@@ -275,7 +275,7 @@ const ProductConfirmation = () => {
                                         Name: <label>{item?.item_name}</label>
                                     </div>
                                     <div>
-                                        Price: <label>{item?.price}</label> per Product
+                                        Price: <label>{item?.price}</label>
                                     </div>
                                     <div>
                                         Discount: <label>{item?.discount_price}</label>

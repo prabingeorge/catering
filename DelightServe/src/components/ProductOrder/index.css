@@ -16,6 +16,7 @@
                 font-size: 16px;
                 font-weight: bold;
                 font-style: italic;
+                width: 140px;;
             }
 
             .product-name {
@@ -56,12 +57,24 @@
                 }
             } */
 
-            .venue-timing {
-                padding: 2px 5px;
+            .event-details-label {
+                color: #ffa500;
+                font-size: 16px;
+            }
+
+            .event-control {
+                padding: 5px;
                 cursor: pointer;
-                border: 2px solid orange;
+                border: 2px solid #ffa500;
                 border-radius: 5px;
                 font-size: 16px;
+                line-height: 20px;
+                width: 160px;
+                margin-left: 10px;
+            }
+
+            .validation-error {
+                width: auto;
             }
         }
     }
