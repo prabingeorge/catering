@@ -15,10 +15,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "star",
-    "password": "0alnQXkQpJDlyTN77ts3skSl9XtShu5m",
-    "database": "starfurniture",
-    "host": "dpg-d5citmur433s739octl0-a",
+    "username": "catering",
+    "password": "H3UWRXSBjTxkGPSZQTjPvbEQ5qe97jGe",
+    "database": "delightservecateringmanagement",
+    "host": "dpg-d5j3mep4tr6s73e3lltg-a",
     "port": "5432",
     "dialect": "postgres"
   }
