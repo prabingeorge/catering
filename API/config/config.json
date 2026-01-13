@@ -1,0 +1,25 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "Libin@04",
+    "database": "DelightServeCateringManagement",
+    "host": "localhost",
+    "port": "5432",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "star",
+    "password": "0alnQXkQpJDlyTN77ts3skSl9XtShu5m",
+    "database": "starfurniture",
+    "host": "dpg-d5citmur433s739octl0-a",
+    "port": "5432",
+    "dialect": "postgres"
+  }
+}
