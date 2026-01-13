@@ -199,7 +199,7 @@ const ProductConfirmation = () => {
 
     const confirmedClick = async () => {
         await savePurchaseDetails();
-        await sendConfirmationEmail();
+        // await sendConfirmationEmail();
         clearCart();
         navigate('/delivery');
     };
