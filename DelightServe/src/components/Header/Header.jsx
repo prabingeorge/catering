@@ -5,7 +5,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import api from "../../contexts/APIContext";
 import { CartContext } from "../../contexts/Cart";
 import "./index.css";
-import starLogo from "../../assets/images/header/logo.jpeg";
+import starLogo from "../../assets/images/header/logo3.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelopeCircleCheck, faSignOut, faSignIn, faHeart, faCartShopping } from '@fortawesome/free-solid-svg-icons'
 

@@ -5,6 +5,10 @@
 
         .carousel-item {
             height: 20%;
+
+            img {
+                height: 500px;
+            }
         }
     }
 

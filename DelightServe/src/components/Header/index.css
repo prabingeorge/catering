@@ -43,6 +43,7 @@
         .header-logo {
             height: 90px;
             width: 400px;
+            margin-left: 40px;
         }
 
         .menu-container {
