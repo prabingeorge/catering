@@ -51,7 +51,7 @@ const CategoriesList = () => {
                                             <label>Ratings:</label> {image.ratings}
                                         </div>
                                         <div>
-                                            <label>Total Saled:</label> {image.send_items_count}
+                                            <label>Total Ordered:</label> {image.send_items_count}
                                         </div>
                                     </li>
                                     <li>
