@@ -10,6 +10,16 @@ export const CartProvider = ({ children }) => {
       : []
   );
 
+  const [selectedCategoryId, setSelectedCategoryId] = useState(
+    localStorage.getItem("selectedCategoryId") !== undefined
+      ? parseInt(localStorage.getItem("selectedCategoryId"))
+      : 1
+  );
+
+  const addSelectedCategoryToCart = (categoryId) => {
+    setSelectedCategoryId(categoryId);
+  };
+
   const addToCart = (item) => {
     const isCartItem = cartItems.find((cartItem) => cartItem.id === item.id);
 
@@ -75,6 +85,10 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
+  useEffect(() => {
+    localStorage.setItem("selectedCategoryId", selectedCategoryId);
+  }, [selectedCategoryId]);
+
   // useEffect(() => {
   //   const cartItemString = localStorage.getItem("cartItems");
 
@@ -95,6 +109,8 @@ export const CartProvider = ({ children }) => {
         getCartTotal,
         addCartQuantityCount,
         totalCartCount,
+        selectedCategoryId,
+        addSelectedCategoryToCart,
       }}
     >
       {children}
