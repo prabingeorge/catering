@@ -1,5 +1,13 @@
 {
   "development": {
+    "username": "catering",
+    "password": "H3UWRXSBjTxkGPSZQTjPvbEQ5qe97jGe",
+    "database": "delightservecateringmanagement",
+    "host": "dpg-d5j3mep4tr6s73e3lltg-a",
+    "port": "5432",
+    "dialect": "postgres"
+  },
+  "development1": {
     "username": "postgres",
     "password": "Libin@04",
     "database": "DelightServeCateringManagement",
