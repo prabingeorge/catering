@@ -47,7 +47,7 @@ const Header = () => {
                             <FontAwesomeIcon icon={faPhone} size="1x" style={{ color: '#ffa500' }} /> +91 9486629098
                         </li>
                         <li>
-                            <FontAwesomeIcon icon={faEnvelopeCircleCheck} size="1x" style={{ color: '#ffa500' }} /> ajinselva@gmail.com
+                            <FontAwesomeIcon icon={faEnvelopeCircleCheck} size="1x" style={{ color: '#ffa500' }} /> ajinselva03@gmail.com
                         </li>
                     </ul>
 
