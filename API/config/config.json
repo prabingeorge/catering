@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "catering",
-    "password": "H3UWRXSBjTxkGPSZQTjPvbEQ5qe97jGe",
-    "database": "delightservecateringmanagement",
-    "host": "dpg-d5j3mep4tr6s73e3lltg-a",
+    "username": "divine",
+    "password": "IxMdc0M1EghqRbvHsTqf099jM2xIdU0F",
+    "database": "divine_db",
+    "host": "dpg-d5kbi0mr433s73enle00-a",
     "port": "5432",
     "dialect": "postgres"
   },
