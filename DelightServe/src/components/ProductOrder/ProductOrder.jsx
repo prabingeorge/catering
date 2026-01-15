@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Images from "../Images/Images";
 import api from "../../contexts/APIContext";
 import { CartContext } from "../../contexts/Cart";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faIndianRupee } from '@fortawesome/free-solid-svg-icons';
 import './index.css';
 
 const ProductOrder = () => {
@@ -83,13 +85,16 @@ const ProductOrder = () => {
                             <hr />
                         </li>
                         <li>
-                            <label>Price:</label>{product?.price}
+                            <label>Price:</label>
+                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{product?.price}
                         </li>
                         <li>
-                            <label>Discount:</label>{product?.discount_price}
+                            <label>Discount:</label>
+                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{product?.discount_price}
                         </li>
                         <li>
-                            <label>Total Price:</label>{product?.price - product?.discount_price}
+                            <label>Total Price:</label>
+                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{product?.price - product?.discount_price}
                         </li>
                         <li>
                             <hr />
@@ -149,7 +154,8 @@ const ProductOrder = () => {
                         </li> */}
 
                         <li>
-                            <label>Total Price: </label> {(product?.price - product?.discount_price) * productQuantity} (incl. of all taxes)
+                            <label>Total Price: </label>
+                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{(product?.price - product?.discount_price) * productQuantity} (incl. of all taxes)
                         </li>
                         <li>
                             <input type="button" className="buy-now" onClick={() => buyNowProduct(product)} value={'ORDER NOW'} />

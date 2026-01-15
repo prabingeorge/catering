@@ -2,6 +2,8 @@ import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { renderToString } from 'react-dom/server';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faIndianRupee } from '@fortawesome/free-solid-svg-icons';
 import Images from "../Images/Images";
 import { CartContext } from "../../contexts/Cart";
 import { useAuth } from "../../contexts/AuthContext";
@@ -27,7 +29,9 @@ const EmailTemplate = ({ cartItems }) => {
                                                 Name: <label style={{ fontWeight: 'bold' }} key={item?.id}>{item?.item_name}</label>
                                             </div>
                                             <div>
-                                                Price: <label style={{ fontWeight: 'bold' }} key={item?.id}>{item?.price}</label> per Product
+                                                Price: <label style={{ fontWeight: 'bold' }} key={item?.id}>
+                                                    <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{item?.price}
+                                                </label> per Product
                                             </div>
                                             <div>
                                                 Discount: <label style={{ fontWeight: 'bold' }} key={item?.id}>{item?.discount_price}</label>
@@ -275,17 +279,23 @@ const ProductConfirmation = () => {
                                         Name: <label>{item?.item_name}</label>
                                     </div>
                                     <div>
-                                        Price: <label>{item?.price}</label>
+                                        Price: <label>
+                                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{item?.price}
+                                        </label>
                                     </div>
                                     <div>
-                                        Discount: <label>{item?.discount_price}</label>
+                                        Discount: <label>
+                                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{item?.discount_price}
+                                        </label>
                                     </div>
                                     <div>
-                                        Total: <label>{(item?.price - item?.discount_price) * item?.quantity}</label>
+                                        Total: <label>
+                                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{(item?.price - item?.discount_price) * item?.quantity}
+                                        </label>
                                     </div>
-                                    <div>
+                                    {/* <div>
                                         Quantity: <label>{item?.quantity}</label>
-                                    </div>
+                                    </div> */}
                                     <div className="footer-container">
                                         <input type="button" className="button" value="Remove" onClick={() => removeItemClick(item)} />
                                     </div>

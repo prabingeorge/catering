@@ -3,7 +3,9 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import Images from "../Images/Images";
 import api from "../../contexts/APIContext";
-import { CartContext } from "../../contexts/Cart"
+import { CartContext } from "../../contexts/Cart";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faIndianRupee } from '@fortawesome/free-solid-svg-icons';
 import './index.css';
 
 const CategoriesList = () => {
@@ -58,7 +60,8 @@ const CategoriesList = () => {
                                         <hr />
                                     </li>
                                     <li>
-                                        <label>Price:</label> {image.price}
+                                        <label>Price:</label>
+                                        <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{image.price}
                                     </li>
                                     <li className="button-container">
                                         <Link to={`${'/product-order/' + image.category_list_item_id}`}>
