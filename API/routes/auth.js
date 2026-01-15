@@ -155,7 +155,7 @@ router.post("/categories-list", async (req, res) => {
 
 // Add Categories-list-items
 router.post("/categories-list-items", async (req, res) => {
-    const { itemName, imageName, price, discountPrice, ratings, sendItemsCount, CategoryListId } = req.body;
+    const { itemName, imageName, price, discountPrice, ratings, sendItemsCount, categoryListId } = req.body;
     try {
         const categoriesListItems = await CategoriesListItems.findOne({ where: { [Op.or]: [{ item_name: itemName }] } });
         if (categoriesListItems) {
@@ -171,10 +171,10 @@ router.post("/categories-list-items", async (req, res) => {
             discount_price: discountPrice,
             ratings: ratings,
             send_items_count: sendItemsCount,
-            category_list_id: CategoryListId
+            category_list_id: categoryListId
         });
 
-        res.status(201).json({ categoryListItemId: newData?.category_list_item_id, itemName: newData.item_name, imageName: newData?.image_name, price: newData?.price, discountPrice: newData?.discount_price, ratings: newData?.ratings, sendItemsCount: newData?.send_items_count, CategoryListId: newData?.category_list_id, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
+        res.status(201).json({ categoryListItemId: newData?.category_list_item_id, itemName: newData.item_name, imageName: newData?.image_name, price: newData?.price, discountPrice: newData?.discount_price, ratings: newData?.ratings, sendItemsCount: newData?.send_items_count, categoryListId: newData?.category_list_id, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
     } catch (e) {
         console.log(e);
         return res.status(500)
