@@ -35,10 +35,10 @@ const ProductOrder = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await api.post(apiURL + "/api/user/categories-list-items-details", { id: params?.listItemId });
+                const response = await api.post(apiURL + "/api/user/categories-list-items-details", { categoryListItemId: params?.categoryListItemId });
                 const { data } = response;
                 setProduct(data);
-                const selectedItem = cartItems.find((cartItem) => cartItem.id === data.id);
+                const selectedItem = cartItems.find((cartItem) => cartItem.category_list_item_id === data.category_list_item_id);
                 setProductQuantity(selectedItem?.quantity);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -46,7 +46,7 @@ const ProductOrder = () => {
         };
 
         fetchData();
-    }, [params?.id]);
+    }, [params?.categoryListItemId]);
 
     const setQuantity = (qty) => {
         setProductQuantity(qty);
@@ -59,7 +59,7 @@ const ProductOrder = () => {
             setValidationError("Enter all the Event Details!");
             return;
         }
-        navigate('/product-confirmation/' + product?.id);
+        navigate('/product-confirmation');
     };
 
     return (
@@ -98,15 +98,15 @@ const ProductOrder = () => {
                             <label className="event-details-label">Event Details</label>
                         </li>
                         <li>
-                            <label for="place">Place*</label>
+                            <label htmlFor="place">Place*</label>
                             <input type="text" placeholder="Place" className="event-control" name="place" value={venueInfo?.place} onChange={addFieldValue} />
                         </li>
                         <li>
-                            <label for="eventDate">Date*</label>
+                            <label htmlFor="eventDate">Date*</label>
                             <input type="date" className="event-control" name="eventDate" value={venueInfo?.eventDate} onChange={addFieldValue} />
                         </li>
                         <li>
-                            <label for="eventTime">Time*</label>
+                            <label htmlFor="eventTime">Time*</label>
                             <select className="event-control" name="eventTime" value={venueInfo?.eventTime} onChange={addFieldValue}>
                                 <option value="">--Select--</option>
                                 <option value="1">Noon</option>
@@ -114,7 +114,7 @@ const ProductOrder = () => {
                             </select>
                         </li>
                         <li>
-                            <label for="gender">Gender*</label>
+                            <label htmlFor="gender">Gender*</label>
                             <select className="event-control" name="gender" value={venueInfo?.gender} onChange={addFieldValue}>
                                 <option value="">--Select--</option>
                                 <option value="1">Bride</option>

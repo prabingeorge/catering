@@ -8,11 +8,11 @@ import './index.css';
 
 const CategoriesList = () => {
 
-    const { addToCart } = useContext(CartContext);
+    const { addToCart, selectedCategoryId } = useContext(CartContext);
     const [categoriesListItems, setCategoriesListItems] = useState([]);
 
     const addToCartClick = (item)=> {
-        item.categoryId = params?.categoryId;
+        item.categoryId = selectedCategoryId;
         addToCart(item);
     }
 
@@ -21,7 +21,7 @@ const CategoriesList = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await api.post(apiURL + "/api/user/categories-list-items-by-id", { listId: params?.id });
+                const response = await api.post(apiURL + "/api/user/categories-list-items-by-id", { categoryListId: params?.categoryListId });
                 const { data } = response;
                 setCategoriesListItems([...data]);
             } catch (error) {
@@ -30,16 +30,16 @@ const CategoriesList = () => {
         };
 
         fetchData();
-    }, [params?.id]);
+    }, [params?.categoryListId]);
 
     return (
         <div className="categories-list-view">
             <div>
                 <div className="images-container">
-                    {categoriesListItems?.length > 0 && categoriesListItems.map((image, index) => {
+                    {categoriesListItems?.length > 0 && categoriesListItems.map((image) => {
                         return (
                             <>
-                                <ul key={index} className="images-wrapper">
+                                <ul key={image?.category_list_item_id} className="images-wrapper">
                                     <li>
                                         <Images fileName={image.image_name} path={'details'} cssClass={'rectangle-image'} />
                                     </li>
@@ -61,7 +61,7 @@ const CategoriesList = () => {
                                         <label>Price:</label> {image.price}
                                     </li>
                                     <li className="button-container">
-                                        <Link to={`${'/product-order/' + (index + 1) + '/' + image.id}`}>
+                                        <Link to={`${'/product-order/' + image.category_list_item_id}`}>
                                             <input type="button" className="add-to-cart" value={'Select'} onClick={()=>addToCartClick(image)} />
                                         </Link>
                                     </li>

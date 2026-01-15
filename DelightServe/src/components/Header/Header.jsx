@@ -1,5 +1,4 @@
 import { useEffect, useState, useContext } from "react";
-import { useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import api from "../../contexts/APIContext";
@@ -11,11 +10,9 @@ import { faPhone, faEnvelopeCircleCheck, faSignOut, faSignIn, faHeart, faCartSho
 
 const Header = () => {
 
-    const [searchParams, setSearchParams] = useSearchParams();
-    const selectedId = searchParams.get("id") || 1;
     const [categoriesList, setCategoriesList] = useState([]);
     const { user, logout } = useAuth();
-    const { totalCartCount } = useContext(CartContext);
+    const { totalCartCount, selectedCategoryId, addSelectedCategoryToCart } = useContext(CartContext);
 
     const apiURL = import.meta.env.VITE_API_URL;
     useEffect(() => {
@@ -31,6 +28,10 @@ const Header = () => {
 
         fetchData();
     }, []);
+
+    const changeCategory = (categoryId) => {
+        addSelectedCategoryToCart(categoryId);
+    };
 
     return (
         <div className="header-view">
@@ -79,12 +80,11 @@ const Header = () => {
             </div>
             <div className="bottom-header">
                 <div>
-
                     <ul className="bottom-menu">
-                        {categoriesList?.length > 0 && categoriesList.map((category, index) => {
+                        {categoriesList?.length > 0 && categoriesList.map((category) => {
                             return (
-                                <li className={(selectedId == index + 1) ? 'active-menu' : 'non-active-menu'}>
-                                    <Link to={`${'/dashboard?id=' + category?.id}`}>{category?.name}</Link>
+                                <li key={category?.category_id} className={(selectedCategoryId == category?.category_id) ? 'active-menu' : 'non-active-menu'}>
+                                    <Link to={'/dashboard'} onClick={() => changeCategory(category?.category_id)}>{category?.name}</Link>
                                 </li>
                             )
                         })}

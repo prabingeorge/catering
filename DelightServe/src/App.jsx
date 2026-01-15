@@ -14,6 +14,9 @@ import ProductCart from "./components/ProductCart/ProductCart";
 import ProductConfirmation from "./components/ProductConfirmation/ProductConfirmation";
 import ProductDelivery from "./components/ProductDelivery/ProductDelivery";
 
+/* Admin routes */
+import {ADashboard} from "./Admin/Dashboard/Dashboard";
+
 function App() {
   return (
     <Router>
@@ -35,7 +38,7 @@ function App() {
           }
         />
         <Route
-          path="/categories-list/:categoryId/:id"
+          path="/categories-list/:categoryListId"
           element={
             <>
               <Header />
@@ -44,7 +47,7 @@ function App() {
           }
         />
         <Route
-          path="/product-order/:id/:listItemId"
+          path="/product-order/:categoryListItemId"
           element={
             <>
               <Header />
@@ -53,7 +56,7 @@ function App() {
           }
         />
         <Route
-          path="/product-confirmation/:listItemId"
+          path="/product-confirmation"
           element={
             <>
               <Header />
@@ -94,6 +97,14 @@ function App() {
             <RoleBasedRoute role="admin">
               <AdminPanel />
             </RoleBasedRoute>
+          }
+        />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <>
+              <ADashboard />
+            </>
           }
         />
       </Routes>

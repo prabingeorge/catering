@@ -21,7 +21,7 @@ const EmailTemplate = ({ cartItems }) => {
                         <ul style={{ border: 'solid #1161ee', listStyle: 'none', padding: '0px' }}>
                             {cartItems?.length > 0 && cartItems.map(item => {
                                 return (
-                                    <li key={item?.id} style={{ display: 'flex', border: '2px solid #ffa500', margin: '5px', padding: '10px' }}>
+                                    <li key={item?.category_list_item_id} style={{ display: 'flex', border: '2px solid #ffa500', margin: '5px', padding: '10px' }}>
                                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                                             <div>
                                                 Name: <label style={{ fontWeight: 'bold' }} key={item?.id}>{item?.item_name}</label>
@@ -139,10 +139,10 @@ const ProductConfirmation = () => {
             let response = null;
             const promises = cartItems.map(async (cartItem) => {
                 const details = {
-                    userId: user?.id,
-                    categoriesId: cartItem?.categoryId,
-                    listId: cartItem?.list_id,
-                    listItemId: cartItem?.id,
+                    userId: user?.userId,
+                    categoryId: cartItem?.categoryId,
+                    categoryListId: cartItem?.category_list_id,
+                    categoryListItemId: cartItem?.category_list_item_id,
                     quantity: cartItem?.quantity,
                     amount: cartItem?.price
                 }
@@ -266,10 +266,10 @@ const ProductConfirmation = () => {
     return (
         <div className="product-confirmation-view">
             <ul className="product-panel">
-                {cartItems?.length > 0 && cartItems.map((item, index) => {
+                {cartItems?.length > 0 && cartItems.map((item) => {
                     return (
                         <>
-                            <li key={index} className="product-wrapper">
+                            <li key={item?.category_list_item_id} className="product-wrapper">
                                 <div className="product-details">
                                     <div>
                                         Name: <label>{item?.item_name}</label>

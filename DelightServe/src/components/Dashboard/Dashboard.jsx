@@ -1,21 +1,20 @@
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
 import Images from "../Images/Images";
 import api from "../../contexts/APIContext";
 import AppCarousel from './../Carousel/Carousel';
+import { CartContext } from "../../contexts/Cart"
 import "./index.css";
 
 const Dashboard = () => {
   const [categoriesList, setCategoriesList] = useState([]);
 
-  const [searchParams, setSearchParams] = useSearchParams();
-  const selectedId = searchParams.get("id") || 1;
+   const { selectedCategoryId } = useContext(CartContext);
 
   const apiURL = import.meta.env.VITE_API_URL;
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.post(apiURL + "/api/user/categories-list-by-id", { category_id: selectedId });
+        const response = await api.post(apiURL + "/api/user/categories-list-by-id", { category_id: selectedCategoryId });
         const { data } = response;
         setCategoriesList([...data]);
       } catch (error) {
@@ -24,7 +23,7 @@ const Dashboard = () => {
     };
 
     fetchData();
-  }, [selectedId]);
+  }, [selectedCategoryId]);
 
   if (categoriesList?.length === 0) {
     return (
@@ -47,9 +46,9 @@ const Dashboard = () => {
         <div className="images-container">
           {categoriesList?.length > 0 && categoriesList.map((category) => {
             return (
-              <div key={category?.id}>
+              <div key={category?.category_list_id}>
                 <div>
-                  <Images fileName={category?.image_name} categoryId={category?.category_id} id={category?.id} path={'dashboard'} cssClass={'circle-image'} />
+                  <Images fileName={category?.image_name} categoryListId={category?.category_list_id} path={'dashboard'} cssClass={'circle-image'} />
                 </div>
                 <div className="type-container">
                   <label>{category?.type}</label>
