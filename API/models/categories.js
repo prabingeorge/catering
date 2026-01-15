@@ -23,8 +23,13 @@ export default (sequelize, DataTypes) => {
     }
   };
   Categories.init({
+    category_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     name: DataTypes.STRING,
-    }, {
+  }, {
     sequelize,
     modelName: 'Categories',
   });

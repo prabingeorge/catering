@@ -23,45 +23,21 @@ export default (sequelize, DataTypes) => {
     }
   };
   CategoriesListItems.init({
+    category_list_item_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     item_name: DataTypes.STRING,
     image_name: DataTypes.STRING,
     price: DataTypes.DECIMAL,
     discount_price: DataTypes.DECIMAL,
     ratings: DataTypes.INTEGER,
     send_items_count: DataTypes.INTEGER,
-    list_id: DataTypes.INTEGER
+    category_list_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'CategoriesListItems',
   });
   return CategoriesListItems;
 };
-// 'use strict';
-// const {
-//   Model
-// } = require('sequelize');
-// module.exports = (sequelize, DataTypes) => {
-//   class CategoriesListItems extends Model {
-//     /**
-//      * Helper method for defining associations.
-//      * This method is not a part of Sequelize lifecycle.
-//      * The `models/index` file will call this method automatically.
-//      */
-//     static associate(models) {
-//       // define association here
-//     }
-//   }
-//   CategoriesListItems.init({
-//     item_name: DataTypes.STRING,
-//     image_name: DataTypes.STRING,
-//     price: DataTypes.DECIMAL,
-//     discount_price: DataTypes.DECIMAL,
-//     ratings: DataTypes.INTEGER,
-//     send_items_count: DataTypes.INTEGER,
-//     list_id: DataTypes.INTEGER
-//   }, {
-//     sequelize,
-//     modelName: 'CategoriesListItems',
-//   });
-//   return CategoriesListItems;
-// };

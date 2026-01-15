@@ -48,7 +48,7 @@ router.post("/register", async (req, res) => {
         });
 
         // Generate JWT
-        const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ userId: newUser.user_id }, process.env.JWT_SECRET, {
             expiresIn: "1h"
         });
 
@@ -85,13 +85,13 @@ router.post("/login", async (req, res) => {
             return res.status(400).json({ message: "Invalid credentials" });
 
         // Generate JWT
-        const token = jwt.sign({ id: user.id, name: user.name, email: user.email, phone: user?.phone, role: 'user' }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ userId: user.user_id, name: user.name, email: user.email, phone: user?.phone, role: 'user' }, process.env.JWT_SECRET, {
             expiresIn: "1h"
         });
 
         res.json({
             token,
-            user: { id: user._id, name: user.name, email: user.email, role: user.role }
+            user: { userId: user.user_id, name: user.name, email: user.email, role: user.role }
         });
     } catch (err) {
         console.error(err.message);
@@ -116,7 +116,7 @@ router.post("/categories", async (req, res) => {
             name
         });
 
-        res.status(201).json({ id: newData.id, name: newData.name, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
+        res.status(201).json({ categoryId: newData.category_id, name: newData.name, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
 
         // return res.status(201).send({message: 'Account created successfully'});
     } catch (e) {
@@ -144,7 +144,7 @@ router.post("/categories-list", async (req, res) => {
             category_id: categoryId
         });
 
-        res.status(201).json({ id: newData.id, type: newData.type, imageName: newData?.image_name, categoryId: newData?.category_id, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
+        res.status(201).json({ categoryListId: newData.category_list_id, type: newData.type, imageName: newData?.image_name, categoryId: newData?.category_id, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
     } catch (e) {
         console.log(e);
         return res.status(500)
@@ -155,7 +155,7 @@ router.post("/categories-list", async (req, res) => {
 
 // Add Categories-list-items
 router.post("/categories-list-items", async (req, res) => {
-    const { itemName, imageName, price, discountPrice, ratings, sendItemsCount, listId } = req.body;
+    const { itemName, imageName, price, discountPrice, ratings, sendItemsCount, CategoryListId } = req.body;
     try {
         const categoriesListItems = await CategoriesListItems.findOne({ where: { [Op.or]: [{ item_name: itemName }] } });
         if (categoriesListItems) {
@@ -171,10 +171,10 @@ router.post("/categories-list-items", async (req, res) => {
             discount_price: discountPrice,
             ratings: ratings,
             send_items_count: sendItemsCount,
-            list_id: listId
+            category_list_id: CategoryListId
         });
 
-        res.status(201).json({ id: newData?.id, itemName: newData.item_name, imageName: newData?.image_name, price: newData?.price, discountPrice: newData?.discount_price, ratings: newData?.ratings, sendItemsCount: newData?.send_items_count, listId: newData?.list_id, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
+        res.status(201).json({ categoryListItemId: newData?.category_list_item_id, itemName: newData.item_name, imageName: newData?.image_name, price: newData?.price, discountPrice: newData?.discount_price, ratings: newData?.ratings, sendItemsCount: newData?.send_items_count, CategoryListId: newData?.category_list_id, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
     } catch (e) {
         console.log(e);
         return res.status(500)

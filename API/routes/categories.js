@@ -4,7 +4,7 @@ import auth from "../middleware/auth.js";
 import { Op } from 'sequelize';
 import model from '../models/index.cjs';
 
-const { User,   Categories, CategoriesLists, CategoriesListItems, PurchaseDetails } = model;
+const { User, Categories, CategoriesLists, CategoriesListItems, PurchaseDetails } = model;
 
 const router = express.Router();
 
@@ -21,28 +21,28 @@ router.get("/categories", async (req, res) => {
 
 // Add Categories-list
 router.post("/categories-list", async (req, res) => {
-    const { type, imageName, categoryId } = req.body;
-    try {
-        const categoriesList = await CategoriesLists.findOne({ where: { [Op.or]: [{ type }] } });
-        if (categoriesList) {
-            return res.status(422)
-                .send({ message: 'Type already exists' });
-        }
-
-        // Create new categories list
-        const newData = await CategoriesLists.create({
-            type,
-            image_name: imageName,
-            category_id: categoryId
-        });
-
-        res.status(201).json({ id: newData.id, type: newData.type, imageName: newData?.image_name, categoryId: newData?.category_id, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
-    } catch (e) {
-        console.log(e);
-        return res.status(500)
-            .send(
-                { message: 'Could not perform operation at this time, kindly try again later.' });
+  const { type, imageName, categoryId } = req.body;
+  try {
+    const categoriesList = await CategoriesLists.findOne({ where: { [Op.or]: [{ type }] } });
+    if (categoriesList) {
+      return res.status(422)
+        .send({ message: 'Type already exists' });
     }
+
+    // Create new categories list
+    const newData = await CategoriesLists.create({
+      type,
+      image_name: imageName,
+      category_id: categoryId
+    });
+
+    res.status(201).json({ id: newData.id, type: newData.type, imageName: newData?.image_name, categoryId: newData?.category_id, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
+  } catch (e) {
+    console.log(e);
+    return res.status(500)
+      .send(
+        { message: 'Could not perform operation at this time, kindly try again later.' });
+  }
 });
 
 // Get all categories-list
@@ -69,8 +69,8 @@ router.post("/categories-list-by-id", async (req, res) => {
 // Get all categories-list-items by id
 router.post("/categories-list-items-by-id", async (req, res) => {
   try {
-    const { listId } = req.body;
-    const categoriesListItems = await CategoriesListItems.findAll({ where: { [Op.or]: [{ list_id: listId }] } });
+    const { categoryListId } = req.body;
+    const categoriesListItems = await CategoriesListItems.findAll({ where: { [Op.or]: [{ category_list_id: categoryListId }] } });
     res.json(categoriesListItems);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -80,8 +80,8 @@ router.post("/categories-list-items-by-id", async (req, res) => {
 // Get categories-list-items details by list_item_id
 router.post("/categories-list-items-details", async (req, res) => {
   try {
-    const { id } = req.body;
-    const categoriesListItems = await CategoriesListItems.findAll({ where: { [Op.or]: [{ id }] } });
+    const { categoryListItemId } = req.body;
+    const categoriesListItems = await CategoriesListItems.findAll({ where: { [Op.or]: [{ category_list_item_id: categoryListItemId }] } });
     res.json(...categoriesListItems);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -90,33 +90,33 @@ router.post("/categories-list-items-details", async (req, res) => {
 
 // Add purchase detail (for the authenticated user)
 router.post("/purchase-detail", auth, async (req, res) => {
-    const { userId, categoriesId, listId, listItemId, quantity, amount } = req.body;
-    console.log("======" + JSON.stringify(req.body))
-    try {
-        // const purchaseDetail = await PurchaseDetails.findOne({ where: { [Op.or]: [{ user_id: userId }] } });
-        // console.log("-------" + purchaseDetail)
-        // if (!purchaseDetail) {
-        //     return res.status(422)
-        //         .send({ message: 'Enter all the required information!' });
-        // }
+  const { userId, categoryId, categoryListId, categoryListItemId, quantity, amount } = req.body;
+  console.log("======" + JSON.stringify(req.body))
+  try {
+    // const purchaseDetail = await PurchaseDetails.findOne({ where: { [Op.or]: [{ user_id: userId }] } });
+    // console.log("-------" + purchaseDetail)
+    // if (!purchaseDetail) {
+    //     return res.status(422)
+    //         .send({ message: 'Enter all the required information!' });
+    // }
 
-        // Create new purchase list
-        const newData = await PurchaseDetails.create({
-            user_id: userId,
-            categories_id: categoriesId,
-            list_id: listId,
-            list_item_id: listItemId,
-            quantity,
-            amount
-        });
+    // Create new purchase list
+    const newData = await PurchaseDetails.create({
+      user_id: userId,
+      category_id: categoryId,
+      category_list_id: categoryListId,
+      category_list_item_id: categoryListItemId,
+      quantity,
+      amount
+    });
 
-        res.status(201).json({ id: newData.id, userId: newData.user_id, categoriesId: newData?.categories_id, listId: newData?.listId, listItemId: newData?.list_item_id, quantity: newData?.quantity, amount: newData?.amount, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
-    } catch (e) {
-        console.log(e);
-        return res.status(500)
-            .send(
-                { message: 'Could not perform operation at this time, kindly try again later.' });
-    }
+    res.status(201).json({ id: newData.id, userId: newData.user_id, categoryId: newData?.category_id, listId: categoryListId?.category_list_id, categoryListItemId: newData?.category_list_item_id, quantity: newData?.quantity, amount: newData?.amount, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
+  } catch (e) {
+    console.log(e);
+    return res.status(500)
+      .send(
+        { message: 'Could not perform operation at this time, kindly try again later.' });
+  }
 });
 
 // Get all categories-list

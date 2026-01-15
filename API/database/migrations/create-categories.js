@@ -1,7 +1,7 @@
 export default {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Categories', {
-      id: {
+      category_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,

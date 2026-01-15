@@ -24,10 +24,15 @@ export default (sequelize, DataTypes) => {
     }
   };
   PurchaseDetails.init({
+    purchase_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     user_id: DataTypes.INTEGER,
-    categories_id: DataTypes.INTEGER,
-    list_id: DataTypes.INTEGER,
-    list_item_id: DataTypes.INTEGER,
+    category_id: DataTypes.INTEGER,
+    category_list_id: DataTypes.INTEGER,
+    category_list_item_id: DataTypes.INTEGER,
     quantity: DataTypes.INTEGER,
     amount: DataTypes.BIGINT,
     // last_login_at: DataTypes.DATE,
@@ -38,31 +43,3 @@ export default (sequelize, DataTypes) => {
   });
   return PurchaseDetails;
 };
-// 'use strict';
-// const {
-//   Model
-// } = require('sequelize');
-// module.exports = (sequelize, DataTypes) => {
-//   class PurchaseDetails extends Model {
-//     /**
-//      * Helper method for defining associations.
-//      * This method is not a part of Sequelize lifecycle.
-//      * The `models/index` file will call this method automatically.
-//      */
-//     static associate(models) {
-//       // define association here
-//     }
-//   }
-//   PurchaseDetails.init({
-//     user_id: DataTypes.INTEGER,
-//     categories_id: DataTypes.INTEGER,
-//     list_id: DataTypes.INTEGER,
-//     list_item_id: DataTypes.INTEGER,
-//     quantity: DataTypes.INTEGER,
-//     amount: DataTypes.BIGINT
-//   }, {
-//     sequelize,
-//     modelName: 'PurchaseDetails',
-//   });
-//   return PurchaseDetails;
-// };

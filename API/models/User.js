@@ -23,6 +23,11 @@ export default (sequelize, DataTypes) => {
     }
   };
   User.init({
+    user_id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     name: DataTypes.STRING,
     email: {
       type: DataTypes.STRING,

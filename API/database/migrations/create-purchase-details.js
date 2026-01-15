@@ -2,33 +2,30 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('CategoriesListItems', {
-      id: {
+    await queryInterface.createTable('PurchaseDetails', {
+      purchase_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      item_name: {
-        type: Sequelize.STRING
-      },
-      image_name: {
-        type: Sequelize.STRING
-      },
-      price: {
-        type: Sequelize.DECIMAL
-      },
-      discount_price: {
-        type: Sequelize.DECIMAL
-      },
-      ratings: {
+      user_id: {
         type: Sequelize.INTEGER
       },
-      send_items_count: {
+      category_id: {
         type: Sequelize.INTEGER
       },
-      list_id: {
+      category_list_id: {
         type: Sequelize.INTEGER
+      },
+      category_list_item_id: {
+        type: Sequelize.INTEGER
+      },
+      quantity: {
+        type: Sequelize.INTEGER
+      },
+      amount: {
+        type: Sequelize.BIGINT
       },
       createdAt: {
         allowNull: false,
@@ -41,6 +38,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('CategoriesListItems');
+    await queryInterface.dropTable('PurchaseDetails');
   }
 };

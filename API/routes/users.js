@@ -2,7 +2,10 @@ import express from "express";
 
 import model from '../models/index.cjs';
 
-const { User, PurchaseDetails } = model;
+const { Categories, CategoriesLists, CategoriesListItems, PurchaseDetails, User } = model;
+
+// CategoriesListItems.hasMany(PurchaseDetails, { foreignKey: 'list_item_id' });
+// PurchaseDetails.belongsTo(CategoriesListItems, { foreignKey: 'list_item_id' });
 
 const router = express.Router();
 
@@ -45,6 +48,35 @@ router.delete("/all-purchases-remove", async (req, res) => {
       truncate: true,
     });
     res.json(purchaseDetails);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// Get all purchase details
+router.get("/users-purchase-details", async (req, res) => {
+  try {
+    const users = await Categories.findAll({
+      // Select specific attributes if necessary
+      // attributes: ['id', 'username'], 
+      include: [
+        {
+          model: PurchaseDetails,
+          as: 'PurchaseDetails', // Use the alias defined in your association
+          required: true, // Forces an INNER JOIN for the Order table
+          // attributes: ['id', 'orderDate'],
+          include: [
+            {
+              model: CategoriesListItems,
+              as: 'CategoriesListItems', // Use the alias defined in your association
+              required: true, // Forces an INNER JOIN for the Order table
+              // attributes: ['id', 'orderDate'],
+            }
+          ]
+        }
+      ]
+    });
+    res.json(users);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
