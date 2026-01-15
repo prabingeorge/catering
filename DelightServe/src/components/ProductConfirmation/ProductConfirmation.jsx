@@ -114,7 +114,7 @@ const ProductConfirmation = () => {
             }
             const response = await api.post(apiURL + "/api/auth/register", userInfoCopy);
 
-            if (response?.statusText === "Created") {
+            if (response?.status === 201 && !!response?.data?.token) {
                 setSuccess("Registered successfully. Kindly do SignIn");
                 setUserInfo(initialUserInfo);
             }

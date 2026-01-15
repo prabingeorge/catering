@@ -4,8 +4,17 @@ import model from '../models/index.cjs';
 
 const { Categories, CategoriesLists, CategoriesListItems, PurchaseDetails, User } = model;
 
-// CategoriesListItems.hasMany(PurchaseDetails, { foreignKey: 'list_item_id' });
-// PurchaseDetails.belongsTo(CategoriesListItems, { foreignKey: 'list_item_id' });
+Categories.hasMany(CategoriesLists, { foreignKey: 'category_id' });
+CategoriesLists.belongsTo(Categories, { foreignKey: 'category_id' });
+
+CategoriesLists.hasMany(CategoriesListItems, { foreignKey: 'category_list_id' });
+CategoriesListItems.belongsTo(CategoriesLists, { foreignKey: 'category_list_id' });
+
+CategoriesListItems.hasMany(PurchaseDetails, { foreignKey: 'category_list_item_id' });
+PurchaseDetails.belongsTo(CategoriesListItems, { foreignKey: 'category_list_item_id' });
+
+User.hasMany(PurchaseDetails, { foreignKey: 'user_id' });
+PurchaseDetails.belongsTo(User, { foreignKey: 'user_id' });
 
 const router = express.Router();
 
@@ -61,8 +70,8 @@ router.get("/users-purchase-details", async (req, res) => {
       // attributes: ['id', 'username'], 
       include: [
         {
-          model: PurchaseDetails,
-          as: 'PurchaseDetails', // Use the alias defined in your association
+          model: CategoriesLists,
+          as: 'CategoriesLists', // Use the alias defined in your association
           required: true, // Forces an INNER JOIN for the Order table
           // attributes: ['id', 'orderDate'],
           include: [
@@ -71,6 +80,22 @@ router.get("/users-purchase-details", async (req, res) => {
               as: 'CategoriesListItems', // Use the alias defined in your association
               required: true, // Forces an INNER JOIN for the Order table
               // attributes: ['id', 'orderDate'],
+              include: [
+                {
+                  model: PurchaseDetails,
+                  as: 'PurchaseDetails', // Use the alias defined in your association
+                  required: true, // Forces an INNER JOIN for the Order table
+                  // attributes: ['id', 'orderDate'],
+                  include: [
+                    {
+                      model: User,
+                      as: 'User', // Use the alias defined in your association
+                      required: true, // Forces an INNER JOIN for the Order table
+                      // attributes: ['id', 'orderDate'],
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
