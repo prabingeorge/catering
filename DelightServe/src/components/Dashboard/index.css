@@ -1,17 +1,4 @@
 .dashboard {
-
-    .carousel-container {
-        margin: 40px;
-
-        .carousel-item {
-            height: 20%;
-
-            img {
-                height: 500px;
-            }
-        }
-    }
-
     .images-container {
         display: flex;
         flex-direction: row;

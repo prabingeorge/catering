@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
+import { Home } from "./components/Home/Home";
+import { Menu } from "./components/Menu/Menu";
 import Dashboard from "./components/Dashboard/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import RoleBasedRoute from "./components/RoleBasedRote";
@@ -15,7 +17,7 @@ import ProductConfirmation from "./components/ProductConfirmation/ProductConfirm
 import ProductDelivery from "./components/ProductDelivery/ProductDelivery";
 
 /* Admin routes */
-import {ADashboard} from "./Admin/Dashboard/Dashboard";
+import { ADashboard } from "./Admin/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -29,10 +31,20 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route
+          path="/home"
+          element={
+            <>
+              <Header />
+              <Home />
+            </>
+          }
+        />
+        <Route
           path="/dashboard"
           element={
             <>
               <Header />
+              <Menu />
               <Dashboard />
             </>
           }

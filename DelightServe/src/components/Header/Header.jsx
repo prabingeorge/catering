@@ -1,8 +1,5 @@
-import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
-import api from "../../contexts/APIContext";
-import { CartContext } from "../../contexts/Cart";
 import "./index.css";
 import starLogo from "../../assets/images/header/logo3.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,28 +7,7 @@ import { faPhone, faEnvelopeCircleCheck, faSignOut, faSignIn, faHeart, faCartSho
 
 const Header = () => {
 
-    const [categoriesList, setCategoriesList] = useState([]);
     const { user, logout } = useAuth();
-    const { totalCartCount, selectedCategoryId, addSelectedCategoryToCart } = useContext(CartContext);
-
-    const apiURL = import.meta.env.VITE_API_URL;
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await api.get(apiURL + "/api/user/categories");
-                const { data } = response;
-                setCategoriesList([...data]);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    const changeCategory = (categoryId) => {
-        addSelectedCategoryToCart(categoryId);
-    };
 
     return (
         <div className="header-view">
@@ -76,19 +52,6 @@ const Header = () => {
                         <FontAwesomeIcon icon={faCartShopping} size="1x" style={{ color: '#ffa500', paddingRight: '5px' }} />
                         Cart ({totalCartCount()})
                     </label> */}
-                </div>
-            </div>
-            <div className="bottom-header">
-                <div>
-                    <ul className="bottom-menu">
-                        {categoriesList?.length > 0 && categoriesList.map((category) => {
-                            return (
-                                <li key={category?.category_id} className={(selectedCategoryId == category?.category_id) ? 'active-menu' : 'non-active-menu'}>
-                                    <Link to={'/dashboard'} onClick={() => changeCategory(category?.category_id)}>{category?.name}</Link>
-                                </li>
-                            )
-                        })}
-                    </ul>
                 </div>
             </div>
         </div>

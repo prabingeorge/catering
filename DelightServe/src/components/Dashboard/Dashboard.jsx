@@ -1,7 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import Images from "../Images/Images";
 import api from "../../contexts/APIContext";
-import AppCarousel from './../Carousel/Carousel';
 import { CartContext } from "../../contexts/Cart"
 import "./index.css";
 
@@ -40,9 +39,6 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <div>
-        <div className="carousel-container">
-          <AppCarousel></AppCarousel>
-        </div>
         <div className="images-container">
           {categoriesList?.length > 0 && categoriesList.map((category) => {
             return (
