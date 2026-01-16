@@ -31,7 +31,9 @@ const Header = () => {
             </div>
             <div className="middle-header">
                 <div>
-                    <img src={starLogo} alt="logo" className="header-logo" />
+                    <Link to={'/home'}>
+                        <img src={starLogo} alt="logo" className="header-logo" />
+                    </Link>
                 </div>
                 <div className="menu-container">
                     {user?.name ? <>
