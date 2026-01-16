@@ -25,7 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<>
           <Header />
-          <Dashboard />
+          <Home />
         </>} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
@@ -54,6 +54,7 @@ function App() {
           element={
             <>
               <Header />
+              <Menu />
               <CategoriesList />
             </>
           }
@@ -63,6 +64,7 @@ function App() {
           element={
             <>
               <Header />
+              <Menu />
               <ProductOrder />
             </>
           }
@@ -72,6 +74,7 @@ function App() {
           element={
             <>
               <Header />
+              <Menu />
               <ProductConfirmation />
             </>
           }
@@ -81,6 +84,7 @@ function App() {
           element={
             <ProtectedRoute>
               <Header />
+              <Menu />
               <ProductDelivery />
             </ProtectedRoute>
           }
