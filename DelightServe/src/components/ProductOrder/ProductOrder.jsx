@@ -110,22 +110,41 @@ const ProductOrder = () => {
                             <label htmlFor="eventDate">Date*</label>
                             <input type="date" className="event-control" name="eventDate" value={venueInfo?.eventDate} onChange={addFieldValue} />
                         </li>
-                        <li>
-                            <label htmlFor="eventTime">Time*</label>
-                            <select className="event-control" name="eventTime" value={venueInfo?.eventTime} onChange={addFieldValue}>
-                                <option value="">--Select--</option>
-                                <option value="1">Noon</option>
-                                <option value="2">Evening</option>
-                            </select>
-                        </li>
-                        <li>
-                            <label htmlFor="gender">Gender*</label>
-                            <select className="event-control" name="gender" value={venueInfo?.gender} onChange={addFieldValue}>
-                                <option value="">--Select--</option>
-                                <option value="1">Bride</option>
-                                <option value="2">Groom</option>
-                            </select>
-                        </li>
+                        {(product?.category_list_id == 1) && <>
+                            <li>
+                                <label htmlFor="eventTime">Time*</label>
+                                <select className="event-control" name="eventTime" value={venueInfo?.eventTime} onChange={addFieldValue}>
+                                    <option value="">--Select--</option>
+                                    <option value="1">Noon</option>
+                                    <option value="2">Evening</option>
+                                </select>
+                            </li>
+                            <li>
+                                <label htmlFor="gender">Gender*</label>
+                                <select className="event-control" name="gender" value={venueInfo?.gender} onChange={addFieldValue}>
+                                    <option value="">--Select--</option>
+                                    <option value="1">Bride</option>
+                                    <option value="2">Groom</option>
+                                </select>
+                            </li></>}
+                        {(product?.category_list_id == 2) && <>
+                            <li>
+                                <label htmlFor="eventTime">Time*</label>
+                                <select className="event-control" name="eventTime" value={venueInfo?.eventTime} onChange={addFieldValue}>
+                                    <option value="">--Select--</option>
+                                    <option value="1">Morning</option>
+                                    <option value="2">Noon</option>
+                                    <option value="3">Evening</option>
+                                </select>
+                            </li>
+                            <li>
+                                <label htmlFor="gender">Gender*</label>
+                                <select className="event-control" name="gender" value={venueInfo?.gender} onChange={addFieldValue}>
+                                    <option value="">--Select--</option>
+                                    <option value="1">Girl</option>
+                                    <option value="2">Boy</option>
+                                </select>
+                            </li></>}
                         {validationError && <li>
                             <div className="group-error">
                                 <label className="error validation-error">{validationError}</label>
