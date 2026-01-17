@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "divine",
-    "password": "cpfYJgJvWS8nQRwoYs7T5dYJoBDEZfw3",
-    "database": "divine_db_395r",
-    "host": "dpg-d5ki62er433s73es5lo0-a",
+    "password": "b0jCnMyoUugu139vKldeM6t65ejqdh25",
+    "database": "divine_db_7vsi",
+    "host": "dpg-d5lqpdu3jp1c739lv91g-a",
     "port": "5432",
     "dialect": "postgres"
   },
