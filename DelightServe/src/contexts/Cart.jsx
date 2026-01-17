@@ -13,7 +13,7 @@ export const CartProvider = ({ children }) => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(
     localStorage.getItem("selectedCategoryId") !== undefined
       ? parseInt(localStorage.getItem("selectedCategoryId"))
-      : 1
+      : 2
   );
 
   const addSelectedCategoryToCart = (categoryId) => {

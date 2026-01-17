@@ -1,8 +1,12 @@
+import { useContext } from "react";
 import { Link } from 'react-router-dom';
 import AppCarousel from './../Carousel/Carousel';
+import { CartContext } from "../../contexts/Cart";
 import './index.css';
 
 const Home = () => {
+
+    const { addSelectedCategoryToCart } = useContext(CartContext);
 
     return (
         <div className="home-view">
@@ -10,7 +14,7 @@ const Home = () => {
                 <AppCarousel></AppCarousel>
             </div>
             <div className='place-order-container'>
-                <Link to={'/dashboard'} className='order-button'>View & Place Order</Link>
+                <Link to={'/dashboard'} onClick={()=>addSelectedCategoryToCart(1)} className='order-button'>View & Place Order</Link>
             </div>
             <div className="footer-container">
                 <div>

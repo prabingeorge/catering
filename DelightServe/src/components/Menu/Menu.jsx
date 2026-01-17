@@ -31,6 +31,9 @@ const Menu = () => {
             <div className="bottom-header">
                 <div>
                     <ul className="bottom-menu">
+                        <li key={0} className={(selectedCategoryId == 0) ? 'active-menu' : 'non-active-menu'}>
+                            <Link to={'/home'} onClick={() => changeCategory(0)}>Home</Link>
+                        </li>
                         {categoriesList?.length > 0 && categoriesList.map((category) => {
                             return (
                                 <li key={category?.category_id} className={(selectedCategoryId == category?.category_id) ? 'active-menu' : 'non-active-menu'}>
