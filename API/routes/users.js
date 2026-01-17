@@ -1,5 +1,5 @@
 import express from "express";
-
+import * as Sequelize from 'sequelize';
 import model from '../models/index.cjs';
 
 const { Categories, CategoriesLists, CategoriesListItems, PurchaseDetails, User } = model;
@@ -107,5 +107,18 @@ router.get("/users-purchase-details", async (req, res) => {
   }
 });
 
+// Truncate all the tables
+router.delete("/truncate-tables", async (req, res) => {
+  try {
+    await Categories.truncate({ restartIdentity: true });
+    await CategoriesLists.truncate({ restartIdentity: true });
+    await CategoriesListItems.truncate({ restartIdentity: true });
+    await PurchaseDetails.truncate({ restartIdentity: true });
+    await User.truncate({ restartIdentity: true });
+    res.json({message: "Truncated successfully"});
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 export default router;
