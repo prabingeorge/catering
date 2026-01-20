@@ -1,8 +1,7 @@
-import { useEffect, useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import Images from "../Images/Images";
-import api from "../../contexts/APIContext";
 import { CartContext } from "../../contexts/Cart";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupee } from '@fortawesome/free-solid-svg-icons';
@@ -13,8 +12,9 @@ const ProductOrder = () => {
     let params = useParams();
     const navigate = useNavigate();
 
-    const [productQuantity, setProductQuantity] = useState(1);
-    const [product, setProduct] = useState(null);
+    const product = cartItems.find((cartItem) => cartItem.categoryListItemId === parseInt(params?.categoryListItemId));
+
+    const [productQuantity, setProductQuantity] = useState(product?.quantity);
     const initialVenueInfo = {
         place: "",
         eventDate: "",
@@ -33,29 +33,12 @@ const ProductOrder = () => {
         });
     };
 
-    const apiURL = import.meta.env.VITE_API_URL;
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await api.post(apiURL + "/api/user/categories-list-items-details", { categoryListItemId: params?.categoryListItemId });
-                const { data } = response;
-                setProduct(data);
-                const selectedItem = cartItems.find((cartItem) => cartItem.category_list_item_id === data.category_list_item_id);
-                setProductQuantity(selectedItem?.quantity);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        };
-
-        fetchData();
-    }, [params?.categoryListItemId]);
-
     const setQuantity = (qty) => {
         setProductQuantity(qty);
         addCartQuantityCount(product, qty);
     }
 
-    const buyNowProduct = (product) => {
+    const buyNowProduct = () => {
         setValidationError("");
         if (!venueInfo?.place || !venueInfo?.eventDate || !venueInfo?.eventTime || !venueInfo?.gender) {
             setValidationError("Enter all the Event Details!");
@@ -68,18 +51,18 @@ const ProductOrder = () => {
         <>
             <div className="product-order-view">
                 <div>
-                    <Images fileName={product?.image_name} path={'details'} cssClass={'order-rectangle-image'} />
+                    <Images fileName={product?.imageName} path={'details'} cssClass={'order-rectangle-image'} />
                 </div>
                 <div className="order-right-panel">
                     <ul className="order-summary">
                         <li className="product-name">
-                            {product?.item_name}
+                            {product?.itemName}
                         </li>
                         <li>
                             <label>Ratings:</label> {product?.ratings}
                         </li>
                         <li>
-                            <label>Total Orders:</label> {product?.send_items_count}
+                            <label>Total Orders:</label> {product?.sendItemsCount}
                         </li>
                         <li>
                             <hr />
@@ -90,11 +73,11 @@ const ProductOrder = () => {
                         </li>
                         <li>
                             <label>Discount:</label>
-                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{product?.discount_price}
+                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{product?.discountPrice}
                         </li>
                         <li>
                             <label>Total Price:</label>
-                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{product?.price - product?.discount_price}
+                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{product?.price - product?.discountPrice}
                         </li>
                         <li>
                             <hr />
@@ -110,7 +93,7 @@ const ProductOrder = () => {
                             <label htmlFor="eventDate">Date*</label>
                             <input type="date" className="event-control" name="eventDate" value={venueInfo?.eventDate} onChange={addFieldValue} />
                         </li>
-                        {(product?.category_list_id == 1) && <>
+                        {(product?.categoryListId == 1) && <>
                             <li>
                                 <label htmlFor="eventTime">Time*</label>
                                 <select className="event-control" name="eventTime" value={venueInfo?.eventTime} onChange={addFieldValue}>
@@ -127,7 +110,7 @@ const ProductOrder = () => {
                                     <option value="2">Groom</option>
                                 </select>
                             </li></>}
-                        {(product?.category_list_id == 2) && <>
+                        {(product?.categoryListId == 2) && <>
                             <li>
                                 <label htmlFor="eventTime">Time*</label>
                                 <select className="event-control" name="eventTime" value={venueInfo?.eventTime} onChange={addFieldValue}>
@@ -174,7 +157,7 @@ const ProductOrder = () => {
 
                         <li>
                             <label>Total Price: </label>
-                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{(product?.price - product?.discount_price) * productQuantity} (incl. of all taxes)
+                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{(product?.price - product?.discountPrice) * productQuantity} (incl. of all taxes)
                         </li>
                         <li>
                             <input type="button" className="buy-now" onClick={() => buyNowProduct(product)} value={'ORDER NOW'} />

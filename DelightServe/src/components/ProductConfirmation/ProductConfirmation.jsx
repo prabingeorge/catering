@@ -23,10 +23,10 @@ const EmailTemplate = ({ cartItems }) => {
                         <ul style={{ border: 'solid #1161ee', listStyle: 'none', padding: '0px' }}>
                             {cartItems?.length > 0 && cartItems.map(item => {
                                 return (
-                                    <li key={item?.category_list_item_id} style={{ display: 'flex', border: '2px solid #ffa500', margin: '5px', padding: '10px' }}>
+                                    <li key={item?.categoryListItemId} style={{ display: 'flex', border: '2px solid #ffa500', margin: '5px', padding: '10px' }}>
                                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                                             <div>
-                                                Name: <label style={{ fontWeight: 'bold' }} key={item?.id}>{item?.item_name}</label>
+                                                Name: <label style={{ fontWeight: 'bold' }} key={item?.id}>{item?.itemName}</label>
                                             </div>
                                             <div>
                                                 Price: <label style={{ fontWeight: 'bold' }} key={item?.id}>
@@ -34,10 +34,10 @@ const EmailTemplate = ({ cartItems }) => {
                                                 </label> per Product
                                             </div>
                                             <div>
-                                                Discount: <label style={{ fontWeight: 'bold' }} key={item?.id}>{item?.discount_price}</label>
+                                                Discount: <label style={{ fontWeight: 'bold' }} key={item?.id}>{item?.discountPrice}</label>
                                             </div>
                                             <div>
-                                                Total: <label style={{ fontWeight: 'bold' }} key={item?.id}>{(item?.price - item?.discount_price) * item?.quantity}</label>
+                                                Total: <label style={{ fontWeight: 'bold' }} key={item?.id}>{(item?.price - item?.discountPrice) * item?.quantity}</label>
                                             </div>
                                             <div>
                                                 Quantity: <label style={{ fontWeight: 'bold' }} key={item?.id}>{item?.quantity}</label>
@@ -145,8 +145,8 @@ const ProductConfirmation = () => {
                 const details = {
                     userId: user?.userId,
                     categoryId: cartItem?.categoryId,
-                    categoryListId: cartItem?.category_list_id,
-                    categoryListItemId: cartItem?.category_list_item_id,
+                    categoryListId: cartItem?.categoryListId,
+                    categoryListItemId: cartItem?.categoryListItemId,
                     quantity: cartItem?.quantity,
                     amount: cartItem?.price
                 }
@@ -174,7 +174,7 @@ const ProductConfirmation = () => {
             cartItems.map(item => {
                 const attachment = {
                     filename: item?.image_name,
-                    path: "D:/Divine/furniturem/API/public/images/details/" + item?.image_name,
+                    path: "D:/Divine/furniturem/API/public/images/details/" + item?.imageName,
                     cid: item?.id + '@example.com' //"nodemailer@example.com", // matches the cid in the img src attribute
                 };
                 attachments.push(attachment);
@@ -273,10 +273,10 @@ const ProductConfirmation = () => {
                 {cartItems?.length > 0 && cartItems.map((item) => {
                     return (
                         <>
-                            <li key={item?.category_list_item_id} className="product-wrapper">
+                            <li key={item?.categoryListItemId} className="product-wrapper">
                                 <div className="product-details">
                                     <div>
-                                        Name: <label>{item?.item_name}</label>
+                                        Name: <label>{item?.itemName}</label>
                                     </div>
                                     <div>
                                         Price: <label>
@@ -285,12 +285,12 @@ const ProductConfirmation = () => {
                                     </div>
                                     <div>
                                         Discount: <label>
-                                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{item?.discount_price}
+                                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{item?.discountPrice}
                                         </label>
                                     </div>
                                     <div>
                                         Total: <label>
-                                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{(item?.price - item?.discount_price) * item?.quantity}
+                                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{(item?.price - item?.discountPrice) * item?.quantity}
                                         </label>
                                     </div>
                                     {/* <div>
@@ -301,7 +301,7 @@ const ProductConfirmation = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <Images fileName={item?.image_name} path={'details'} cssClass={'square-image'} />
+                                    <Images fileName={item?.imageName} path={'details'} cssClass={'square-image'} />
                                 </div>
                             </li>
                         </>
