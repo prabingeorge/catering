@@ -12,7 +12,12 @@ const router = express.Router();
 // router.get("/categories", auth, async (req, res) => {
 router.get("/categories", async (req, res) => {
   try {
-    const categories = await Categories.findAll();
+    const categories = await Categories.findAll({
+      attributes: [
+        ['category_id', 'categoryId'],
+        'name'
+      ],
+    });
     res.json(categories);
   } catch (err) {
     res.status(500).json({ message: err.message });

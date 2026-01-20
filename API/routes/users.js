@@ -67,31 +67,32 @@ router.get("/users-purchase-details", async (req, res) => {
   try {
     const users = await Categories.findAll({
       // Select specific attributes if necessary
-      // attributes: ['id', 'username'], 
+      attributes: ['category_id', 'name'], 
       include: [
         {
           model: CategoriesLists,
           as: 'CategoriesLists', // Use the alias defined in your association
           required: true, // Forces an INNER JOIN for the Order table
-          // attributes: ['id', 'orderDate'],
+          attributes: ['category_list_id', 'type', 'image_name', 'category_id'],
           include: [
             {
               model: CategoriesListItems,
               as: 'CategoriesListItems', // Use the alias defined in your association
               required: true, // Forces an INNER JOIN for the Order table
-              // attributes: ['id', 'orderDate'],
+                        "send_items_count": 1,
+              attributes: ['category_list_item_id', 'item_name', 'image_name', 'price', 'discount_price','ratings','send_items_count'],
               include: [
                 {
                   model: PurchaseDetails,
                   as: 'PurchaseDetails', // Use the alias defined in your association
                   required: true, // Forces an INNER JOIN for the Order table
-                  // attributes: ['id', 'orderDate'],
+                  attributes: ['purchase_id', 'quantity', 'amount'],
                   include: [
                     {
                       model: User,
                       as: 'User', // Use the alias defined in your association
                       required: true, // Forces an INNER JOIN for the Order table
-                      // attributes: ['id', 'orderDate'],
+                      attributes: ['user_id', 'name', 'email', 'phone', 'status'],
                     }
                   ]
                 }

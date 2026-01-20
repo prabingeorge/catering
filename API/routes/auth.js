@@ -116,7 +116,7 @@ router.post("/categories", async (req, res) => {
             name
         });
 
-        res.status(201).json({ categoryId: newData.category_id, name: newData.name, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
+        res.status(201).json({ categoryId: newData.category_id, name: newData.name });
 
         // return res.status(201).send({message: 'Account created successfully'});
     } catch (e) {
