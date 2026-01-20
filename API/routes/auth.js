@@ -61,8 +61,7 @@ router.post("/register", async (req, res) => {
     } catch (e) {
         console.log(e);
         return res.status(500)
-            .send(
-                { message: 'Could not perform operation at this time, kindly try again later.' });
+            .send({ message: 'Could not perform operation at this time, kindly try again later.' });
     }
 });
 
@@ -148,8 +147,7 @@ router.post("/categories-list", async (req, res) => {
     } catch (e) {
         console.log(e);
         return res.status(500)
-            .send(
-                { message: 'Could not perform operation at this time, kindly try again later.' });
+            .send({ message: 'Could not perform operation at this time, kindly try again later.' });
     }
 });
 
@@ -178,8 +176,7 @@ router.post("/categories-list-items", async (req, res) => {
     } catch (e) {
         console.log(e);
         return res.status(500)
-            .send(
-                { message: 'Could not perform operation at this time, kindly try again later.' });
+            .send({ message: 'Could not perform operation at this time, kindly try again later.' });
     }
 });
 

@@ -63,8 +63,16 @@ router.get("/categories-list", async (req, res) => {
 // Get all categories-list by id
 router.post("/categories-list-by-id", async (req, res) => {
   try {
-    const { category_id } = req.body;
-    const categoriesList = await CategoriesLists.findAll({ where: { [Op.or]: [{ category_id }] } });
+    const { categoryId } = req.body;
+    const categoriesList = await CategoriesLists.findAll({
+      attributes: [
+        ['category_id', 'categoryId'],
+        ['category_list_id', 'categoryListId'],
+        'type',
+        ['image_name', 'imageName'],
+      ],
+      where: { [Op.or]: [{ category_id: categoryId }] }
+    });
     res.json(categoriesList);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -75,7 +83,19 @@ router.post("/categories-list-by-id", async (req, res) => {
 router.post("/categories-list-items-by-id", async (req, res) => {
   try {
     const { categoryListId } = req.body;
-    const categoriesListItems = await CategoriesListItems.findAll({ where: { [Op.or]: [{ category_list_id: categoryListId }] } });
+    const categoriesListItems = await CategoriesListItems.findAll({
+      attributes: [
+        ['category_list_id', 'categoryListId'],
+        ['category_list_item_id', 'categoryListItemId'],
+        ['item_name', 'itemName'],
+        ['image_name', 'imageName'],
+        'price',
+        ['discount_price', 'discountPrice'],
+        'ratings',
+        ['send_items_count', 'sendItemsCount']
+      ],
+      where: { [Op.or]: [{ category_list_id: categoryListId }] }
+    });
     res.json(categoriesListItems);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -86,7 +106,19 @@ router.post("/categories-list-items-by-id", async (req, res) => {
 router.post("/categories-list-items-details", async (req, res) => {
   try {
     const { categoryListItemId } = req.body;
-    const categoriesListItems = await CategoriesListItems.findAll({ where: { [Op.or]: [{ category_list_item_id: categoryListItemId }] } });
+    const categoriesListItems = await CategoriesListItems.findAll({
+      attributes: [
+        ['category_list_id', 'categoryListId'],
+        ['category_list_item_id', 'categoryListItemId'],
+        ['item_name', 'itemName'],
+        ['image_name', 'imageName'],
+        'price',
+        ['discount_price', 'discountPrice'],
+        'ratings',
+        ['send_items_count', 'sendItemsCount']
+      ],
+      where: { [Op.or]: [{ category_list_item_id: categoryListItemId }] }
+    });
     res.json(...categoriesListItems);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -124,10 +156,20 @@ router.post("/purchase-detail", auth, async (req, res) => {
   }
 });
 
-// Get all categories-list
+// Get all purchase details
 router.get("/purchase-details", async (req, res) => {
   try {
-    const purchaseDetails = await PurchaseDetails.findAll();
+    const purchaseDetails = await PurchaseDetails.findAll({
+      attributes: [
+        ['purchase_id', 'purchaseId'],
+        ['user_id', 'userId'],
+        ['category_id', 'categoryId'],
+        ['category_list_id', 'categoryListId'],
+        ['category_list_item_id', 'categoryListItemId'],
+        'quantity',
+        'amount'
+      ]
+    });
     res.json(purchaseDetails);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -138,7 +180,18 @@ router.get("/purchase-details", async (req, res) => {
 router.post("/purchase-details-by-userid", async (req, res) => {
   try {
     const { userId } = req.body;
-    const purchaseDetails = await PurchaseDetails.findAll({ where: { [Op.or]: [{ user_id: userId }] } });
+    const purchaseDetails = await PurchaseDetails.findAll({
+      attributes: [
+        ['purchase_id', 'purchaseId'],
+        ['user_id', 'userId'],
+        ['category_id', 'categoryId'],
+        ['category_list_id', 'categoryListId'],
+        ['category_list_item_id', 'categoryListItemId'],
+        'quantity',
+        'amount'
+      ],
+      where: { [Op.or]: [{ user_id: userId }] }
+    });
     res.json(purchaseDetails);
   } catch (err) {
     res.status(500).json({ message: err.message });
