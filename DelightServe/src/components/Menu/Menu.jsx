@@ -36,8 +36,8 @@ const Menu = () => {
                         </li>
                         {categoriesList?.length > 0 && categoriesList.map((category) => {
                             return (
-                                <li key={category?.category_id} className={(selectedCategoryId == category?.category_id) ? 'active-menu' : 'non-active-menu'}>
-                                    <Link to={'/dashboard'} onClick={() => changeCategory(category?.category_id)}>{category?.name}</Link>
+                                <li key={category?.categoryId} className={(selectedCategoryId == category?.categoryId) ? 'active-menu' : 'non-active-menu'}>
+                                    <Link to={'/dashboard'} onClick={() => changeCategory(category?.categoryId)}>{category?.name}</Link>
                                 </li>
                             )
                         })}
