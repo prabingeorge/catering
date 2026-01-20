@@ -18,6 +18,7 @@ import ProductDelivery from "./components/ProductDelivery/ProductDelivery";
 
 /* Admin routes */
 import { ADashboard } from "./Admin/Dashboard/Dashboard";
+import { ACategories } from "./Admin/Categories/Categories";
 
 function App() {
   return (
@@ -120,6 +121,14 @@ function App() {
           element={
             <>
               <ADashboard />
+            </>
+          }
+        />
+        <Route
+          path="/admin/categories"
+          element={
+            <>
+              <ACategories />
             </>
           }
         />
