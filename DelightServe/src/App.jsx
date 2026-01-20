@@ -19,6 +19,8 @@ import ProductDelivery from "./components/ProductDelivery/ProductDelivery";
 /* Admin routes */
 import { ADashboard } from "./Admin/Dashboard/Dashboard";
 import { ACategories } from "./Admin/Categories/Categories";
+import { ACategoriesList } from "./Admin/CategoriesList/CategoriesList";
+import { ACategoriesListItems } from "./Admin/CategoriesListItems/CategoriesListItems";
 
 function App() {
   return (
@@ -129,6 +131,22 @@ function App() {
           element={
             <>
               <ACategories />
+            </>
+          }
+        />
+        <Route
+          path="/admin/categorieslist"
+          element={
+            <>
+              <ACategoriesList />
+            </>
+          }
+        />
+        <Route
+          path="/admin/categorieslistitems"
+          element={
+            <>
+              <ACategoriesListItems />
             </>
           }
         />

@@ -22,4 +22,10 @@
             font-size: 14px;
         }
     }
+
+    .nextpage-link {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
 }

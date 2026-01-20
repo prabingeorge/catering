@@ -13,7 +13,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.post(apiURL + "/api/user/categories-list-by-id", { category_id: selectedCategoryId });
+        const response = await api.post(apiURL + "/api/user/categories-list-by-id", { categoryId: selectedCategoryId });
         const { data } = response;
         setCategoriesList([...data]);
       } catch (error) {
@@ -44,7 +44,7 @@ const Dashboard = () => {
             return (
               <div key={category?.category_list_id}>
                 <div>
-                  <Images fileName={category?.image_name} categoryListId={category?.category_list_id} path={'dashboard'} cssClass={'circle-image'} />
+                  <Images fileName={category?.imageName} categoryListId={category?.categoryListId} path={'dashboard'} cssClass={'circle-image'} />
                 </div>
                 <div className="type-container">
                   <label>{category?.type}</label>

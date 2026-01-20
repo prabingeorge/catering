@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import api from "../../contexts/APIContext";
 import { Table } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 
 import "./index.css";
 
@@ -70,6 +71,9 @@ const ACategories = () => {
                 <div>
                     <button className='add-button' onClick={addCategory}>Add</button>
                 </div>
+            </div>
+            <div className='nextpage-link'>
+                <Link to={'/admin/categorieslist'}>Add Categories List</Link>
             </div>
         </div>
     )

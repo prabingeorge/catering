@@ -41,19 +41,19 @@ const CategoriesList = () => {
                     {categoriesListItems?.length > 0 && categoriesListItems.map((image) => {
                         return (
                             <>
-                                <ul key={image?.category_list_item_id} className="images-wrapper">
+                                <ul key={image?.categoryListItemId} className="images-wrapper">
                                     <li>
-                                        <Images fileName={image.image_name} path={'details'} cssClass={'rectangle-image'} />
+                                        <Images fileName={image.imageName} path={'details'} cssClass={'rectangle-image'} />
                                     </li>
                                     <li>
-                                        <label className="product-name">{image.item_name}</label>
+                                        <label className="product-name">{image.itemName}</label>
                                     </li>
                                     <li className="product-ratings-count">
                                         <div>
                                             <label>Ratings:</label> {image.ratings}
                                         </div>
                                         <div>
-                                            <label>Total Ordered:</label> {image.send_items_count}
+                                            <label>Total Ordered:</label> {image.sendItemsCount}
                                         </div>
                                     </li>
                                     <li>
@@ -64,7 +64,7 @@ const CategoriesList = () => {
                                         <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{image.price}
                                     </li>
                                     <li className="button-container">
-                                        <Link to={`${'/product-order/' + image.category_list_item_id}`}>
+                                        <Link to={`${'/product-order/' + image.categoryListItemId}`}>
                                             <input type="button" className="add-to-cart" value={'Select'} onClick={()=>addToCartClick(image)} />
                                         </Link>
                                     </li>
