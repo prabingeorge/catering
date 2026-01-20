@@ -83,7 +83,10 @@ const Login = () => {
                   </div>
                 </div>
                 <div className="footer-last">
-                  <Link className="link" to="/dashboard"> Click here for Dashboard!</Link>
+                  <Link className="link" to="/home"> Click here for Home!</Link>
+                </div>
+                <div className="footer-last">
+                  <Link className="link" to="/admin/categories">Admin, Click here!</Link>
                 </div>
               </div>
             </div>
