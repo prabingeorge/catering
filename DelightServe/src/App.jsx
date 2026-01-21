@@ -21,6 +21,7 @@ import { ADashboard } from "./Admin/Dashboard/Dashboard";
 import { ACategories } from "./Admin/Categories/Categories";
 import { ACategoriesList } from "./Admin/CategoriesList/CategoriesList";
 import { ACategoriesListItems } from "./Admin/CategoriesListItems/CategoriesListItems";
+import { ABookingHistory } from "./Admin/BookingHistory/BookingHistory";
 
 function App() {
   return (
@@ -123,6 +124,14 @@ function App() {
           element={
             <>
               <ADashboard />
+            </>
+          }
+        />
+        <Route
+          path="/admin/bookinghistory"
+          element={
+            <>
+              <ABookingHistory />
             </>
           }
         />
