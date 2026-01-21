@@ -20,9 +20,9 @@ const Home = () => {
                 <div>
                     <label className='label'>Info:</label>
                     <div className='info-details'>
-                        <Link>Contact Us</Link>
-                        <Link>Term of Services</Link>
-                        <Link>Privacy Policy</Link>
+                        <Link className="info-link" to={'/contact-information'}>Contact Us</Link>
+                        <Link className="info-link" to={'/terms-of-service'}>Term of Services</Link>
+                        <Link className="info-link" to={'/privacy-policy'}>Privacy Policy</Link>
                     </div>
                 </div>
                 <label className='label'>Our Mission:</label>

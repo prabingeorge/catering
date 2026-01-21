@@ -24,6 +24,9 @@ import { ACategories } from "./Admin/Categories/Categories";
 import { ACategoriesList } from "./Admin/CategoriesList/CategoriesList";
 import { ACategoriesListItems } from "./Admin/CategoriesListItems/CategoriesListItems";
 import { ABookingHistory } from "./Admin/BookingHistory/BookingHistory";
+import { ContactInformation } from "./components/ContactInformation/ContactInformation";
+import { TermsOfService } from "./components/TermsOfService/TermsOfService";
+import { PrivacyPolicy } from "./components/PrivacyPolicy/PrivacyPolicy";
 
 function App() {
   return (
@@ -121,6 +124,36 @@ function App() {
               <Header />
               <Registration />
             </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/contact-information"
+          element={
+            <>
+              <Header />
+              <Menu />
+              <ContactInformation />
+            </>
+          }
+        />
+        <Route
+          path="/terms-of-service"
+          element={
+            <>
+              <Header />
+              <Menu />
+              <TermsOfService />
+            </>
+          }
+        />
+        <Route
+          path="/privacy-policy"
+          element={
+            <>
+              <Header />
+              <Menu />
+              <PrivacyPolicy />
+            </>
           }
         />
         <Route

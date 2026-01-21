@@ -45,9 +45,12 @@
             margin: 10px 0px;
             font-size: 16px;
 
-            a {
+            .info-link {
                 text-decoration: none;
                 color: #000;
+                &:hover {
+                    text-decoration: underline;
+                }
             }
         }
 
