@@ -67,32 +67,58 @@ router.get("/users-purchase-details", async (req, res) => {
   try {
     const users = await Categories.findAll({
       // Select specific attributes if necessary
-      attributes: ['category_id', 'name'], 
+      attributes: [
+        ['category_id', 'categoryId'],
+        'name'
+      ],
       include: [
         {
           model: CategoriesLists,
           as: 'CategoriesLists', // Use the alias defined in your association
           required: true, // Forces an INNER JOIN for the Order table
-          attributes: ['category_list_id', 'type', 'image_name', 'category_id'],
+          attributes: [
+            ['category_list_id', 'categoryListId'],
+            'type',
+            ['image_name', 'imageName'],
+            ['category_id', 'categoryId'],
+          ],
           include: [
             {
               model: CategoriesListItems,
               as: 'CategoriesListItems', // Use the alias defined in your association
               required: true, // Forces an INNER JOIN for the Order table
-                        "send_items_count": 1,
-              attributes: ['category_list_item_id', 'item_name', 'image_name', 'price', 'discount_price','ratings','send_items_count'],
+              "send_items_count": 1,
+              attributes: [
+                ['category_list_item_id', 'categoryListItemId'],
+                ['item_name', 'itemName'],
+                ['image_name', 'imageName'],
+                'price',
+                ['discount_price', 'discountPrice'],
+                'ratings',
+                ['send_items_count', 'sendItemsCount']
+              ],
               include: [
                 {
                   model: PurchaseDetails,
                   as: 'PurchaseDetails', // Use the alias defined in your association
                   required: true, // Forces an INNER JOIN for the Order table
-                  attributes: ['purchase_id', 'quantity', 'amount'],
+                  attributes: [
+                    ['purchase_id', 'purchaseId'],
+                    'quantity',
+                    'amount'
+                  ],
                   include: [
                     {
                       model: User,
                       as: 'User', // Use the alias defined in your association
                       required: true, // Forces an INNER JOIN for the Order table
-                      attributes: ['user_id', 'name', 'email', 'phone', 'status'],
+                      attributes: [
+                        ['user_id', 'userId'],
+                        'name',
+                        'email',
+                        'phone',
+                        'status'
+                      ],
                     }
                   ]
                 }
@@ -116,7 +142,7 @@ router.delete("/truncate-tables", async (req, res) => {
     await CategoriesListItems.truncate({ restartIdentity: true });
     await PurchaseDetails.truncate({ restartIdentity: true });
     await User.truncate({ restartIdentity: true });
-    res.json({message: "Truncated successfully"});
+    res.json({ message: "Truncated successfully" });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
