@@ -4,7 +4,7 @@ import auth from "../middleware/auth.js";
 import { Op } from 'sequelize';
 import model from '../models/index.cjs';
 
-const { User, Categories, CategoriesLists, CategoriesListItems, PurchaseDetails } = model;
+const { User, Categories, CategoriesLists, CategoriesListItems, CategoriesListItemsTypes, FoodMenus, PurchaseDetails } = model;
 
 const router = express.Router();
 
@@ -60,7 +60,7 @@ router.get("/categories-list", async (req, res) => {
   }
 });
 
-// Get all categories-list by id
+// Get all categories-list by category_id
 router.post("/categories-list-by-id", async (req, res) => {
   try {
     const { categoryId } = req.body;
@@ -79,7 +79,7 @@ router.post("/categories-list-by-id", async (req, res) => {
   }
 });
 
-// Get all categories-list-items by id
+// Get all categories-list-items by category_list_id
 router.post("/categories-list-items-by-id", async (req, res) => {
   try {
     const { categoryListId } = req.body;
@@ -102,7 +102,7 @@ router.post("/categories-list-items-by-id", async (req, res) => {
   }
 });
 
-// Get categories-list-items details by list_item_id
+// Get categories-list-items details by category_list_item_id
 router.post("/categories-list-items-details", async (req, res) => {
   try {
     const { categoryListItemId } = req.body;
@@ -120,6 +120,43 @@ router.post("/categories-list-items-details", async (req, res) => {
       where: { [Op.or]: [{ category_list_item_id: categoryListItemId }] }
     });
     res.json(...categoriesListItems);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// Get categories-list-items-types details by category_list_item_id
+router.post("/categories-list-items-types-by-id", async (req, res) => {
+  try {
+    const { categoryListItemId } = req.body;
+    const categoriesListItemsTypes = await CategoriesListItemsTypes.findAll({
+      attributes: [
+        ['category_list_item_type_id', 'categoryListItemTypeId'],
+        ['type_name', 'typeName'],
+        ['image_name', 'imageName'],
+        ['category_list_item_id', 'categoryListItemId'],
+      ],
+      where: { [Op.or]: [{ category_list_item_id: categoryListItemId }] }
+    });
+    res.json(categoriesListItemsTypes);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// Get food-menus by category_list_item_type_id
+router.post("/food-menus-by-id", async (req, res) => {
+  try {
+    const { categoryListItemTypeId } = req.body;
+    const data = await FoodMenus.findAll({
+      attributes: [
+        ['food_id', 'foodId'],
+        ['food_name', 'foodName'],
+        ['category_list_item_type_id', 'categoryListItemTypeId'],
+      ],
+      where: { [Op.or]: [{ category_list_item_type_id: categoryListItemTypeId }] }
+    });
+    res.json(data);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

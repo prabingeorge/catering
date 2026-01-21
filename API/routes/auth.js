@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import { Op } from 'sequelize';
 import model from '../models/index.cjs';
 
-const { User, Categories, CategoriesLists, CategoriesListItems } = model;
+const { User, Categories, CategoriesLists, CategoriesListItems, CategoriesListItemsTypes, FoodMenus } = model;
 
 console.log("Modal" + Categories);
 
@@ -173,6 +173,55 @@ router.post("/categories-list-items", async (req, res) => {
         });
 
         res.status(201).json({ categoryListItemId: newData?.category_list_item_id, itemName: newData.item_name, imageName: newData?.image_name, price: newData?.price, discountPrice: newData?.discount_price, ratings: newData?.ratings, sendItemsCount: newData?.send_items_count, categoryListId: newData?.category_list_id, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
+    } catch (e) {
+        console.log(e);
+        return res.status(500)
+            .send({ message: 'Could not perform operation at this time, kindly try again later.' });
+    }
+});
+
+// Add Categories-list-items-types
+router.post("/categories-list-items-types", async (req, res) => {
+    const { typeName, imageName, categoryListItemId } = req.body;
+    try {
+        const data = await CategoriesListItemsTypes.findOne({ where: { [Op.or]: [{ type_name: typeName }] } });
+        if (data) {
+            return res.status(422)
+                .send({ message: 'Type name already exists' });
+        }
+
+        // Create new categories list items types
+        const newData = await CategoriesListItemsTypes.create({
+            type_name: typeName,
+            image_name: imageName,
+            category_list_item_id: categoryListItemId
+        });
+
+        res.status(201).json({ categoryListItemTypeId: newData?.category_list_item_type_id, typeName: newData.type_name, imageName: newData?.image_name, categoryListItemId: newData?.category_list_item_id });
+    } catch (e) {
+        console.log(e);
+        return res.status(500)
+            .send({ message: 'Could not perform operation at this time, kindly try again later.' });
+    }
+});
+
+// Add Food-menus
+router.post("/food-menu", async (req, res) => {
+    const { foodName, categoryListItemTypeId } = req.body;
+    try {
+        const data = await FoodMenus.findOne({ where: { [Op.or]: [{ food_name: foodName }] } });
+        if (data) {
+            return res.status(422)
+                .send({ message: 'Food name already exists' });
+        }
+
+        // Create new food menu
+        const newData = await FoodMenus.create({
+            food_name: foodName,
+            category_list_item_type_id: categoryListItemTypeId
+        });
+
+        res.status(201).json({ foodId: newData?.food_id, foodName: newData.food_name, categoryListItemTypeId: newData?.category_list_item_type_id });
     } catch (e) {
         console.log(e);
         return res.status(500)
