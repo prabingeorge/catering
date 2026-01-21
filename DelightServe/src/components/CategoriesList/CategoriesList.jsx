@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Images from "../Images/Images";
 import api from "../../contexts/APIContext";
 import { CartContext } from "../../contexts/Cart";
@@ -10,12 +10,18 @@ import './index.css';
 
 const CategoriesList = () => {
 
+    let navigate = useNavigate();
     const { addToCart, selectedCategoryId } = useContext(CartContext);
     const [categoriesListItems, setCategoriesListItems] = useState([]);
 
-    const addToCartClick = (item)=> {
+    const addToCartClick = (item) => {
         item.categoryId = selectedCategoryId;
         addToCart(item);
+        if (selectedCategoryId == 2) {
+            navigate('/productlisttypes/' + item.categoryListItemId);
+            return;
+        }
+        navigate('/product-order/' + item.categoryListItemId);
     }
 
     let params = useParams();
@@ -43,7 +49,7 @@ const CategoriesList = () => {
                             <>
                                 <ul key={image?.categoryListItemId} className="images-wrapper">
                                     <li>
-                                        <Images fileName={image.imageName} path={'details'} cssClass={'rectangle-image'} />
+                                        <Images fileName={image.imageName} path={`details/${selectedCategoryId}/`} cssClass={'rectangle-image'} />
                                     </li>
                                     <li>
                                         <label className="product-name">{image.itemName}</label>
@@ -64,11 +70,8 @@ const CategoriesList = () => {
                                         <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{image.price}
                                     </li>
                                     <li className="button-container">
-                                        <Link to={`${'/product-order/' + image.categoryListItemId}`}>
-                                            <input type="button" className="add-to-cart" value={'Select'} onClick={()=>addToCartClick(image)} />
-                                        </Link>
+                                        <input type="button" className="add-to-cart" value={'Select'} onClick={() => addToCartClick(image)} />
                                     </li>
-
                                 </ul>
                             </>
                         )

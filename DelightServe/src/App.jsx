@@ -16,6 +16,8 @@ import ProductCart from "./components/ProductCart/ProductCart";
 import ProductConfirmation from "./components/ProductConfirmation/ProductConfirmation";
 import ProductDelivery from "./components/ProductDelivery/ProductDelivery";
 
+import { ProductListTypes } from "./components/ProductListTypes/ProductListTypes";
+
 /* Admin routes */
 import { ADashboard } from "./Admin/Dashboard/Dashboard";
 import { ACategories } from "./Admin/Categories/Categories";
@@ -60,6 +62,16 @@ function App() {
               <Header />
               <Menu />
               <CategoriesList />
+            </>
+          }
+        />
+        <Route
+          path="/productlisttypes/:categoryListItemId"
+          element={
+            <>
+              <Header />
+              <Menu />
+              <ProductListTypes />
             </>
           }
         />
