@@ -154,13 +154,12 @@ const ProductOrder = () => {
                                 }} />
                             </div>
                         </li> */}
-
                         <li>
                             <label>Total Price: </label>
                             <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{(product?.price - product?.discountPrice) * productQuantity} (incl. of all taxes)
                         </li>
                         <li>
-                            <input type="button" className="buy-now" onClick={() => buyNowProduct(product)} value={'ORDER NOW'} />
+                            <input type="button" className="buy-now" onClick={() => buyNowProduct()} value={'ORDER NOW'} />
                         </li>
                     </ul>
                 </div>
