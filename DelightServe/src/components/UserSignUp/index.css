@@ -1,0 +1,60 @@
+.usersignup-view {
+    .product-panel {
+        border: 2px solid #1161ee;
+        margin-left: 40px;
+        padding: 6px;
+        list-style: none;
+        /* min-height: 345px; */
+        position: relative;
+        perspective: 1000px;
+        transform-style: preserve-3d;
+
+        .group {
+            display: flex;
+            background-color: #ffa500;
+            margin: 6px 0px;
+            padding: 6px 0px;
+            justify-content: center;
+        }
+
+        .group .label,
+        .group .input,
+        .group .button {
+            border: none;
+            /* padding: 15px 20px; */
+            padding: 15px 16px;
+            border-radius: 25px;
+            /* background: rgba(255, 255, 255, .1); */
+            width: 40%;
+            color: #000;
+            display: block;
+            font-weight: bold;
+            font-size: 16px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .group .label {
+            width: 20%;
+
+            @media only screen and (max-width: 600px) {
+                width: 35%;
+            }
+        }
+
+        .group .button {
+            width: 15%;
+            cursor: pointer;
+            background: #1161ee;
+
+            @media only screen and (max-width: 600px) {
+                width: 30%;
+            }
+
+            &:hover {
+                background: #598de6;
+                color: #000;
+            }
+        }
+    }
+}
+

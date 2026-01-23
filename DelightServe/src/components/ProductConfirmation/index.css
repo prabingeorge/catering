@@ -26,9 +26,7 @@
             justify-content: center;
         }
 
-        .group .label,
-        .group .input,
-        .group .button {
+        .group .label {
             border: none;
             /* padding: 15px 20px; */
             padding: 15px 16px;
@@ -47,21 +45,6 @@
 
             @media only screen and (max-width: 600px) {
                 width: 35%;
-            }
-        }
-
-        .group .button {
-            width: 15%;
-            cursor: pointer;
-            background: #1161ee;
-
-            @media only screen and (max-width: 600px) {
-                width: 30%;
-            }
-
-            &:hover {
-                background: #598de6;
-                color: #000;
             }
         }
 
@@ -154,7 +137,7 @@
         justify-content: center;
     }
 
-    .login-panel {
+    /* .login-panel {
         display: flex;
         justify-content: center;
 
@@ -195,7 +178,7 @@
 
             }
         }
-    }
+    } */
 
     .email-validation-container {
         display: flex;
