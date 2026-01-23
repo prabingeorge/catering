@@ -43,7 +43,6 @@
                         }
 
                         .button {
-                            padding: 10px 20px;
                             width: auto;
                             float: right;
                         }
@@ -89,6 +88,7 @@
 
         .event-info {
             list-style: none;
+            padding: 20px;
 
             li {
                 margin: 15px 0px;
@@ -161,7 +161,7 @@
     .buy-now {
         cursor: pointer;
         background: #1161ee;
-        padding: 10px 50px;
+        padding: 5px 15px;
         border-radius: 5px;
         font-size: 16px;
         margin: 10px 0px 30px;

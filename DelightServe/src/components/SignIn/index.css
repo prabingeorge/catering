@@ -2,23 +2,23 @@
     .login-panel {
         display: flex;
         justify-content: center;
-        margin-top: 10px;
+        margin: 40px;
 
         .login-container {
             list-style: none;
-            width: 380px;
+            /* width: 380px; */
 
             li {
-                margin: 12px;
+                margin-bottom: 15px;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 font-weight: bold;
 
                 .input {
-                    padding: 15px 20px;
+                    padding: 5px;
                     border: 2px solid #ffa500;
-                    border-radius: 25px;
+                    border-radius: 5px;
                 }
 
                 &.button-container {
@@ -26,8 +26,8 @@
 
                     .button {
                         border: none;
-                        padding: 10px 20px;
-                        border-radius: 25px;
+                        padding: 5px;
+                        border-radius: 5px;
                         color: #000;
                         display: block;
                         font-weight: bold;

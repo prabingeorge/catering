@@ -60,7 +60,7 @@ const ProductOrder = () => {
                             <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{(product?.price - product?.discountPrice) * productQuantity} (incl. of all taxes)
                         </li>
                         <li>
-                            <input type="button" className="buy-now" onClick={() => buyNowProduct()} value={'ORDER NOW'} />
+                            <input type="button" className="buy-now" onClick={() => buyNowProduct()} value={'Place Order'} />
                         </li>
                     </ul>
                 </div>

@@ -159,7 +159,7 @@ const EventInformations = () => {
                         <hr />
                     </li>
                     <li>
-                        <input type="button" className="buy-now" onClick={() => buyNowProduct()} value={'SAVE'} />
+                        <input type="button" className="buy-now" onClick={() => buyNowProduct()} value={'Save'} />
                     </li>
                 </ul>
             </div>}

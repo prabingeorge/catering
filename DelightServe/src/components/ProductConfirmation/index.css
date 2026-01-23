@@ -75,14 +75,13 @@
                     margin-top: 60px;
 
                     .button {
-                        width: 200px;
                         cursor: pointer;
                         background: #1161ee;
                         border: 2px solid #ffa500;
                         color: #fff;
                         font-size: 16px;
-                        padding: 5px;
-                        border-radius: 10px;
+                        padding: 5px 15px;
+                        border-radius: 5px;
 
                         &:hover {
                             background: #598de6;
@@ -103,8 +102,8 @@
 
         .button {
             border: none;
-            padding: 15px 20px;
-            border-radius: 25px;
+            padding: 5px 15px;
+            border-radius: 5px;
             color: #000;
             display: block;
             font-weight: bold;

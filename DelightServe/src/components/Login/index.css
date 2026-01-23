@@ -81,8 +81,8 @@
     .login-form .group .input,
     .login-form .group .button {
         border: none;
-        padding: 15px 20px;
-        border-radius: 25px;
+        padding: 5px;
+        border-radius: 5px;
         /* background: rgba(255, 255, 255, .1); */
     }
 
@@ -98,7 +98,7 @@
     .login-form .group .button {
         cursor: pointer;
         background: #1161ee;
-        margin-top: 30px;
+        /* margin-top: 30px; */
 
         &:hover {
             background: #598de6;
