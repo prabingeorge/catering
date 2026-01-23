@@ -2,18 +2,23 @@
     .login-panel {
         display: flex;
         justify-content: center;
+        margin-top: 10px;
 
         .login-container {
             list-style: none;
-            width: 320px;
+            width: 380px;
 
             li {
-                margin: 10px 10px;
+                margin: 12px;
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
+                font-weight: bold;
 
                 .input {
-                    padding: 5px;
+                    padding: 15px 20px;
+                    border: 2px solid #ffa500;
+                    border-radius: 25px;
                 }
 
                 &.button-container {
@@ -38,6 +43,12 @@
                     }
                 }
 
+                .error-message {
+                    display: flex;
+                    margin: 10px;
+                    justify-content: center;
+                    width: -webkit-fill-available;
+                }
             }
         }
     }

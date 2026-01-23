@@ -1,6 +1,6 @@
 .signup-view {
 
-    *,
+    /* *,
     :after,
     :before {
         box-sizing: border-box
@@ -20,7 +20,7 @@
     a {
         color: inherit;
         text-decoration: none
-    }
+    } */
 
     .signup-wrap {
         width: 100%;

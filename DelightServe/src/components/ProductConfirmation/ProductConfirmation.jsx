@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { renderToString } from 'react-dom/server';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupee } from '@fortawesome/free-solid-svg-icons';
@@ -8,8 +8,6 @@ import { CartContext } from "../../contexts/Cart";
 import { useAuth } from "../../contexts/AuthContext";
 import api from "../../contexts/APIContext";
 import "./index.css";
-import { SignIn } from "../SignIn/SignIn";
-import { UserSignUp } from "../UserSignUp/UserSignUp";
 
 const EmailTemplate = ({ cartItems }) => {
     return (
@@ -66,6 +64,7 @@ const ProductConfirmation = () => {
     const apiURL = import.meta.env.VITE_API_URL;
    
     const [emailValidationError, setEmailValidationError] = useState("");
+    const [error, setError] = useState("");
 
     const savePurchaseDetails = async () => {
 
@@ -145,8 +144,6 @@ const ProductConfirmation = () => {
     const { user } = useAuth();
    
     // const [isLoggedIn, setIsLoggedIn] = useState(!!user?.phone);
-    const [isNewUser, setIsNewUser] = useState(false);
-    
     if (cartItems?.length === 0) {
         return (
             <div className="product-confirmation-view">
@@ -197,35 +194,15 @@ const ProductConfirmation = () => {
                     )
                 })}
             </ul>
-            {user && <div>
-                <ul className="loggedin-panel">
-                    <li>
-                        Name: {user?.name}
-                    </li>
-                    <li>
-                        Email: {user?.email}
-                    </li>
-                    <li>
-                        Mobile: {user?.phone}
-                    </li>
-                </ul>
-            </div>}
-            {!user && !isNewUser && <div>
-                <div className="login-header">
-                    New User Click here to Register <Link className="link" onClick={() => setIsNewUser(true)}> Click</Link>
-                </div>
-                <SignIn />
-            </div>}
-            {!user && isNewUser && <div>
-                <div className="login-header">
-                    Already registered user <Link className="link" onClick={() => setIsNewUser(false)}> Click</Link>
-                </div>
-                <UserSignUp />
-            </div>
-            }
+           
             {user && emailValidationError && <div className="email-validation-container">
                 <div className="group group-error">
                     <label className="error">{emailValidationError}</label>
+                </div>
+            </div>}
+            {user && error && <div className="email-validation-container">
+                <div className="group group-error">
+                    <label className="error">{error}</label>
                 </div>
             </div>}
             {user && <div className="confirm-button-wrapper">

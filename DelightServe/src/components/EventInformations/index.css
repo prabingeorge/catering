@@ -1,9 +1,90 @@
 .eventinformations-view {
+    .userinfo-panel {
+        .login-header {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+
+            .link {
+                margin-left: 5px;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        /* signup override css */
+        .signup-wrap {
+            padding: 0px;
+            background: none;
+            box-shadow: unset;
+            margin-top: 10px;
+
+            .signup-html {
+                padding-top: 0px;
+                background: none;
+
+                .sign-up {
+                    display: none;
+                }
+
+                .signup-form {
+                    .group {
+                        .label {
+                            color: #000;
+                        }
+
+                        .input {
+                            border: 2px solid #ffa500
+                        }
+
+                        .button {
+                            padding: 10px 20px;
+                            width: auto;
+                            float: right;
+                        }
+
+                        .error {
+                            display: flex;
+                            margin: 10px;
+                            justify-content: center;
+                            width: -webkit-fill-available;
+                        }
+                    }
+
+                    .footer {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .loggedin-panel {
+            list-style: none;
+            display: grid;
+            justify-content: center;
+            font-weight: bold;
+
+            li {
+                margin: 5px;
+            }
+        }
+    }
+
     .summary-panel {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
 
         .event-summary {
             padding-left: 2rem;
             font-size: 16px;
+            font-weight: bold;
         }
 
         .event-info {
@@ -83,7 +164,8 @@
         padding: 10px 50px;
         border-radius: 5px;
         font-size: 16px;
-        margin: 30px;
+        margin: 10px 0px 30px;
+        float: right;
 
         &:hover {
             background: #598de6;

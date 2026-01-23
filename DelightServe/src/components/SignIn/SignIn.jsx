@@ -65,7 +65,7 @@ const SignIn = () => {
                         <input type="password" name="password" placeholder="Password" value={credentials.password} onChange={handleChange} className="input" />
                     </li>
                     <li>
-                        {loginError && <p className="error">{loginError}</p>}
+                        {loginError && <p className="error error-message">{loginError}</p>}
                     </li>
                     <li className="button-container">
                         <input type="button" className="button" value="Sign In" onClick={handleSubmit} />

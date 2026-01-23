@@ -1,18 +1,21 @@
 import { useState, useContext } from "react";
 import { useParams } from "react-router";
-import { useNavigate } from "react-router-dom";
-import Images from "../Images/Images";
+import { useNavigate, Link } from "react-router-dom";
 import { CartContext } from "../../contexts/Cart";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faIndianRupee } from '@fortawesome/free-solid-svg-icons';
+import { useAuth } from "../../contexts/AuthContext";
 import "./index.css";
+import { SignIn } from "../SignIn/SignIn";
+import { Signup } from "../Signup/Signup";
 
 const EventInformations = () => {
     const { cartItems, addCartQuantityCount } = useContext(CartContext);
     let params = useParams();
     const navigate = useNavigate();
+    const { user } = useAuth();
 
     const product = cartItems.find((cartItem) => cartItem.categoryListItemId === parseInt(params?.categoryListItemId));
+
+    const [isNewUser, setIsNewUser] = useState(false);
     const initialVenueInfo = {
         place: "",
         eventDate: "",
@@ -47,7 +50,36 @@ const EventInformations = () => {
 
     return (
         <div className="eventinformations-view">
-            <div className="summary-panel">
+            <div className="userinfo-panel">
+                {!user && !isNewUser && <div>
+                    <div className="login-header">
+                        New User Click here to Register <Link className="link" onClick={() => setIsNewUser(true)}> Click</Link>
+                    </div>
+                    <SignIn />
+                </div>}
+                {!user && isNewUser && <div>
+                    <div className="login-header">
+                        Already registered user <Link className="link" onClick={() => setIsNewUser(false)}> Click</Link>
+                    </div>
+                    <Signup />
+                </div>
+                }
+                {user && <div>
+                    <ul className="loggedin-panel">
+                        <li>
+                            Name: {user?.name}
+                        </li>
+                        <li>
+                            Email: {user?.email}
+                        </li>
+                        <li>
+                            Mobile: {user?.phone}
+                        </li>
+                    </ul>
+                     <hr />
+                </div>}
+            </div>
+            {user && <div className="summary-panel">
                 <div className="event-summary">
                     <p>
                         Kindly do fill all the Event informatin to serve you well.
@@ -130,7 +162,7 @@ const EventInformations = () => {
                         <input type="button" className="buy-now" onClick={() => buyNowProduct()} value={'SAVE'} />
                     </li>
                 </ul>
-            </div>
+            </div>}
         </div>
     )
 };

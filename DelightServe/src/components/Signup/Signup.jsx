@@ -69,11 +69,11 @@ const Signup = () => {
 
             //   navigate("/dashboard");
         } catch (error) {
-            if(error?.response?.data?.message) {
+            if (error?.response?.data?.message) {
                 setError(error?.response?.data?.message);
                 return;
             }
-            if(error?.message) {
+            if (error?.message) {
                 setError(error?.message);
                 return;
             }
@@ -127,4 +127,4 @@ const Signup = () => {
     );
 };
 
-export default Signup;
+export { Signup };
