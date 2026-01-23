@@ -1,4 +1,4 @@
-.product-order-view {
+.productorder-view {
     margin: 5px 10px 5px 50px;
     display: flex;
     flex-wrap: wrap;
@@ -22,40 +22,6 @@
             .product-name {
                 color: #1161ee;
             }
-
-            /* .product-counter {
-                display: flex;
-                align-items: baseline;
-
-                .counter-wrapper {
-                    margin-left: 15px;
-                }
-
-                .counter-button {
-                    height: 30px;
-                    width: 40px;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    border: 2px solid #1161ee;
-                    color: #1161ee;
-
-                    &:hover {
-                        background: #598de6;
-                        color: #fff;
-                        font-weight: bold;
-                        border: 2px solid #fff;
-                    }
-                }
-
-                .counter-label {
-                    height: 30px;
-                    width: 40px;
-                    height: 30px;
-                    width: 40px;
-                    display: inline-flex;
-                    justify-content: center;
-                }
-            } */
 
             .event-details-label {
                 color: #ffa500;

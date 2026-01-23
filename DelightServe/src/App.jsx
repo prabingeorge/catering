@@ -27,6 +27,7 @@ import { ABookingHistory } from "./Admin/BookingHistory/BookingHistory";
 import { ContactInformation } from "./components/ContactInformation/ContactInformation";
 import { TermsOfService } from "./components/TermsOfService/TermsOfService";
 import { PrivacyPolicy } from "./components/PrivacyPolicy/PrivacyPolicy";
+import { EventInformations } from "./components/EventInformations/EventInformations";
 
 function App() {
   return (
@@ -79,12 +80,22 @@ function App() {
           }
         />
         <Route
-          path="/product-order/:categoryListItemId"
+          path="/productorder/:categoryListItemId"
           element={
             <>
               <Header />
               <Menu />
               <ProductOrder />
+            </>
+          }
+        />
+        <Route
+          path="/eventinformations/:categoryListItemId"
+          element={
+            <>
+              <Header />
+              <Menu />
+              <EventInformations />
             </>
           }
         />

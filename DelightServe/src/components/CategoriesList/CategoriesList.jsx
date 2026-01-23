@@ -21,7 +21,7 @@ const CategoriesList = () => {
             navigate('/productlisttypes/' + item.categoryListItemId);
             return;
         }
-        navigate('/product-order/' + item.categoryListItemId);
+        navigate('/productorder/' + item.categoryListItemId);
     }
 
     let params = useParams();
