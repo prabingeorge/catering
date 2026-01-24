@@ -152,6 +152,9 @@ router.post("/food-menus-by-id", async (req, res) => {
       attributes: [
         ['food_id', 'foodId'],
         ['food_name', 'foodName'],
+        ['image_name', 'imageName'],
+        'price',
+        'description',
         ['category_list_item_type_id', 'categoryListItemTypeId'],
       ],
       where: { [Op.or]: [{ category_list_item_type_id: categoryListItemTypeId }] }

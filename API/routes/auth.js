@@ -207,7 +207,7 @@ router.post("/categories-list-items-types", async (req, res) => {
 
 // Add Food-menus
 router.post("/food-menu", async (req, res) => {
-    const { foodName, categoryListItemTypeId } = req.body;
+    const { foodName, imageName, price, description, categoryListItemTypeId } = req.body;
     try {
         const data = await FoodMenus.findOne({ where: { [Op.or]: [{ food_name: foodName }] } });
         if (data) {
@@ -218,10 +218,13 @@ router.post("/food-menu", async (req, res) => {
         // Create new food menu
         const newData = await FoodMenus.create({
             food_name: foodName,
+            image_name: imageName,
+            price,
+            description,
             category_list_item_type_id: categoryListItemTypeId
         });
 
-        res.status(201).json({ foodId: newData?.food_id, foodName: newData.food_name, categoryListItemTypeId: newData?.category_list_item_type_id });
+        res.status(201).json({ foodId: newData?.food_id, foodName: newData.food_name, imageName: newData?.image_name, price: newData?.price, description: newData?.description, categoryListItemTypeId: newData?.category_list_item_type_id });
     } catch (e) {
         console.log(e);
         return res.status(500)

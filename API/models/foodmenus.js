@@ -29,6 +29,9 @@ export default (sequelize, DataTypes) => {
       autoIncrement: true
     },
     food_name: DataTypes.STRING,
+    image_name: DataTypes.STRING,
+    price: DataTypes.DECIMAL,
+    description: DataTypes.STRING,
     category_list_item_type_id: DataTypes.INTEGER
   }, {
     sequelize,

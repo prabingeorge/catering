@@ -12,6 +12,15 @@ module.exports = {
       food_name: {
         type: Sequelize.STRING
       },
+      image_name: {
+        type: Sequelize.STRING
+      },
+      price: {
+        type: Sequelize.DECIMAL
+      },
+      description: {
+        type: Sequelize.STRING
+      },
       category_list_item_type_id: {
         type: Sequelize.INTEGER
       },
