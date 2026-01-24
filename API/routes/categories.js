@@ -4,7 +4,7 @@ import auth from "../middleware/auth.js";
 import { Op } from 'sequelize';
 import model from '../models/index.cjs';
 
-const { User, Categories, CategoriesLists, CategoriesListItems, CategoriesListItemsTypes, FoodMenus, PurchaseDetails } = model;
+const { User, Categories, CategoriesLists, CategoriesListItems, CategoriesListItemsTypes, FoodMenus1, PurchaseDetails } = model;
 
 const router = express.Router();
 
@@ -148,7 +148,7 @@ router.post("/categories-list-items-types-by-id", async (req, res) => {
 router.post("/food-menus-by-id", async (req, res) => {
   try {
     const { categoryListItemTypeId } = req.body;
-    const data = await FoodMenus.findAll({
+    const data = await FoodMenus1.findAll({
       attributes: [
         ['food_id', 'foodId'],
         ['food_name', 'foodName'],

@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import { Op } from 'sequelize';
 import model from '../models/index.cjs';
 
-const { User, Categories, CategoriesLists, CategoriesListItems, CategoriesListItemsTypes, FoodMenus } = model;
+const { User, Categories, CategoriesLists, CategoriesListItems, CategoriesListItemsTypes, FoodMenus1 } = model;
 
 console.log("Modal" + Categories);
 
@@ -209,14 +209,14 @@ router.post("/categories-list-items-types", async (req, res) => {
 router.post("/food-menu", async (req, res) => {
     const { foodName, imageName, price, description, categoryListItemTypeId } = req.body;
     try {
-        const data = await FoodMenus.findOne({ where: { [Op.or]: [{ food_name: foodName }] } });
+        const data = await FoodMenus1.findOne({ where: { [Op.or]: [{ food_name: foodName }] } });
         if (data) {
             return res.status(422)
                 .send({ message: 'Food name already exists' });
         }
 
         // Create new food menu
-        const newData = await FoodMenus.create({
+        const newData = await FoodMenus1.create({
             food_name: foodName,
             image_name: imageName,
             price,
