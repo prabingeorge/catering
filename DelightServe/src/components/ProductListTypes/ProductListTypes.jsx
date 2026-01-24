@@ -3,8 +3,8 @@ import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import api from "../../contexts/APIContext";
 import Images from "../Images/Images";
-import { Table } from 'react-bootstrap';
 import "./index.css";
+import { Cards } from "../Cards/Cards";
 
 const ProductListTypes = () => {
 
@@ -50,10 +50,6 @@ const ProductListTypes = () => {
         setSelectedFoodTypeId(categoryListItemTypeId);
     };
 
-    const buyNowProduct = () => {
-        navigate('/product-confirmation');
-    };
-
     return (
         <div className="dashboard">
             <div>
@@ -77,31 +73,7 @@ const ProductListTypes = () => {
             <div className="productlisttypes-view">
                 <div className='categories-list'>
                     {foodItems?.length == 0 && <div>No Food item is available!</div>}
-                    {foodItems?.length > 0 && <Table striped bordered hover className='table'>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {foodItems?.map((item, index) => {
-                                return (
-                                    <tr>
-                                        <td>{index + 1}</td>
-                                        <td>
-                                            {item?.foodName}
-                                        </td>
-                                    </tr>
-                                )
-                            })}
-                            <tr>
-                                <td colSpan={2}>
-                                    <input type="button" className="buy-now" onClick={() => buyNowProduct()} value={'ORDER NOW'} />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </Table>}
+                    {foodItems?.length > 0 && <Cards foodItems={foodItems} categoryListItemId={params?.categoryListItemId}/>}
                 </div>
             </div>
         </div>

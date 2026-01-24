@@ -54,23 +54,25 @@ const CategoriesList = () => {
                                     <li>
                                         <label className="product-name">{image.itemName}</label>
                                     </li>
-                                    <li className="product-ratings-count">
-                                        <div>
-                                            <label>Ratings:</label> {image.ratings}
-                                        </div>
-                                        <div>
-                                            <label>Total Ordered:</label> {image.sendItemsCount}
-                                        </div>
+                                    {!(image.itemName == 'Veg' || image.itemName == 'Non Veg') && <>
+                                        <li className="product-ratings-count">
+                                            <div>
+                                                <label>Ratings:</label> {image.ratings}
+                                            </div>
+                                            <div>
+                                                <label>Total Ordered:</label> {image.sendItemsCount}
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <label>Price:</label>
+                                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{image.price}
+                                        </li>
+                                    </>}
+                                    <li className="button-container">
+                                        <input type="button" className="add-to-cart" value={'Select'} onClick={() => addToCartClick(image)} />
                                     </li>
                                     <li>
                                         <hr />
-                                    </li>
-                                    <li>
-                                        <label>Price:</label>
-                                        <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{image.price}
-                                    </li>
-                                    <li className="button-container">
-                                        <input type="button" className="add-to-cart" value={'Select'} onClick={() => addToCartClick(image)} />
                                     </li>
                                 </ul>
                             </>

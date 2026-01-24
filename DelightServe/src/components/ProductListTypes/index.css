@@ -4,25 +4,7 @@
         display: flex;
         justify-content: left;
         margin-left: 70px;
-
-        .table {
-            width: 30%;
-
-            .buy-now {
-                cursor: pointer;
-                background: #1161ee;
-                padding: 5px 15px;
-                border-radius: 5px;
-                font-size: 14px;
-                margin: 30px;
-
-                &:hover {
-                    background: #598de6;
-                    color: #fff;
-                    font-weight: bold;
-                }
-            }
-        }
+        
     }
 }
 

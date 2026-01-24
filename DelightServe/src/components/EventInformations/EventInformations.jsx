@@ -21,6 +21,7 @@ const EventInformations = () => {
         eventDate: "",
         eventTime: "",
         gender: "",
+        guests: ""
     };
 
     const [venueInfo, setVenueInfo] = useState(initialVenueInfo);
@@ -41,7 +42,15 @@ const EventInformations = () => {
 
     const buyNowProduct = () => {
         setValidationError("");
-        if (!venueInfo?.place || !venueInfo?.eventDate || !venueInfo?.eventTime || !venueInfo?.gender) {
+        if (!venueInfo?.place || !venueInfo?.eventDate || !venueInfo?.eventTime) {
+            setValidationError("Enter all the Event Details!");
+            return;
+        }
+        if (product?.categoryId == 2 && !venueInfo?.guests) {
+            setValidationError("Enter all the Event Details!");
+            return;
+        }
+        if (product?.categoryListId == 1 && !venueInfo?.gender) {
             setValidationError("Enter all the Event Details!");
             return;
         }
@@ -76,7 +85,7 @@ const EventInformations = () => {
                             Mobile: {user?.phone}
                         </li>
                     </ul>
-                     <hr />
+                    <hr />
                 </div>}
             </div>
             {user && <div className="summary-panel">
@@ -97,15 +106,22 @@ const EventInformations = () => {
                         <label htmlFor="eventDate">Date*</label>
                         <input type="date" className="event-control" name="eventDate" value={venueInfo?.eventDate} onChange={addFieldValue} />
                     </li>
-                    {(product?.categoryListId == 1) && <>
+                    <li>
+                        <label htmlFor="eventTime">Time*</label>
+                        <select className="event-control" name="eventTime" value={venueInfo?.eventTime} onChange={addFieldValue}>
+                            <option value="">--Select--</option>
+                            <option value="1">Morning</option>
+                            <option value="2">Noon</option>
+                            <option value="3">Evening</option>
+                        </select>
+                    </li>
+                    {(product?.categoryId == 2) && <>
                         <li>
-                            <label htmlFor="eventTime">Time*</label>
-                            <select className="event-control" name="eventTime" value={venueInfo?.eventTime} onChange={addFieldValue}>
-                                <option value="">--Select--</option>
-                                <option value="1">Noon</option>
-                                <option value="2">Evening</option>
-                            </select>
+                            <label htmlFor="eventDate">Guests Count*</label>
+                            <input type="text" placeholder="Guests Count" className="event-control" name="guests" value={venueInfo?.guests} onChange={addFieldValue} />
                         </li>
+                    </>}
+                    {(product?.categoryListId == 1) && <>
                         <li>
                             <label htmlFor="gender">Gender*</label>
                             <select className="event-control" name="gender" value={venueInfo?.gender} onChange={addFieldValue}>
@@ -115,15 +131,6 @@ const EventInformations = () => {
                             </select>
                         </li></>}
                     {(product?.categoryListId == 2) && <>
-                        <li>
-                            <label htmlFor="eventTime">Time*</label>
-                            <select className="event-control" name="eventTime" value={venueInfo?.eventTime} onChange={addFieldValue}>
-                                <option value="">--Select--</option>
-                                <option value="1">Morning</option>
-                                <option value="2">Noon</option>
-                                <option value="3">Evening</option>
-                            </select>
-                        </li>
                         <li>
                             <label htmlFor="gender">Gender*</label>
                             <select className="event-control" name="gender" value={venueInfo?.gender} onChange={addFieldValue}>

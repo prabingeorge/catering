@@ -7,7 +7,7 @@ const ContactInformation = () => {
             <label className="title-name">Contact Information</label>
             <ul className="contact-info-container">
                 <li>
-                    <label>Name:</label> Ajin
+                    <label>Name:</label> Ajin Selvaraj
                 </li>
                 <li>
                     <label>Mobile:</label> +91 9486629098

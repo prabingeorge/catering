@@ -19,7 +19,15 @@ const Images = ({ fileName, categoryListId, path, cssClass, isNavigate = true })
     return (
         <div className="images-view">
             <Link to={"/categories-list/" + categoryListId}>
-                <img className={cssClass} src={url} alt={fileName} srcSet={`${url} 200w,`} />
+                <img className={cssClass}
+                    src={url}
+                    alt={fileName}
+                    onError={
+                        (e) => {
+                            e.target.src = "./../../../../public/default.jpg";
+                        }
+                    }
+                />
             </Link>
         </div>
     )
