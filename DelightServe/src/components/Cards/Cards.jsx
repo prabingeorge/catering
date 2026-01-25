@@ -17,7 +17,7 @@ const Cards = ({ foodItems, categoryListItemId }) => {
             {foodItems?.map((item) => {
                 return (
                     <Card>
-                        <Card.Img className="d-block w-10 card-image" variant="top" src={`./../../../public/images/cards/${item?.imageName}`} />
+                        <Card.Img className="d-block w-10 card-image" variant="top" src={`/images/cards/${item?.imageName}`} />
                         <Card.Body>
                             <Card.Title>{item?.foodName}</Card.Title>
                             <Card.Text>
