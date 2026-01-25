@@ -54,7 +54,7 @@ const CategoriesList = () => {
                                     <li>
                                         <label className="product-name">{image.itemName}</label>
                                     </li>
-                                    {!(image.itemName == 'Veg' || image.itemName == 'Non Veg') && <>
+                                    {!(image.itemName == 'Veg' || image.itemName == 'Non Veg' || image.itemName == 'Non-veg') && <>
                                         <li className="product-ratings-count">
                                             <div>
                                                 <label>Ratings:</label> {image.ratings}
