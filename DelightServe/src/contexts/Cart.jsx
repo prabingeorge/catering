@@ -21,20 +21,19 @@ export const CartProvider = ({ children }) => {
   };
 
   const addToCart = (item) => {
-    setCartItems([{ ...item, quantity: 1 }]);
-    // const isCartItem = cartItems.find((cartItem) => cartItem.cart_list_id === item.cart_list_id);
+    const isCartItem = cartItems.find((cartItem) => cartItem.categoryId === item.categoryId);
 
-    // if (isCartItem) {
-    //   setCartItems(
-    //     cartItems.map((cartItem) =>
-    //       cartItem.cart_list_id === item.cart_list_id
-    //         ? { ...cartItem, quantity: cartItem.quantity + 1 }
-    //         : cartItem
-    //     )
-    //   );
-    // } else {
-    //   setCartItems([...cartItems, { ...item, quantity: 1 }]);
-    // }
+    if (isCartItem) {
+      setCartItems(
+        cartItems.map((cartItem) =>
+          cartItem.categoryId === item.categoryId
+            ? { ...item, quantity: cartItem.quantity }
+            : cartItem
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...item, quantity: 1 }]);
+    }
   };
 
   const removeFromCart = (item) => {
