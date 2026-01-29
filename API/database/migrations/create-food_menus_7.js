@@ -21,7 +21,7 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
-      category_list_item_type_id: {
+      catering_list_item_type_id: {
         type: Sequelize.INTEGER
       },
       createdAt: {

@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import { Op } from 'sequelize';
 import model from '../models/index.cjs';
 
-const { User, Categories, CategoriesLists, CategoriesListItems, CategoriesListItemsTypes, FoodMenusTables } = model;
+const { User, Categories, CategoriesLists, CategoriesListItems, CateringListItems, CateringListItemsTypes, FoodMenusTables } = model;
 
 console.log("Modal" + Categories);
 
@@ -180,24 +180,49 @@ router.post("/categories-list-items", async (req, res) => {
     }
 });
 
-// Add Categories-list-items-types
-router.post("/categories-list-items-types", async (req, res) => {
-    const { typeName, imageName, categoryListItemId } = req.body;
+// Add Catering-list-items
+router.post("/catering-list-items", async (req, res) => {
+    const { itemName, imageName, categoryListId } = req.body;
     try {
-        const data = await CategoriesListItemsTypes.findOne({ where: { [Op.or]: [{ type_name: typeName }] } });
+        const data = await CateringListItems.findOne({ where: { [Op.or]: [{ item_name: itemName }] } });
+        if (data) {
+            return res.status(422)
+                .send({ message: 'Item name already exists' });
+        }
+
+        // Create new catering list
+        const newData = await CateringListItems.create({
+            item_name: itemName,
+            image_name: imageName,
+            category_list_id: categoryListId
+        });
+
+        res.status(201).json({ cateringListItemId: newData?.catering_list_item_id, itemName: newData.item_name, imageName: newData?.image_name, categoryListId: newData?.category_list_id, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
+    } catch (e) {
+        console.log(e);
+        return res.status(500)
+            .send({ message: 'Could not perform operation at this time, kindly try again later.' });
+    }
+});
+
+// Add Catering-list-items-types
+router.post("/catering-list-items-types", async (req, res) => {
+    const { typeName, imageName, cateringListItemId } = req.body;
+    try {
+        const data = await CateringListItemsTypes.findOne({ where: { [Op.or]: [{ type_name: typeName }] } });
         if (data) {
             return res.status(422)
                 .send({ message: 'Type name already exists' });
         }
 
         // Create new categories list items types
-        const newData = await CategoriesListItemsTypes.create({
+        const newData = await CateringListItemsTypes.create({
             type_name: typeName,
             image_name: imageName,
-            category_list_item_id: categoryListItemId
+            catering_list_item_id: cateringListItemId
         });
 
-        res.status(201).json({ categoryListItemTypeId: newData?.category_list_item_type_id, typeName: newData.type_name, imageName: newData?.image_name, categoryListItemId: newData?.category_list_item_id });
+        res.status(201).json({ cateringListItemTypeId: newData?.catering_list_item_type_id, typeName: newData.type_name, imageName: newData?.image_name, cateringListItemId: newData?.catering_list_item_id });
     } catch (e) {
         console.log(e);
         return res.status(500)
@@ -207,7 +232,7 @@ router.post("/categories-list-items-types", async (req, res) => {
 
 // Add Food-menus
 router.post("/food-menu", async (req, res) => {
-    const { foodName, imageName, price, description, categoryListItemTypeId } = req.body;
+    const { foodName, imageName, price, description, cateringListItemTypeId } = req.body;
     try {
         const data = await FoodMenusTables.findOne({ where: { [Op.or]: [{ food_name: foodName }] } });
         if (data) {
@@ -221,10 +246,10 @@ router.post("/food-menu", async (req, res) => {
             image_name: imageName,
             price,
             description,
-            category_list_item_type_id: categoryListItemTypeId
+            catering_list_item_type_id: cateringListItemTypeId
         });
 
-        res.status(201).json({ foodId: newData?.food_id, foodName: newData.food_name, imageName: newData?.image_name, price: newData?.price, description: newData?.description, categoryListItemTypeId: newData?.category_list_item_type_id });
+        res.status(201).json({ foodId: newData?.food_id, foodName: newData.food_name, imageName: newData?.image_name, price: newData?.price, description: newData?.description, cateringListItemTypeId: newData?.catering_list_item_type_id });
     } catch (e) {
         console.log(e);
         return res.status(500)
