@@ -16,7 +16,7 @@ import ProductCart from "./components/ProductCart/ProductCart";
 import ProductConfirmation from "./components/ProductConfirmation/ProductConfirmation";
 import ProductDelivery from "./components/ProductDelivery/ProductDelivery";
 
-import { ProductListTypes } from "./components/ProductListTypes/ProductListTypes";
+import { CateringListTypes } from "./components/CateringListTypes/CateringListTypes";
 
 /* Admin routes */
 import { ADashboard } from "./Admin/Dashboard/Dashboard";
@@ -28,6 +28,7 @@ import { ContactInformation } from "./components/ContactInformation/ContactInfor
 import { TermsOfService } from "./components/TermsOfService/TermsOfService";
 import { PrivacyPolicy } from "./components/PrivacyPolicy/PrivacyPolicy";
 import { EventInformations } from "./components/EventInformations/EventInformations";
+import { CateringList } from "./components/CateringList/CateringList";
 
 function App() {
   return (
@@ -60,7 +61,7 @@ function App() {
           }
         />
         <Route
-          path="/categories-list/:categoryListId"
+          path="/categorieslist/:categoryListId"
           element={
             <>
               <Header />
@@ -70,12 +71,22 @@ function App() {
           }
         />
         <Route
-          path="/productlisttypes/:categoryListItemId"
+          path="/cateringlist/:categoryListId"
           element={
             <>
               <Header />
               <Menu />
-              <ProductListTypes />
+              <CateringList />
+            </>
+          }
+        />
+        <Route
+          path="/cateringlisttypes/:cateringListItemId"
+          element={
+            <>
+              <Header />
+              <Menu />
+              <CateringListTypes />
             </>
           }
         />
@@ -90,7 +101,7 @@ function App() {
           }
         />
         <Route
-          path="/eventinformations/:categoryListItemId"
+          path="/eventinformations/:eventType/:categoryCateringId"
           element={
             <>
               <Header />

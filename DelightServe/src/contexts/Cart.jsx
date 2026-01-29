@@ -10,6 +10,12 @@ export const CartProvider = ({ children }) => {
       : []
   );
 
+  const [cateringCurrentItem, setCateringCurrentItem] = useState(
+    localStorage.getItem("cateringCurrentItem")
+      ? JSON.parse(localStorage.getItem("cateringCurrentItem"))
+      : []
+  );
+
   const [selectedCategoryId, setSelectedCategoryId] = useState(
     localStorage.getItem("selectedCategoryId") !== undefined
       ? parseInt(localStorage.getItem("selectedCategoryId"))
@@ -36,20 +42,85 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const removeFromCart = (item) => {
-    const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id);
+  const udateCartVenuInfo = (item, venuInfo) => {
+    const isCartItem = cartItems.find((cartItem) => cartItem.categoryId === item.categoryId);
+    if (!isCartItem) {
+      return;
+    }
 
-    // if (isItemInCart && isItemInCart.quantity === 1) { // Check if the item is in the cart and its quantity is 1
-    if (isItemInCart) {
-      setCartItems(cartItems.filter((cartItem) => cartItem.id !== item.id));
-    } else {
+    if (item?.cateringListItemTypeId) {
       setCartItems(
         cartItems.map((cartItem) =>
-          cartItem.id === item.id
-            ? { ...cartItem, quantity: cartItem.quantity - 1 }
+          cartItem.foodId === item.foodId
+            ? { ...item, venuInfo: venuInfo }
             : cartItem
         )
       );
+    } else {
+      setCartItems(
+        cartItems.map((cartItem) =>
+          cartItem.categoryListItemId === item.categoryListItemId
+            ? { ...item, venuInfo: venuInfo }
+            : cartItem
+        )
+      );
+    }
+  };
+
+  const addToCartCurrentCatering = (item) => {
+    setCateringCurrentItem(item);
+  };
+
+  const addToCartCatering = (item) => {
+    const isCartItem1 = cartItems.find((cartItem) => cartItem.categoryId === item.categoryId);
+
+    if (isCartItem1) {
+      const isCartItem2 = cartItems.find((cartItem) => cartItem.cateringListItemId === item.cateringListItemId);
+      if (isCartItem2) {
+        const isCartItem3 = cartItems.find((cartItem) => cartItem.foodId === item.foodId);
+        if (!isCartItem3) {
+          setCartItems([...cartItems, { ...item, quantity: 1 }]);
+          // setCartItems(
+          //   cartItems.map((cartItem) =>
+          //     (cartItem.categoryId === item.categoryId
+          //       && cartItem.cateringListItemId === item.cateringListItemId
+          //       && (!cartItem?.foodId || cartItem?.foodId === item?.foodId)
+          //     ) ? { ...item, quantity: cartItem.quantity }
+          //       : cartItem
+          //   )
+          // );
+        }
+        //  else {
+        //   setCartItems([...cartItems, { ...item, quantity: 1 }]);
+        // }
+
+      } else {
+        setCartItems([...cartItems, { ...item, quantity: 1 }]);
+      }
+
+    } else {
+      setCartItems([...cartItems, { ...item, quantity: 1 }]);
+    }
+  };
+
+  const removeFromCart = (item) => {
+    let isItemInCart = null;
+    if (item?.cateringListItemTypeId) {
+      isItemInCart = cartItems.find((cartItem) => cartItem.categoryId === item.categoryId
+        && cartItem.categoryListId === item.categoryListId
+        && cartItem.cateringListItemId === item.cateringListItemId
+        && cartItem.cateringListItemTypeId === item.cateringListItemTypeId
+        && cartItem.foodId === item.foodId);
+      if (isItemInCart) {
+        setCartItems(cartItems.filter((cartItem) => cartItem.foodId !== item.foodId));
+      }
+    } else {
+      isItemInCart = cartItems.find((cartItem) => cartItem.categoryId === item.categoryId
+        && cartItem.categoryListId === item.categoryListId
+        && cartItem.categoryListItemId === item.categoryListItemId);
+      if (isItemInCart) {
+        setCartItems(cartItems.filter((cartItem) => cartItem.categoryListItemId !== item.categoryListItemId));
+      }
     }
   };
 
@@ -103,7 +174,10 @@ export const CartProvider = ({ children }) => {
     <CartContext.Provider
       value={{
         cartItems,
+        cateringCurrentItem,
         addToCart,
+        addToCartCurrentCatering,
+        addToCartCatering,
         removeFromCart,
         clearCart,
         getCartTotal,
@@ -111,6 +185,7 @@ export const CartProvider = ({ children }) => {
         totalCartCount,
         selectedCategoryId,
         addSelectedCategoryToCart,
+        udateCartVenuInfo,
       }}
     >
       {children}

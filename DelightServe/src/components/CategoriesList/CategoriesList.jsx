@@ -17,10 +17,6 @@ const CategoriesList = () => {
     const addToCartClick = (item) => {
         item.categoryId = selectedCategoryId;
         addToCart(item);
-        if (selectedCategoryId == 2) {
-            navigate('/productlisttypes/' + item.categoryListItemId);
-            return;
-        }
         navigate('/productorder/' + item.categoryListItemId);
     }
 
@@ -41,7 +37,7 @@ const CategoriesList = () => {
     }, [params?.categoryListId]);
 
     return (
-        <div className="categories-list-view">
+        <div className="categorieslist-view">
             <div>
                 <div className="images-container">
                     {categoriesListItems?.length > 0 && categoriesListItems.map((image) => {
@@ -49,25 +45,23 @@ const CategoriesList = () => {
                             <>
                                 <ul key={image?.categoryListItemId} className="images-wrapper">
                                     <li>
-                                        <Images fileName={image.imageName} path={`details/${selectedCategoryId}/`} cssClass={'rectangle-image'} />
+                                        <Images fileName={image.imageName} path={`categorieslist/`} cssClass={'rectangle-image'} />
                                     </li>
                                     <li>
                                         <label className="product-name">{image.itemName}</label>
                                     </li>
-                                    {!(image.itemName == 'Veg' || image.itemName == 'Non Veg' || image.itemName == 'Non-veg') && <>
-                                        <li className="product-ratings-count">
-                                            <div>
-                                                <label>Ratings:</label> {image.ratings}
-                                            </div>
-                                            <div>
-                                                <label>Total Ordered:</label> {image.sendItemsCount}
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <label>Price:</label>
-                                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{image.price}
-                                        </li>
-                                    </>}
+                                    <li className="product-ratings-count">
+                                        <div>
+                                            <label>Ratings:</label> {image.ratings}
+                                        </div>
+                                        <div>
+                                            <label>Total Ordered:</label> {image.sendItemsCount}
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <label>Price:</label>
+                                        <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{image.price}
+                                    </li>
                                     <li className="button-container">
                                         <input type="button" className="add-to-cart" value={'Select'} onClick={() => addToCartClick(image)} />
                                     </li>

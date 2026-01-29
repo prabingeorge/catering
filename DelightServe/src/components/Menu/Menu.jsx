@@ -5,7 +5,7 @@ import api from "../../contexts/APIContext";
 import "./index.css";
 
 const Menu = () => {
-    const { totalCartCount, selectedCategoryId, addSelectedCategoryToCart } = useContext(CartContext);
+    const { selectedCategoryId, addSelectedCategoryToCart } = useContext(CartContext);
     const [categoriesList, setCategoriesList] = useState([]);
 
     const apiURL = import.meta.env.VITE_API_URL;

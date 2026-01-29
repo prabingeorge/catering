@@ -5,7 +5,7 @@ import './index.css';
 // const baseUrl = `https://furniture-ui-2qka.onrender.com/public/images`;
 const baseUrl = `/images/`;
 
-const Images = ({ fileName, categoryListId, path, cssClass, isNavigate = true }) => {
+const Images = ({ fileName, navigatePath = '', path, cssClass, isNavigate = true }) => {
     const url = baseUrl + path + '/' + fileName;
 
     if (!isNavigate) {
@@ -18,7 +18,8 @@ const Images = ({ fileName, categoryListId, path, cssClass, isNavigate = true })
 
     return (
         <div className="images-view">
-            <Link to={"/categories-list/" + categoryListId}>
+            {/* <Link to={"/categorieslist/" + categoryListId}> */}
+            <Link to={navigatePath}>
                 <img className={cssClass}
                     src={url}
                     alt={fileName}

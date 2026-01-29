@@ -17,7 +17,7 @@ const ProductOrder = () => {
     const [productQuantity, setProductQuantity] = useState(product?.quantity);
     
     const buyNowProduct = () => {
-        navigate(`/eventinformations/${params?.categoryListItemId}`);
+        navigate(`/eventinformations/decoration/${params?.categoryListItemId}`);
     };
 
     return (

@@ -8,12 +8,18 @@ import { SignIn } from "../SignIn/SignIn";
 import { Signup } from "../Signup/Signup";
 
 const EventInformations = () => {
-    const { cartItems, addCartQuantityCount } = useContext(CartContext);
+    const { cartItems, udateCartVenuInfo } = useContext(CartContext);
     let params = useParams();
     const navigate = useNavigate();
     const { user } = useAuth();
+    let product = [];
+    
+    if (params?.eventType === 'decoration') {
+        product = cartItems.find((cartItem) => cartItem.categoryListItemId === parseInt(params?.categoryCateringId));
+    } else {
+        product = cartItems.find((cartItem) => cartItem.cateringListItemId === parseInt(params?.categoryCateringId));
+    }
 
-    const product = cartItems.find((cartItem) => cartItem.categoryListItemId === parseInt(params?.categoryListItemId));
 
     const [isNewUser, setIsNewUser] = useState(false);
     const initialVenueInfo = {
@@ -54,6 +60,7 @@ const EventInformations = () => {
             setValidationError("Enter all the Event Details!");
             return;
         }
+        udateCartVenuInfo(product, venueInfo)
         navigate(`/product-confirmation`);
     };
 

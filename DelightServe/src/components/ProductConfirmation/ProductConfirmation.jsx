@@ -62,9 +62,13 @@ const ProductConfirmation = () => {
     const { cartItems, removeFromCart, clearCart } = useContext(CartContext);
     let navigate = useNavigate();
     const apiURL = import.meta.env.VITE_API_URL;
-   
+
     const [emailValidationError, setEmailValidationError] = useState("");
     const [error, setError] = useState("");
+
+    const eventTimeInfo = ['Morning', 'Noon', 'Evening'];
+    const genderWeddingInfo = ['Bride', 'Groom'];
+    const genderBirthdayInfo = ['Girl', 'Boy'];
 
     const savePurchaseDetails = async () => {
 
@@ -142,7 +146,7 @@ const ProductConfirmation = () => {
     }
 
     const { user } = useAuth();
-   
+
     // const [isLoggedIn, setIsLoggedIn] = useState(!!user?.phone);
     if (cartItems?.length === 0) {
         return (
@@ -160,24 +164,69 @@ const ProductConfirmation = () => {
                         <>
                             <li key={item?.categoryListItemId} className="product-wrapper">
                                 <div className="product-details">
+                                    {item?.discountPrice && <>
+                                        <div>
+                                            Name: <label>{item?.itemName}</label>
+                                        </div>
+                                        <div>
+                                            Price: <label>
+                                                <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{item?.price}
+                                            </label>
+                                        </div>
+                                        <div>
+                                            Discount: <label>
+                                                <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{item?.discountPrice}
+                                            </label>
+                                        </div>
+                                        <div>
+                                            Total: <label>
+                                                <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{(item?.price - item?.discountPrice) * item?.quantity}
+                                            </label>
+                                        </div>
+                                    </>}
+                                    {!item?.discountPrice && <>
+                                        <div>
+                                            Name: <label>{item?.itemName} - {item?.foodName}</label>
+                                        </div>
+                                        {item?.description && <div>
+                                            <label>({item?.description})</label>
+                                        </div>}
+                                        <div>
+                                            Price: <label>
+                                                <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{item?.price}
+                                            </label>
+                                        </div>
+                                        <div>
+                                            Guests: <label>{item?.venuInfo?.guests}</label>
+                                        </div>
+                                        <div>
+                                            Total: <label>
+                                                <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{(item?.price * item?.venuInfo?.guests)}
+                                            </label>
+                                        </div>
+                                    </>}
                                     <div>
-                                        Name: <label>{item?.itemName}</label>
+                                        <h5 className="venu-info-title">Venue Info:</h5>
                                     </div>
                                     <div>
-                                        Price: <label>
-                                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{item?.price}
-                                        </label>
+                                        Place: <label>{item?.venuInfo?.place}</label>
                                     </div>
                                     <div>
-                                        Discount: <label>
-                                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{item?.discountPrice}
-                                        </label>
+                                        Date: <label>{item?.venuInfo?.eventDate}</label>
                                     </div>
                                     <div>
-                                        Total: <label>
-                                            <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{(item?.price - item?.discountPrice) * item?.quantity}
-                                        </label>
+                                        Time: <label>{eventTimeInfo?.[item?.venuInfo?.eventTime - 1]}</label>
                                     </div>
+                                    {item?.discountPrice && item?.categoryListId == 1 && <>
+                                        <div>
+                                            Gender: <label>{genderWeddingInfo?.[item?.venuInfo?.gender - 1]}</label>
+                                        </div>
+                                    </>}
+                                    {item?.discountPrice && item?.categoryListId == 2 && <>
+                                        <div>
+                                            Gender: <label>{genderBirthdayInfo?.[item?.venuInfo?.gender - 1]}</label>
+                                        </div>
+                                    </>}
                                     {/* <div>
                                         Quantity: <label>{item?.quantity}</label>
                                     </div> */}
@@ -194,7 +243,7 @@ const ProductConfirmation = () => {
                     )
                 })}
             </ul>
-           
+
             {user && emailValidationError && <div className="email-validation-container">
                 <div className="group group-error">
                     <label className="error">{emailValidationError}</label>

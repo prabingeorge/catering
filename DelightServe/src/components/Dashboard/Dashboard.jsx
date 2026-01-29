@@ -12,6 +12,7 @@ const Dashboard = () => {
   const [isTimerRunning, setTimerRunning] = useState(false);
 
   const { selectedCategoryId } = useContext(CartContext);
+  const nextPage = (selectedCategoryId == 1) ? '/categorieslist/' : '/cateringlist/';
 
   const apiURL = import.meta.env.VITE_API_URL;
   useEffect(() => {
@@ -54,7 +55,7 @@ const Dashboard = () => {
             return (
               <div key={category?.category_list_id}>
                 <div>
-                  <Images fileName={category?.imageName} categoryListId={category?.categoryListId} path={'dashboard'} cssClass={'circle-image'} />
+                  <Images fileName={category?.imageName} navigatePath={nextPage + category?.categoryListId} path={'dashboard'} cssClass={'circle-image'} />
                 </div>
                 <div className="type-container">
                   <label>{category?.type}</label>

@@ -41,7 +41,7 @@ const ACategories = () => {
 
     return (
         <div className="acategories-view">
-            <div className='categories-list'>
+            <div className='categorieslist'>
                 {categories?.length == 0 && <div>No data is available!</div>}
                 {categories?.length > 0 && <Table striped bordered hover className='table'>
                     <thead>

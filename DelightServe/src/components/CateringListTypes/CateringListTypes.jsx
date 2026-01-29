@@ -6,9 +6,9 @@ import Images from "../Images/Images";
 import "./index.css";
 import { Cards } from "../Cards/Cards";
 
-const ProductListTypes = () => {
+const CateringListTypes = () => {
 
-    const [categoriesListItemsTypes, setCategoriesListItemsTypes] = useState([]);
+    const [cateringListItemsTypes, setCateringListItemsTypes] = useState([]);
     const [foodItems, setFoodItems] = useState([]);
     const [selectedFoodTypeId, setSelectedFoodTypeId] = useState(0);
 
@@ -18,11 +18,11 @@ const ProductListTypes = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await api.post(apiURL + "/api/user/categories-list-items-types-by-id", { categoryListItemId: params?.categoryListItemId });
+                const response = await api.post(apiURL + "/api/user/catering-list-items-types-by-id", { cateringListItemId: params?.cateringListItemId });
                 const { data } = response;
-                setCategoriesListItemsTypes(data);
-                if (data[0]?.categoryListItemTypeId) {
-                    setSelectedFoodTypeId(data[0]?.categoryListItemTypeId);
+                setCateringListItemsTypes(data);
+                if (data[0]?.cateringListItemTypeId) {
+                    setSelectedFoodTypeId(data[0]?.cateringListItemTypeId);
                 }
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -35,7 +35,7 @@ const ProductListTypes = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await api.post(apiURL + "/api/user/food-menus-by-id", { categoryListItemTypeId: selectedFoodTypeId });
+                const response = await api.post(apiURL + "/api/user/food-menus-by-id", { cateringListItemTypeId: selectedFoodTypeId });
                 const { data } = response;
                 setFoodItems(data);
             } catch (error) {
@@ -46,20 +46,20 @@ const ProductListTypes = () => {
         fetchData();
     }, [selectedFoodTypeId]);
 
-    const showFoodItems = async (categoryListItemTypeId) => {
-        setSelectedFoodTypeId(categoryListItemTypeId);
+    const showFoodItems = async (cateringListItemTypeId) => {
+        setSelectedFoodTypeId(cateringListItemTypeId);
     };
 
     return (
         <div className="dashboard">
             <div>
                 <div className="images-container">
-                    {categoriesListItemsTypes?.length > 0 && categoriesListItemsTypes.map((type) => {
+                    {cateringListItemsTypes?.length > 0 && cateringListItemsTypes.map((type) => {
                         return (
-                            <div key={type?.categoryListItemTypeId}>
-                                <div className={(selectedFoodTypeId == type?.categoryListItemTypeId) ? 'active-food-menu' : 'non-active-food-menu'}>
-                                    <button onClick={() => showFoodItems(type?.categoryListItemTypeId)}>
-                                        <Images fileName={type?.imageName} isNavigate={false} path={'listtypes'} cssClass={'circle-image'} />
+                            <div key={type?.cateringListItemTypeId}>
+                                <div className={(selectedFoodTypeId == type?.cateringListItemTypeId) ? 'active-food-menu' : 'non-active-food-menu'}>
+                                    <button onClick={() => showFoodItems(type?.cateringListItemTypeId)}>
+                                        <Images fileName={type?.imageName} isNavigate={false} path={'cateringlisttypes'} cssClass={'circle-image'} />
                                     </button>
                                 </div>
                                 <div className="type-container">
@@ -70,14 +70,14 @@ const ProductListTypes = () => {
                     })}
                 </div>
             </div>
-            <div className="productlisttypes-view">
-                <div className='categories-list'>
+            <div className="cateringlisttypes-view">
+                <div className='categorieslist'>
                     {foodItems?.length == 0 && <div>No Food item is available!</div>}
-                    {foodItems?.length > 0 && <Cards foodItems={foodItems} categoryListItemId={params?.categoryListItemId}/>}
+                    {foodItems?.length > 0 && <Cards cateringListItemId={params?.cateringListItemId} cateringListItemTypeId={selectedFoodTypeId} foodItems={foodItems}/>}
                 </div>
             </div>
         </div>
     )
 };
 
-export { ProductListTypes };
+export { CateringListTypes };

@@ -68,11 +68,17 @@
                     font-weight: bold;
                 }
 
+                .venu-info-title {
+                    color: #ffa500;
+                    font-style: italic;
+                    font-size: 18px;
+                    margin-top: 5px;
+                }
+
                 .footer-container {
                     display: flex;
                     justify-content: end;
                     flex-wrap: wrap;
-                    margin-top: 60px;
 
                     .button {
                         cursor: pointer;
