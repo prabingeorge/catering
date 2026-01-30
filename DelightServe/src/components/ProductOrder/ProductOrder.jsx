@@ -24,7 +24,7 @@ const ProductOrder = () => {
         <>
             <div className="productorder-view">
                 <div>
-                    <Images fileName={product?.imageName} path={`details/${product?.categoryId}`} cssClass={'order-rectangle-image'} />
+                    <Images fileName={product?.imageName} path={`categorieslist/`} cssClass={'order-rectangle-image'} />
                 </div>
                 <div className="order-right-panel">
                     <ul className="order-summary">

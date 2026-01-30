@@ -9,7 +9,7 @@ import './index.css';
 const CateringList = () => {
 
     let navigate = useNavigate();
-    const { addToCartCurrentCatering, selectedCategoryId } = useContext(CartContext);
+    const {addToCartCurrentCatering, selectedCategoryId } = useContext(CartContext);
     const [categoriesListItems, setCategoriesListItems] = useState([]);
 
     const addToCartClick = (item) => {

@@ -18,6 +18,7 @@ const Cards = ({ cateringListItemId, cateringListItemTypeId, foodItems }) => {
             selectedCateringItem['cateringListItemTypeId'] = cateringListItemTypeId;
             selectedCateringItem['foodId'] = selectedFoodItem?.foodId;
             selectedCateringItem['foodName'] = selectedFoodItem?.foodName;
+            selectedCateringItem['imageName1'] = selectedFoodItem?.imageName;
             selectedCateringItem['price'] = selectedFoodItem?.price;
             selectedCateringItem['description'] = selectedFoodItem?.description;
             addToCartCatering(selectedCateringItem);

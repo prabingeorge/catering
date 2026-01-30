@@ -8,7 +8,7 @@ import { SignIn } from "../SignIn/SignIn";
 import { Signup } from "../Signup/Signup";
 
 const EventInformations = () => {
-    const { cartItems, udateCartVenuInfo } = useContext(CartContext);
+    const { cartItems, cateringCurrentItem, udateCartVenuInfo } = useContext(CartContext);
     let params = useParams();
     const navigate = useNavigate();
     const { user } = useAuth();
@@ -17,7 +17,9 @@ const EventInformations = () => {
     if (params?.eventType === 'decoration') {
         product = cartItems.find((cartItem) => cartItem.categoryListItemId === parseInt(params?.categoryCateringId));
     } else {
-        product = cartItems.find((cartItem) => cartItem.cateringListItemId === parseInt(params?.categoryCateringId));
+        product = cartItems.find((cartItem) => cartItem.cateringListItemId === parseInt(params?.categoryCateringId) 
+                && cartItem.cateringListItemTypeId === cateringCurrentItem?.cateringListItemTypeId
+                && cartItem.foodId === cateringCurrentItem?.foodId);
     }
 
 

@@ -235,11 +235,11 @@ const ProductConfirmation = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <Images fileName={item?.imageName} path={`details/${item?.categoryId}`} cssClass={'square-image'} />
+                                    {!item?.foodId && <Images fileName={item?.imageName} path={`categorieslist/`} cssClass={'square-image'} />}
+                                    {item?.foodId && <Images fileName={item?.imageName1} path={`cateringlisttypes/${item?.cateringListItemTypeId}`} cssClass={'square-image'} />}
                                 </div>
                             </li>
                         </>
-
                     )
                 })}
             </ul>
