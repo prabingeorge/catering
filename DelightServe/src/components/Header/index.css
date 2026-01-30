@@ -18,6 +18,10 @@
     .left-menu {
         list-style: none;
 
+        @media only screen and (max-width: 600px) {
+            width: 100%;
+        }
+
         .active-menu {
             border-bottom: 2px solid #ffa500;
         }
@@ -28,6 +32,13 @@
         display: flex;
         justify-content: end;
         margin: 0px 15px;
+
+        @media only screen and (max-width: 600px) {
+            flex-direction: column;
+            width: 100%;
+            text-align: end;
+            margin-right: 40px;
+        }
 
         li {
             margin-left: 10px;
@@ -44,9 +55,10 @@
             height: 90px;
             width: 300px;
             margin-left: 40px;
-             @media only screen and (max-width: 600px) {
+
+            @media only screen and (max-width: 600px) {
                 margin-left: 10px;
-             }
+            }
         }
 
         .menu-container {
