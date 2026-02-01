@@ -5,6 +5,9 @@
         padding: 10px 0px;
         background: #1161ee;
         color: #fff;
+        @media only screen and (max-width: 600px) {
+            display: none;
+        }
     }
 
     .header-wrapper {
@@ -50,6 +53,9 @@
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
+         @media only screen and (max-width: 600px) {
+            margin-top: 15px;
+        }
 
         .header-logo {
             height: 90px;
