@@ -205,9 +205,9 @@ const ACateringListItemsTypes = () => {
                     </li>
                 </ul>
             </div>}
-            {/* <div>
-                <Link to={'/admin/categorieslistitems'}>Add Categories List Items</Link>
-            </div> */}
+            <div className='nextpage-link'>
+                <Link to={'/admin/foodmenu'}>Add Food Menu Items</Link>
+            </div>
         </div>
     )
 };
