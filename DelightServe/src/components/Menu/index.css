@@ -26,7 +26,7 @@
             }
 
             .active-menu {
-                border-bottom: 2px solid blue;
+                border-bottom: 2px solid #ffa500;
                 padding: 0px 5px;
             }
         }

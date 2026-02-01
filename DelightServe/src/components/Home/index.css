@@ -16,20 +16,19 @@
         justify-content: center;
 
         .order-button {
-            background: #a3eda3;
+            background: #0ade51;
             text-decoration: none;
             display: block;
             padding: 5px 15px;
             font-size: 18px;
-            font-weight: bold;
-            color: #000;
-            border: 2px solid;
+            color: #fff;
+            border: 2px solid #ffa500;
             border-radius: 5px;
 
             &:hover {
-                font-style: italic;
                 color: #fff;
-                border: 2px solid #000;
+                border: 2px solid #ffa500;
+                font-weight: bold;
             }
         }
     }

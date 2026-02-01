@@ -82,7 +82,7 @@
 
                     .button {
                         cursor: pointer;
-                        background: #1161ee;
+                        background: #0ade51;
                         border: 2px solid #ffa500;
                         color: #fff;
                         font-size: 16px;
@@ -90,10 +90,7 @@
                         border-radius: 5px;
 
                         &:hover {
-                            background: #598de6;
-                            border: 2px solid #fff;
-                            color: #ffa500;
-                            ;
+                           font-weight: bold;
                         }
                     }
                 }
@@ -107,20 +104,18 @@
         margin: 10px 15px 60px 0px;
 
         .button {
-            border: none;
             padding: 5px 15px;
             border-radius: 5px;
-            color: #000;
             display: block;
-            font-weight: bold;
             font-size: 16px;
-            font-family: 'Times New Roman', Times, serif;
+            /* font-family: 'Times New Roman', Times, serif; */
             cursor: pointer;
-            background: #1161ee;
+            background: #0ade51;
+            border: 2px solid #ffa500;
+            color: #fff;
 
             &:hover {
-                background: #598de6;
-                color: #000;
+                font-weight: bold;
             }
         }
 
