@@ -29,6 +29,8 @@ import { TermsOfService } from "./components/TermsOfService/TermsOfService";
 import { PrivacyPolicy } from "./components/PrivacyPolicy/PrivacyPolicy";
 import { EventInformations } from "./components/EventInformations/EventInformations";
 import { CateringList } from "./components/CateringList/CateringList";
+import { ACateringListItemsTypes } from "./Admin/CateringListItemsTypes/CateringListItemsTypes";
+import { AFoodMenu } from "./Admin/FoodMenu/FoodMenu";
 
 function App() {
   return (
@@ -223,6 +225,22 @@ function App() {
           element={
             <>
               <ACategoriesListItems />
+            </>
+          }
+        />
+        <Route
+          path="/admin/cateringlistitemstypes"
+          element={
+            <>
+              <ACateringListItemsTypes />
+            </>
+          }
+        />
+        <Route
+          path="/admin/foodmenu"
+          element={
+            <>
+              <AFoodMenu />
             </>
           }
         />

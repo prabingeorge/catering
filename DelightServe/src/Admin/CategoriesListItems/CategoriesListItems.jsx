@@ -14,6 +14,7 @@ const ACategoriesListItems = () => {
     const [categoriesList, setCategoriesList] = useState([]);
     const [selectedCategoryListId, setSelectedCategoryListId] = useState(0);
     const [categoriesListItems, setCategoriesListItems] = useState([]);
+    const [cateringListItems, setCateringListItems] = useState([]);
 
     const initialListItem = {
         itemName: "",
@@ -26,6 +27,8 @@ const ACategoriesListItems = () => {
     };
     const [listItem, setListItem] = useState(initialListItem);
     const [addListItemError, setAddListItemError] = useState("");
+    const selectedCategory = categories.find((category) => category.categoryId == selectedCategoryId);
+    const isCateringType = selectedCategory?.name === 'Catering' || false;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -60,12 +63,19 @@ const ACategoriesListItems = () => {
 
     const changeCategoryList = async (event) => {
         setCategoriesListItems([]);
+        setCateringListItems([]);
         setSelectedCategoryListId(event.target.value || 0);
         if (!event.target.value) {
             return;
         }
         try {
-            const response = await api.post(apiURL + "/api/user/categories-list-items-by-id", { categoryListId: event.target.value });
+            if (isCateringType) {
+                const response = await api.post(apiURL + '/api/user/catering-list-items-by-id', { categoryListId: event.target.value });
+                const { data } = response;
+                setCateringListItems(data);
+                return;
+            }
+            const response = await api.post(apiURL + '/api/user/categories-list-items-by-id', { categoryListId: event.target.value });
             const { data } = response;
             setCategoriesListItems(data);
         } catch (error) {
@@ -87,6 +97,23 @@ const ACategoriesListItems = () => {
             const response = await api.post(apiURL + "/api/auth/categories-list-items", listItemData);
             const { data } = response;
             setCategoriesListItems([...categoriesListItems, data]);
+            setListItem(initialListItem);
+            setAddListItemError("");
+        } catch (error) {
+            setAddListItemError(error?.response?.data?.message || error?.message);
+            console.error("Error fetching data:", error);
+        }
+    };
+
+    const addCateringListItem = async () => {
+        if (!listItem?.itemName || !listItem?.imageName) {
+            return;
+        }
+        try {
+            const listItemData = { ...listItem, categoryListId: selectedCategoryListId };
+            const response = await api.post(apiURL + "/api/auth/catering-list-items", listItemData);
+            const { data } = response;
+            setCateringListItems([...cateringListItems, data]);
             setListItem(initialListItem);
             setAddListItemError("");
         } catch (error) {
@@ -124,7 +151,7 @@ const ACategoriesListItems = () => {
                 </select>
             </div>
             <div className='categorylist-container'>
-                {categoriesListItems?.length == 0 && <div>
+                {categoriesListItems?.length == 0 && cateringListItems?.length == 0 && <div>
                     No data is available!
                 </div>}
                 {(selectedCategoryListId != 0 && categoriesListItems?.length > 0) && <Table striped bordered hover className='table'>
@@ -175,6 +202,39 @@ const ACategoriesListItems = () => {
                         })}
                     </tbody>
                 </Table>}
+
+                {(selectedCategoryListId != 0 && cateringListItems?.length > 0) && <Table striped bordered hover className='table'>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>List Id</th>
+                            <th>List Item Id</th>
+                            <th>Item Name</th>
+                            <th>Image Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {cateringListItems?.map((list, index) => {
+                            return (
+                                <tr>
+                                    <td>{index + 1}</td>
+                                    <td>
+                                        {list?.categoryListId}
+                                    </td>
+                                    <td>
+                                        {list?.cateringListItemId}
+                                    </td>
+                                    <td>
+                                        {list?.itemName}
+                                    </td>
+                                    <td>
+                                        {list?.imageName}
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </Table>}
             </div>
             {selectedCategoryListId != 0 && <div className='add-categorylist-container'>
                 <ul>
@@ -186,24 +246,27 @@ const ACategoriesListItems = () => {
                         <label>Image Name: </label>
                         <input type="text" name="imageName" value={listItem?.imageName} onChange={(event) => addListItem(event)} />
                     </li>
-                    <li>
-                        <label>Price: </label>
-                        <input type="text" name="price" value={listItem?.price} onChange={(event) => addListItem(event)} />
-                    </li>
-                    <li>
-                        <label>Discount Price: </label>
-                        <input type="text" name="discountPrice" value={listItem?.discountPrice} onChange={(event) => addListItem(event)} />
-                    </li>
-                    <li>
-                        <label>Ratings: </label>
-                        <input type="text" name="ratings" value={listItem?.ratings} onChange={(event) => addListItem(event)} />
-                    </li>
-                    <li>
-                        <label>Send Items Count: </label>
-                        <input type="text" name="sendItemsCount" value={listItem?.sendItemsCount} onChange={(event) => addListItem(event)} />
-                    </li>
+                    {!isCateringType && <>
+                        <li>
+                            <label>Price: </label>
+                            <input type="text" name="price" value={listItem?.price} onChange={(event) => addListItem(event)} />
+                        </li>
+                        <li>
+                            <label>Discount Price: </label>
+                            <input type="text" name="discountPrice" value={listItem?.discountPrice} onChange={(event) => addListItem(event)} />
+                        </li>
+                        <li>
+                            <label>Ratings: </label>
+                            <input type="text" name="ratings" value={listItem?.ratings} onChange={(event) => addListItem(event)} />
+                        </li>
+                        <li>
+                            <label>Send Items Count: </label>
+                            <input type="text" name="sendItemsCount" value={listItem?.sendItemsCount} onChange={(event) => addListItem(event)} />
+                        </li>
+                    </>}
                     <li className='button-container'>
-                        <button disabled={!selectedCategoryId} className='add-button' onClick={addCategoryListItem}>Add</button>
+                        {!isCateringType ? <button disabled={!selectedCategoryId} className='add-button' onClick={addCategoryListItem}>Add</button> :
+                            <button disabled={!selectedCategoryId} className='add-button' onClick={addCateringListItem}>Add</button>}
                     </li>
                     <li className='group-error'>
                         {addListItemError && <p className="error">{addListItemError}</p>}
