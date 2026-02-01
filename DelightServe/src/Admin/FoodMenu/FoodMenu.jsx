@@ -184,7 +184,6 @@ const AFoodMenu = () => {
                 </select>
             </div>
             <div className='categorylist-container'>
-                ={JSON.stringify(foodMenu)}==
                 {foodMenu?.length == 0 && <div>
                     No data is available!
                 </div>}

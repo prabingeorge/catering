@@ -236,7 +236,7 @@ const ProductConfirmation = () => {
                                 </div>
                                 <div>
                                     {!item?.foodId && <Images fileName={item?.imageName} path={`categorieslist/`} cssClass={'square-image'} />}
-                                    {item?.foodId && <Images fileName={item?.imageName1} path={`cateringlisttypes/${item?.cateringListItemTypeId}`} cssClass={'square-image'} />}
+                                    {item?.foodId && <Images fileName={item?.imageName1} path={`cateringlisttypes/fooditems`} cssClass={'square-image'} />}
                                 </div>
                             </li>
                         </>

@@ -32,7 +32,7 @@ const Cards = ({ cateringListItemId, cateringListItemTypeId, foodItems }) => {
             {foodItems?.map((item) => {
                 return (
                     <Card>
-                        <Card.Img className="d-block w-10 card-image" variant="top" src={`/images/cateringlisttypes/${cateringListItemTypeId}/${item?.imageName}`} />
+                        <Card.Img className="d-block w-10 card-image" variant="top" src={`/images/cateringlisttypes/fooditems/${item?.imageName}`} />
                         <Card.Body>
                             <Card.Title>{item?.foodName}</Card.Title>
                             <Card.Text>

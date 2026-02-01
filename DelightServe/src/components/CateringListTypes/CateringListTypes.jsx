@@ -59,7 +59,7 @@ const CateringListTypes = () => {
                             <div key={type?.cateringListItemTypeId}>
                                 <div className={(selectedFoodTypeId == type?.cateringListItemTypeId) ? 'active-food-menu' : 'non-active-food-menu'}>
                                     <button onClick={() => showFoodItems(type?.cateringListItemTypeId)}>
-                                        <Images fileName={type?.imageName} isNavigate={false} path={'cateringlisttypes'} cssClass={'circle-image'} />
+                                        <Images fileName={type?.imageName} isNavigate={false} path={'cateringlisttypes/foodmenu'} cssClass={'circle-image'} />
                                     </button>
                                 </div>
                                 <div className="type-container">
