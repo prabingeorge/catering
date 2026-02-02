@@ -73,18 +73,28 @@ const ProductConfirmation = () => {
     const savePurchaseDetails = async () => {
 
         try {
-            let response = null;
             const promises = cartItems.map(async (cartItem) => {
-                const details = {
-                    userId: user?.userId,
-                    categoryId: cartItem?.categoryId,
-                    categoryListId: cartItem?.categoryListId,
-                    categoryListItemId: cartItem?.categoryListItemId,
-                    quantity: cartItem?.quantity,
-                    amount: cartItem?.price
+                if (cartItem?.cateringListItemId) {
+                    const cateringDetail = {
+                        userId: user?.userId,
+                        categoryId: cartItem?.categoryId,
+                        categoryListId: cartItem?.categoryListId,
+                        cateringListItemId: cartItem?.cateringListItemId,
+                        quantity: cartItem?.quantity,
+                        amount: cartItem?.price
+                    }
+                    await api.post(apiURL + "/api/user/catering-booking-detail", cateringDetail);
+                } else {
+                    const detail = {
+                        userId: user?.userId,
+                        categoryId: cartItem?.categoryId,
+                        categoryListId: cartItem?.categoryListId,
+                        categoryListItemId: cartItem?.categoryListItemId,
+                        quantity: cartItem?.quantity,
+                        amount: cartItem?.price
+                    }
+                    await api.post(apiURL + "/api/user/purchase-detail", detail);
                 }
-                response = await api.post(apiURL + "/api/user/purchase-detail", details);
-
             });
             await Promise.all(promises);
         } catch (error) {
