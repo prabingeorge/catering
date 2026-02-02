@@ -4,7 +4,7 @@ import auth from "../middleware/auth.js";
 import { Op } from 'sequelize';
 import model from '../models/index.cjs';
 
-const { User, Categories, CategoriesLists, CategoriesListItems, CateringListItems, CateringListItemsTypes, FoodMenusTables, PurchaseDetails } = model;
+const { User, Categories, CategoriesLists, CategoriesListItems, CateringListItems, CateringListItemsTypes, FoodMenusTables, PurchaseDetails, CateringBookingDetails } = model;
 
 const router = express.Router();
 
@@ -256,5 +256,79 @@ router.post("/purchase-details-by-userid", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+// Add Catering Booking detail (for the authenticated user)
+router.post("/catering-booking-detail", auth, async (req, res) => {
+  const { userId, categoryId, categoryListId, cateringListItemId, quantity, amount } = req.body;
+  console.log("======" + JSON.stringify(req.body))
+  try {
+    // const purchaseDetail = await PurchaseDetails.findOne({ where: { [Op.or]: [{ user_id: userId }] } });
+    // console.log("-------" + purchaseDetail)
+    // if (!purchaseDetail) {
+    //     return res.status(422)
+    //         .send({ message: 'Enter all the required information!' });
+    // }
+
+    // Create new catering booking detail
+    const newData = await CateringBookingDetails.create({
+      user_id: userId,
+      category_id: categoryId,
+      category_list_id: categoryListId,
+      catering_list_item_id: cateringListItemId,
+      quantity,
+      amount
+    });
+
+    res.status(201).json({ id: newData.id, userId: newData.user_id, categoryId: newData?.category_id, listId: categoryListId?.category_list_id, cateringListItemId: newData?.catering_list_item_id, quantity: newData?.quantity, amount: newData?.amount, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
+  } catch (e) {
+    console.log(e);
+    return res.status(500)
+      .send(
+        { message: 'Could not perform operation at this time, kindly try again later.' });
+  }
+});
+
+// Get all Catering Booking details
+router.get("/catering-booking-details", async (req, res) => {
+  try {
+    const purchaseDetails = await CateringBookingDetails.findAll({
+      attributes: [
+        ['purchase_id', 'purchaseId'],
+        ['user_id', 'userId'],
+        ['category_id', 'categoryId'],
+        ['category_list_id', 'categoryListId'],
+        ['catering_list_item_id', 'cateringListItemId'],
+        'quantity',
+        'amount'
+      ]
+    });
+    res.json(purchaseDetails);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// Get all Catering Booking Details by userid
+router.post("/catering-booking-details-by-userid", async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const purchaseDetails = await CateringBookingDetails.findAll({
+      attributes: [
+        ['purchase_id', 'purchaseId'],
+        ['user_id', 'userId'],
+        ['category_id', 'categoryId'],
+        ['category_list_id', 'categoryListId'],
+        ['catering_list_item_id', 'cateringListItemId'],
+        'quantity',
+        'amount'
+      ],
+      where: { [Op.or]: [{ user_id: userId }] }
+    });
+    res.json(purchaseDetails);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 
 export default router;
