@@ -49,7 +49,7 @@ const CateringList = () => {
                                         <label className="product-name">{image.itemName}</label>
                                     </li>
                                     <li className="button-container">
-                                        <input type="button" className="add-to-cart" value={'Select'} onClick={() => addToCartClick(image)} />
+                                        <input type="button" className="add-to-cart" value={'Add'} onClick={() => addToCartClick(image)} />
                                     </li>
                                     <li>
                                         <hr />

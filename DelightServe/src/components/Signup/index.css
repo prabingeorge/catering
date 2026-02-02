@@ -41,8 +41,7 @@
     }
 
     .signup-html .tab,
-    .signup-form .group .label,
-    .signup-form .group .button {
+    .signup-form .group .label {
         font-weight: bold;
         font-size: 16px;
         font-family: 'Times New Roman', Times, serif;
@@ -102,11 +101,11 @@
 
     .signup-form .group .button {
         cursor: pointer;
-        background: #1161ee;
-        /* margin-top: 30px; */
+        background: #0ade51;
+        font-size: 16px;
+
         &:hover {
-            background: #598de6;
-            color: #000;
+            font-weight: bold;
         }
     }
 
@@ -161,6 +160,7 @@
     .footer {
         color: #fff;
         text-align: center;
+
         .click-link {
             margin-left: 5px;
         }

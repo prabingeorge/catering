@@ -108,8 +108,8 @@ const EventInformations = () => {
                         <label className="event-details-label">Event Details</label>
                     </li>
                     <li>
-                        <label htmlFor="place">Place*</label>
-                        <input type="text" placeholder="Place" className="event-control" name="place" value={venueInfo?.place} onChange={addFieldValue} />
+                        <label htmlFor="place">Location*</label>
+                        <input type="text" placeholder="Location" className="event-control" name="place" value={venueInfo?.place} onChange={addFieldValue} />
                     </li>
                     <li>
                         <label htmlFor="eventDate">Date*</label>

@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { renderToString } from 'react-dom/server';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faIndianRupee } from '@fortawesome/free-solid-svg-icons';
+import { faIndianRupee, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Images from "../Images/Images";
 import { CartContext } from "../../contexts/Cart";
 import { useAuth } from "../../contexts/AuthContext";
@@ -219,7 +219,7 @@ const ProductConfirmation = () => {
                                         <h5 className="venu-info-title">Venue Info:</h5>
                                     </div>
                                     <div>
-                                        Place: <label>{item?.venuInfo?.place}</label>
+                                        Location: <label>{item?.venuInfo?.place}</label>
                                     </div>
                                     <div>
                                         Date: <label>{item?.venuInfo?.eventDate}</label>
@@ -241,7 +241,7 @@ const ProductConfirmation = () => {
                                         Quantity: <label>{item?.quantity}</label>
                                     </div> */}
                                     <div className="footer-container">
-                                        <input type="button" className="button" value="Remove" onClick={() => removeItemClick(item)} />
+                                        <FontAwesomeIcon title="Remove" icon={faTrash} size="2x" style={{ color: '#000', cursor: 'pointer' }} onClick={() => removeItemClick(item)} />
                                     </div>
                                 </div>
                                 <div>

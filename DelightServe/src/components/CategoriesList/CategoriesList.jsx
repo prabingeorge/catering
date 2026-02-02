@@ -63,7 +63,7 @@ const CategoriesList = () => {
                                         <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{image.price}
                                     </li>
                                     <li className="button-container">
-                                        <input type="button" className="add-to-cart" value={'Select'} onClick={() => addToCartClick(image)} />
+                                        <input type="button" className="add-to-cart" value={'Add'} onClick={() => addToCartClick(image)} />
                                     </li>
                                     <li>
                                         <hr />
