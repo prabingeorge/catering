@@ -28,69 +28,45 @@ const ABookingHistory = () => {
                     <tr>
                         <th>#</th>
                         <th>Event</th>
+                        <th>Name</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {eventDetails && eventDetails.map((category) => {
+                    {eventDetails && eventDetails.map((purchase) => {
                         return (
-                            <tr key={category?.categoryId}>
-                                <td>{category?.categoryId}</td>
+                            <tr key={purchase?.purchase_id}>
+                                <td>
+                                    {purchase?.purchase_id}
+                                </td>
                                 <td>
                                     <div>
-                                        {category?.name}
+                                        {purchase?.Category?.name}
                                     </div>
-                                    <div>
-                                        <Table>
-                                            <tbody>
-                                                {category?.CategoriesLists?.map((list) => {
-                                                    return (
-                                                        <tr key={list?.categoryListId}>
-                                                            <td>{list?.categoryListId}</td>
-                                                            <td>{list?.type}</td>
-                                                            <td>
-                                                                <Table>
-                                                                    <tbody>
-                                                                        {list?.CategoriesListItems?.map((item) => {
-                                                                            return (
-                                                                                <tr key={item?.categoryListItemId}>
-                                                                                    {/* <td>{item?.categoryListItemId}</td> */}
-                                                                                    <td>{item?.itemName}</td>
-                                                                                    {/* <td>{item?.price}</td>
-                                                                                    <td>{item?.discountPrice}</td> */}
-                                                                                    <td>
-                                                                                        <Table>
-                                                                                            <tbody>
-                                                                                                {item?.PurchaseDetails?.map((purchase) => {
-                                                                                                    return (
-                                                                                                        <tr key={purchase?.purchaseId}>
-                                                                                                            {/* <td>{purchase?.purchaseId}</td>
-                                                                                                            <td>{purchase?.quantity}</td> */}
-                                                                                                            <td>{purchase?.amount}</td>
-                                                                                                            <td>{purchase?.User?.name}</td>
-                                                                                                            <td>{purchase?.User?.email}</td>
-                                                                                                            <td>{purchase?.User?.phone}</td>
-                                                                                                            <td>{purchase?.User?.status}</td>
-                                                                                                        </tr>
-                                                                                                    )
-                                                                                                })}
-
-                                                                                            </tbody>
-                                                                                        </Table>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            )
-                                                                        })}
-
-                                                                    </tbody>
-                                                                </Table>
-                                                            </td>
-                                                        </tr>
-                                                    )
-                                                })}
-
-                                            </tbody>
-                                        </Table>
-                                    </div>
+                                </td>
+                                <td>
+                                    <Table>
+                                        <tbody>
+                                            {purchase?.Category?.CategoriesLists?.map((list) => {
+                                                return (
+                                                    <tr key={list?.category_list_id}>
+                                                        <td>{list?.type}</td>
+                                                    </tr>
+                                                )
+                                            })}
+                                        </tbody>
+                                    </Table>
+                                </td>
+                                <td>
+                                    {purchase?.User?.name}
+                                </td>
+                                <td>
+                                    {purchase?.User?.phone}
+                                </td>
+                                <td>
+                                    {purchase?.User?.email}
                                 </td>
                             </tr>
                         )
@@ -102,3 +78,7 @@ const ABookingHistory = () => {
 };
 
 export { ABookingHistory };
+
+
+
+
