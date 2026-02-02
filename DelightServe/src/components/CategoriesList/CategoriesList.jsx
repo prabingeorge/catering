@@ -60,7 +60,7 @@ const CategoriesList = () => {
                                     </li>
                                     <li>
                                         <label>Price:</label>
-                                        <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{image.price}
+                                        <FontAwesomeIcon icon={faIndianRupee} size="1x" />{image.price}
                                     </li>
                                     <li className="button-container">
                                         <input type="button" className="add-to-cart" value={'Add'} onClick={() => addToCartClick(image)} />

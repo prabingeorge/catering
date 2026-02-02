@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { renderToString } from 'react-dom/server';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faIndianRupee, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faIndianRupee, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import Images from "../Images/Images";
 import { CartContext } from "../../contexts/Cart";
 import { useAuth } from "../../contexts/AuthContext";
@@ -29,7 +29,7 @@ const EmailTemplate = ({ cartItems }) => {
                                             </div>
                                             <div>
                                                 Price: <label style={{ fontWeight: 'bold' }} key={item?.id}>
-                                                    <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{item?.price}
+                                                    <FontAwesomeIcon icon={faIndianRupee} size="1x" />{item?.price}
                                                 </label> per Product
                                             </div>
                                             <div>
@@ -180,17 +180,17 @@ const ProductConfirmation = () => {
                                         </div>
                                         <div>
                                             Price: <label>
-                                                <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{item?.price}
+                                                <FontAwesomeIcon icon={faIndianRupee} size="1x" />{item?.price}
                                             </label>
                                         </div>
                                         <div>
                                             Discount: <label>
-                                                <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{item?.discountPrice}
+                                                <FontAwesomeIcon icon={faIndianRupee} size="1x" />{item?.discountPrice}
                                             </label>
                                         </div>
                                         <div>
                                             Total: <label>
-                                                <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{(item?.price - item?.discountPrice) * item?.quantity}
+                                                <FontAwesomeIcon icon={faIndianRupee} size="1x" />{(item?.price - item?.discountPrice) * item?.quantity}
                                             </label>
                                         </div>
                                     </>}
@@ -203,7 +203,7 @@ const ProductConfirmation = () => {
                                         </div>}
                                         <div>
                                             Price: <label>
-                                                <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{item?.price}
+                                                <FontAwesomeIcon icon={faIndianRupee} size="1x" />{item?.price}
                                             </label>
                                         </div>
                                         <div>
@@ -211,7 +211,7 @@ const ProductConfirmation = () => {
                                         </div>
                                         <div>
                                             Total: <label>
-                                                <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{(item?.price * item?.venuInfo?.guests)}
+                                                <FontAwesomeIcon icon={faIndianRupee} size="1x" />{(item?.price * item?.venuInfo?.guests)}
                                             </label>
                                         </div>
                                     </>}
@@ -241,7 +241,7 @@ const ProductConfirmation = () => {
                                         Quantity: <label>{item?.quantity}</label>
                                     </div> */}
                                     <div className="footer-container">
-                                        <FontAwesomeIcon title="Remove" icon={faTrash} size="2x" style={{ color: '#000', cursor: 'pointer' }} onClick={() => removeItemClick(item)} />
+                                        <FontAwesomeIcon title="Remove" icon={faTrashCan} size="1x" style={{ cursor: 'pointer' }} onClick={() => removeItemClick(item)} />
                                     </div>
                                 </div>
                                 <div>

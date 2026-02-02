@@ -39,7 +39,7 @@ const Cards = ({ cateringListItemId, cateringListItemTypeId, foodItems }) => {
                                 {item?.description}
                             </Card.Text>
                             <Card.Text>
-                                <label style={{ fontWeight: 'bold' }}>Price:</label> <FontAwesomeIcon icon={faIndianRupee} size="1x" style={{ color: '#ffa500' }} />{item?.price} per person
+                                <label style={{ fontWeight: 'bold' }}>Price:</label> <FontAwesomeIcon icon={faIndianRupee} size="1x" />{item?.price} per person
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
