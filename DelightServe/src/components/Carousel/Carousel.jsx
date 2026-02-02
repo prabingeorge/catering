@@ -3,7 +3,7 @@ import Carousel from 'react-bootstrap/Carousel';
 const AppCarousel = () => {
     return (
         <Carousel data-bs-theme="dark">
-            <Carousel.Item interval={900}>
+            <Carousel.Item interval={1000}>
                 <img style={{ height: '430px' }}
                     className="d-block w-100"
                     // src="holder.js/800x400?text=First slide&bg=f5f5f5"
@@ -15,7 +15,7 @@ const AppCarousel = () => {
                     <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                 </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item interval={900}>
+            <Carousel.Item interval={1000}>
                 <img style={{ height: '430px' }}
                     className="d-block w-100"
                     // src="holder.js/800x400?text=Second slide&bg=eee"
@@ -27,7 +27,7 @@ const AppCarousel = () => {
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item interval={900}>
+            <Carousel.Item interval={1000}>
                 <img style={{ height: '430px' }}
                     className="d-block w-100"
                     // src="holder.js/800x400?text=Third slide&bg=e5e5e5"
@@ -41,7 +41,7 @@ const AppCarousel = () => {
                     </p>
                 </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item interval={900}>
+            <Carousel.Item interval={1000}>
                 <img style={{ height: '430px' }}
                     className="d-block w-100"
                     // src="holder.js/800x400?text=First slide&bg=f5f5f5"
