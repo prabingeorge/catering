@@ -3,8 +3,8 @@ import Carousel from 'react-bootstrap/Carousel';
 const AppCarousel = () => {
     return (
         <Carousel data-bs-theme="dark">
-            <Carousel.Item>
-                <img
+            <Carousel.Item interval={900}>
+                <img style={{ height: '430px' }}
                     className="d-block w-100"
                     // src="holder.js/800x400?text=First slide&bg=f5f5f5"
                     src='images/carousel/10.jpg?text=First slide&bg=f5f5f5'
@@ -15,8 +15,8 @@ const AppCarousel = () => {
                     <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
                 </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item>
-                <img
+            <Carousel.Item interval={900}>
+                <img style={{ height: '430px' }}
                     className="d-block w-100"
                     // src="holder.js/800x400?text=Second slide&bg=eee"
                     src='images/carousel/7.jpg?text=Second slide&bg=eee'
@@ -27,8 +27,8 @@ const AppCarousel = () => {
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </Carousel.Caption>
             </Carousel.Item>
-            <Carousel.Item>
-                <img
+            <Carousel.Item interval={900}>
+                <img style={{ height: '430px' }}
                     className="d-block w-100"
                     // src="holder.js/800x400?text=Third slide&bg=e5e5e5"
                     src="images/carousel/8.jpg?text=Third slide&bg=e5e5e5"
@@ -41,8 +41,8 @@ const AppCarousel = () => {
                     </p>
                 </Carousel.Caption>
             </Carousel.Item>
-             <Carousel.Item>
-                <img
+            <Carousel.Item interval={900}>
+                <img style={{ height: '430px' }}
                     className="d-block w-100"
                     // src="holder.js/800x400?text=First slide&bg=f5f5f5"
                     src='images/carousel/9.jpg?text=Fourth slide&bg=e5e5e5'

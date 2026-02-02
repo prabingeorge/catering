@@ -2,6 +2,10 @@
     .carousel-container {
         margin: 40px;
 
+        @media only screen and (max-width: 600px) {
+            margin: 20px 40px;
+        }
+
         .carousel-item {
             height: 20%;
 
@@ -47,6 +51,7 @@
             .info-link {
                 text-decoration: none;
                 color: #000;
+
                 &:hover {
                     text-decoration: underline;
                 }
