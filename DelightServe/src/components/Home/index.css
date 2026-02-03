@@ -40,7 +40,8 @@
     .footer-container {
         margin: 20px 0px;
         padding: 5px 20px;
-        background: #faf6f6;
+        /* background: #faf6f6; */
+        background: oldlace;
 
         .info-details {
             display: flex;

@@ -37,7 +37,7 @@ const Dashboard = () => {
         <div>
           <div className="images-container">
             {isTimerRunning && <p className="timer">
-              <FontAwesomeIcon icon={faBowlingBall} size="10x" spin style={{ color: '#ed81f7' }} />
+              <FontAwesomeIcon icon={faBowlingBall} size="10x" spin style={{ color: '#ffa500' }} />
               We are fecthing data for you, Kindly do wait <Timer isTimerRunning={isTimerRunning} />
             </p>}
             {!isTimerRunning && <label className="no-data">No data is available.</label>}
