@@ -6,6 +6,8 @@ import categoriesRoutes from "./routes/categories.js";
 import userProfilesRoutes from "./routes/userprofiles.js";
 import adminUsersRoutes from "./routes/users.js";
 
+import adminRoutes from "./routes/admin.js";
+
 // Load environment variables
 config();
 // connectDB();
@@ -19,7 +21,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/user", categoriesRoutes);
 app.use("/api/user-profile", userProfilesRoutes);
 app.use("/api/admin/users-details", adminUsersRoutes);
-// app.use("/api/admin", adminRoutes);
+app.use("/api/admin", adminRoutes);
 
 // Start server
 const PORT = process.env.PORT || 3000;
