@@ -4,7 +4,7 @@
         width: 500px;
         cursor: pointer;
         @media only screen and (max-width: 600px) {
-            width: 360px;
+            width: 340px;
             height: 400px;
         }
     }
@@ -13,7 +13,7 @@
         width: 400px;
         cursor: pointer;
         @media only screen and (max-width: 600px) {
-            width: 360px;
+            width: 340px;
         }
     }
     .square-image {

@@ -2,9 +2,7 @@
 
     .categorieslist {
         display: flex;
-        justify-content: left;
-        margin-left: 70px;
-        
+        justify-content: center;
     }
 }
 

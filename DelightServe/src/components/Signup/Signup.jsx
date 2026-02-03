@@ -112,7 +112,7 @@ const Signup = () => {
                                 {error && <p className="error">{error}</p>}
                                 {success && <p className="success">{success}</p>}
                             </div>
-                            <div className="group">
+                            <div className="group event-footer">
                                 <input type="submit" className="button" value="Sign Up" />
                             </div>
                             <div className="footer">

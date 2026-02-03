@@ -2,7 +2,9 @@
     .login-panel {
         display: flex;
         justify-content: center;
-        margin: 40px;
+        margin: 20px;
+        background: oldlace;
+        padding: 15px 0px;
 
         .login-container {
             list-style: none;
@@ -23,6 +25,7 @@
 
                 &.button-container {
                     justify-content: end;
+                    margin: 0;
 
                     .button {
                         padding: 5px 15px;

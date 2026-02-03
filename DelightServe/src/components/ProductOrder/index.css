@@ -1,12 +1,16 @@
 .productorder-view {
-    margin: 5px 10px 5px 50px;
+    margin: 15px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 
     .order-right-panel {
 
         .order-summary {
             list-style: none;
+            background: oldlace;
+            padding: 5px 10px;
+            margin: 10px;
 
             li {
                 margin: 15px 0px;
@@ -16,7 +20,7 @@
                 font-size: 16px;
                 font-weight: bold;
                 font-style: italic;
-                width: 140px;;
+                width: 140px;
             }
 
             .product-name {
@@ -45,18 +49,25 @@
         }
     }
 
-    .buy-now {
-        cursor: pointer;
-        background: #0ade51;
-        padding: 5px 15px;
-        border-radius: 5px;
-        font-size: 16px;
-        margin: 30px;
-        border: 2px solid #ffa500;
-        color: #fff;
+    .footer {
+        display: flex;
+        justify-content: center;
 
-        &:hover {
-            font-weight: bold;
+        .buy-now {
+            cursor: pointer;
+            background: #0ade51;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 0px;
+            border: 2px solid #ffa500;
+            color: #fff;
+
+            &:hover {
+                font-weight: bold;
+            }
         }
     }
+
+
 }
