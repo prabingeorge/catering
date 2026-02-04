@@ -4,7 +4,7 @@ import auth from "../middleware/auth.js";
 import { Op } from 'sequelize';
 import model from '../models/index.cjs';
 
-const { User, Categories, CategoriesLists, CategoriesListItems, CateringListItems, CateringListItemsTypes, FoodMenusTables, PurchaseDetails, CateringBookingDetails } = model;
+const { User, Categories, CategoriesLists, CategoriesListItems, CateringListItems, CateringListItemsTypes, FoodMenusTables, VenueDetails, DecorationBookingDetails, CateringBookingDetails } = model;
 
 const router = express.Router();
 
@@ -186,39 +186,42 @@ router.post("/food-menus-by-id", async (req, res) => {
 
 // Add purchase detail (for the authenticated user)
 router.post("/purchase-detail", auth, async (req, res) => {
-  const { userId, categoryId, categoryListId, categoryListItemId, quantity, amount } = req.body;
+  const { userId, categoryId, categoryListId, categoryListItemId, quantity, amount, venueInfo } = req.body;
+  const { location, eventDate, eventTime, gender, guests } = venueInfo;
   console.log("======" + JSON.stringify(req.body))
   try {
-    // const purchaseDetail = await PurchaseDetails.findOne({ where: { [Op.or]: [{ user_id: userId }] } });
-    // console.log("-------" + purchaseDetail)
-    // if (!purchaseDetail) {
-    //     return res.status(422)
-    //         .send({ message: 'Enter all the required information!' });
-    // }
+    // Create new Venue Detail
+    const count = guests == "" ? 0 : guests;
+    const newVenuData = await VenueDetails.create({
+      location,
+      event_date: eventDate,
+      event_time: eventTime,
+      gender,
+      guest_count: count
+    });
 
     // Create new purchase list
-    const newData = await PurchaseDetails.create({
+    const newData = await DecorationBookingDetails.create({
       user_id: userId,
       category_id: categoryId,
       category_list_id: categoryListId,
       category_list_item_id: categoryListItemId,
       quantity,
-      amount
+      amount,
+      venue_id: newVenuData?.venue_id
     });
 
-    res.status(201).json({ id: newData.id, userId: newData.user_id, categoryId: newData?.category_id, listId: categoryListId?.category_list_id, categoryListItemId: newData?.category_list_item_id, quantity: newData?.quantity, amount: newData?.amount, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
+    res.status(201).json({ purchaseId: newData.purchase_id, userId: newData.user_id, categoryId: newData?.category_id, listId: categoryListId?.category_list_id, categoryListItemId: newData?.category_list_item_id, quantity: newData?.quantity, amount: newData?.amount, venueInfo: newVenuData, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
   } catch (e) {
     console.log(e);
-    return res.status(500)
-      .send(
-        { message: 'Could not perform operation at this time, kindly try again later.' });
+    return res.status(500).send({ message: 'Could not perform operation at this time, kindly try again later.' });
   }
 });
 
 // Get all purchase details
 router.get("/purchase-details", async (req, res) => {
   try {
-    const purchaseDetails = await PurchaseDetails.findAll({
+    const DecorationBookingDetails = await DecorationBookingDetails.findAll({
       attributes: [
         ['purchase_id', 'purchaseId'],
         ['user_id', 'userId'],
@@ -229,7 +232,7 @@ router.get("/purchase-details", async (req, res) => {
         'amount'
       ]
     });
-    res.json(purchaseDetails);
+    res.json(DecorationBookingDetails);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -239,7 +242,7 @@ router.get("/purchase-details", async (req, res) => {
 router.post("/purchase-details-by-userid", async (req, res) => {
   try {
     const { userId } = req.body;
-    const purchaseDetails = await PurchaseDetails.findAll({
+    const DecorationBookingDetails = await DecorationBookingDetails.findAll({
       attributes: [
         ['purchase_id', 'purchaseId'],
         ['user_id', 'userId'],
@@ -251,7 +254,7 @@ router.post("/purchase-details-by-userid", async (req, res) => {
       ],
       where: { [Op.or]: [{ user_id: userId }] }
     });
-    res.json(purchaseDetails);
+    res.json(DecorationBookingDetails);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -259,15 +262,18 @@ router.post("/purchase-details-by-userid", async (req, res) => {
 
 // Add Catering Booking detail (for the authenticated user)
 router.post("/catering-booking-detail", auth, async (req, res) => {
-  const { userId, categoryId, categoryListId, cateringListItemId, quantity, amount } = req.body;
+  const { userId, categoryId, categoryListId, cateringListItemId, quantity, amount, venueInfo } = req.body;
+  const { location, eventDate, eventTime, gender, guests } = venueInfo;
   console.log("======" + JSON.stringify(req.body))
   try {
-    // const purchaseDetail = await PurchaseDetails.findOne({ where: { [Op.or]: [{ user_id: userId }] } });
-    // console.log("-------" + purchaseDetail)
-    // if (!purchaseDetail) {
-    //     return res.status(422)
-    //         .send({ message: 'Enter all the required information!' });
-    // }
+    // Create new Venue Detail
+    const newVenuData = await VenueDetails.create({
+      location,
+      event_date: eventDate,
+      event_time: eventTime,
+      gender,
+      guest_count: guests
+    });
 
     // Create new catering booking detail
     const newData = await CateringBookingDetails.create({
@@ -276,10 +282,11 @@ router.post("/catering-booking-detail", auth, async (req, res) => {
       category_list_id: categoryListId,
       catering_list_item_id: cateringListItemId,
       quantity,
-      amount
+      amount,
+      venue_id: newVenuData?.venue_id
     });
 
-    res.status(201).json({ id: newData.id, userId: newData.user_id, categoryId: newData?.category_id, listId: categoryListId?.category_list_id, cateringListItemId: newData?.catering_list_item_id, quantity: newData?.quantity, amount: newData?.amount, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
+    res.status(201).json({ purchaseId: newData.purchase_id, userId: newData.user_id, categoryId: newData?.category_id, listId: categoryListId?.category_list_id, cateringListItemId: newData?.catering_list_item_id, quantity: newData?.quantity, amount: newData?.amount, venueInfo: newVenuData, updatedAt: newData.updatedAt, createdAt: newData.createdAt });
   } catch (e) {
     console.log(e);
     return res.status(500)
@@ -291,7 +298,7 @@ router.post("/catering-booking-detail", auth, async (req, res) => {
 // Get all Catering Booking details
 router.get("/catering-booking-details", async (req, res) => {
   try {
-    const purchaseDetails = await CateringBookingDetails.findAll({
+    const DecorationBookingDetails = await CateringBookingDetails.findAll({
       attributes: [
         ['purchase_id', 'purchaseId'],
         ['user_id', 'userId'],
@@ -302,7 +309,7 @@ router.get("/catering-booking-details", async (req, res) => {
         'amount'
       ]
     });
-    res.json(purchaseDetails);
+    res.json(DecorationBookingDetails);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -312,7 +319,7 @@ router.get("/catering-booking-details", async (req, res) => {
 router.post("/catering-booking-details-by-userid", async (req, res) => {
   try {
     const { userId } = req.body;
-    const purchaseDetails = await CateringBookingDetails.findAll({
+    const DecorationBookingDetails = await CateringBookingDetails.findAll({
       attributes: [
         ['purchase_id', 'purchaseId'],
         ['user_id', 'userId'],
@@ -324,7 +331,7 @@ router.post("/catering-booking-details-by-userid", async (req, res) => {
       ],
       where: { [Op.or]: [{ user_id: userId }] }
     });
-    res.json(purchaseDetails);
+    res.json(DecorationBookingDetails);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

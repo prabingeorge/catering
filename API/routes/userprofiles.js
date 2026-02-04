@@ -5,7 +5,7 @@ import auth from "../middleware/auth.js";
 import { Op } from 'sequelize';
 import model from '../models/index.cjs';
 
-const { User, Categories, CategoriesLists, CategoriesListItems, PurchaseDetails } = model;
+const { User, Categories, CategoriesLists, CategoriesListItems, DecorationBookingDetails } = model;
 
 const router = express.Router();
 

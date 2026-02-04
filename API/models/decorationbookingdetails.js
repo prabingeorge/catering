@@ -1,10 +1,10 @@
 
-import { Model } from 'sequelize';
+import { DATE, Model } from 'sequelize';
 
 const PROTECTED_ATTRIBUTES = ['password'];
 
 export default (sequelize, DataTypes) => {
-  class CateringBookingDetails extends Model {
+  class DecorationBookingDetails extends Model {
     toJSON() {
       // hide protected fields
       const attributes = { ...this.get() };
@@ -23,7 +23,7 @@ export default (sequelize, DataTypes) => {
       // define association here
     }
   };
-  CateringBookingDetails.init({
+  DecorationBookingDetails.init({
     purchase_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -32,7 +32,7 @@ export default (sequelize, DataTypes) => {
     user_id: DataTypes.INTEGER,
     category_id: DataTypes.INTEGER,
     category_list_id: DataTypes.INTEGER,
-    catering_list_item_id: DataTypes.INTEGER,
+    category_list_item_id: DataTypes.INTEGER,
     quantity: DataTypes.INTEGER,
     amount: DataTypes.BIGINT,
     venue_id: DataTypes.BIGINT
@@ -40,7 +40,7 @@ export default (sequelize, DataTypes) => {
     // last_ip_address: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'CateringBookingDetails',
+    modelName: 'DecorationBookingDetails',
   });
-  return CateringBookingDetails;
+  return DecorationBookingDetails;
 };

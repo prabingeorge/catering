@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('PurchaseDetails', {
+    await queryInterface.createTable('CateringBookingDetails', {
       purchase_id: {
         allowNull: false,
         autoIncrement: true,
@@ -18,7 +18,7 @@ module.exports = {
       category_list_id: {
         type: Sequelize.INTEGER
       },
-      category_list_item_id: {
+      catering_list_item_id: {
         type: Sequelize.INTEGER
       },
       quantity: {
@@ -26,6 +26,9 @@ module.exports = {
       },
       amount: {
         type: Sequelize.BIGINT
+      },
+      venue_id: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -38,6 +41,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('PurchaseDetails');
+    await queryInterface.dropTable('CateringBookingDetails');
   }
 };

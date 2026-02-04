@@ -2,12 +2,12 @@ import express from "express";
 import * as Sequelize from 'sequelize';
 import model from '../models/index.cjs';
 
-const { Categories, CategoriesLists, CategoriesListItems, CateringListItems, CateringListItemsTypes, FoodMenusTables, PurchaseDetails, CateringBookingDetails, User } = model;
+const { Categories, CategoriesLists, CategoriesListItems, CateringListItems, CateringListItemsTypes, FoodMenusTables, DecorationBookingDetails, CateringBookingDetails, User } = model;
 
-User.hasMany(PurchaseDetails, { foreignKey: 'user_id' });
-PurchaseDetails.belongsTo(User, { foreignKey: 'user_id' });
-Categories.hasMany(PurchaseDetails, { foreignKey: 'category_id' });
-PurchaseDetails.belongsTo(Categories, { foreignKey: 'category_id' });
+User.hasMany(DecorationBookingDetails, { foreignKey: 'user_id' });
+DecorationBookingDetails.belongsTo(User, { foreignKey: 'user_id' });
+Categories.hasMany(DecorationBookingDetails, { foreignKey: 'category_id' });
+DecorationBookingDetails.belongsTo(Categories, { foreignKey: 'category_id' });
 Categories.hasMany(CategoriesLists, { foreignKey: 'category_list_id' });
 CategoriesLists.belongsTo(Categories, { foreignKey: 'category_list_id' });
 
@@ -45,8 +45,8 @@ router.delete("/all-users-remove", async (req, res) => {
 // Get all purchases details
 router.get("/all-purchases", async (req, res) => {
   try {
-    const purchaseDetails = await PurchaseDetails.findAll();
-    res.json(purchaseDetails);
+    const DecorationBookingDetails = await DecorationBookingDetails.findAll();
+    res.json(DecorationBookingDetails);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -55,11 +55,11 @@ router.get("/all-purchases", async (req, res) => {
 // Remove all purchases details
 router.delete("/all-purchases-remove", async (req, res) => {
   try {
-    const purchaseDetails = await PurchaseDetails.destroy({
+    const DecorationBookingDetails = await DecorationBookingDetails.destroy({
       where: {},
       truncate: true,
     });
-    res.json(purchaseDetails);
+    res.json(DecorationBookingDetails);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -102,8 +102,8 @@ router.get("/users-purchase-details", async (req, res) => {
     //           ],
     //           include: [
     //             {
-    //               model: PurchaseDetails,
-    //               as: 'PurchaseDetails', // Use the alias defined in your association
+    //               model: DecorationBookingDetails,
+    //               as: 'DecorationBookingDetails', // Use the alias defined in your association
     //               required: true, // Forces an INNER JOIN for the Order table
     //               attributes: [
     //                 ['purchase_id', 'purchaseId'],
@@ -131,7 +131,7 @@ router.get("/users-purchase-details", async (req, res) => {
     //     }
     //   ]
     // });
-    const data = await PurchaseDetails.findAll({
+    const data = await DecorationBookingDetails.findAll({
       // where: { id: 1 },
       include: [
         {
@@ -178,7 +178,7 @@ router.delete("/truncate-tables", async (req, res) => {
     await Categories.truncate({ restartIdentity: true });
     await CategoriesLists.truncate({ restartIdentity: true });
     await CategoriesListItems.truncate({ restartIdentity: true });
-    await PurchaseDetails.truncate({ restartIdentity: true });
+    await DecorationBookingDetails.truncate({ restartIdentity: true });
     await User.truncate({ restartIdentity: true });
     res.json({ message: "Truncated successfully" });
   } catch (err) {
