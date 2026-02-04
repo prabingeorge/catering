@@ -27,7 +27,7 @@ const Home = () => {
             <div className="carousel-container">
                 <AppCarousel></AppCarousel>
             </div>
-            <div className='place-order-container'>
+            <div className='location-order-container'>
                 <Link to={'/dashboard'} onClick={()=>addSelectedCategoryToCart(1)} className='order-button'>View & Place Order</Link>
             </div>
             <div className="footer-container">

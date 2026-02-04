@@ -25,7 +25,7 @@ const EventInformations = () => {
 
     const [isNewUser, setIsNewUser] = useState(false);
     const initialVenueInfo = {
-        place: "",
+        location: "",
         eventDate: "",
         eventTime: "",
         gender: "",
@@ -50,7 +50,7 @@ const EventInformations = () => {
 
     const buyNowProduct = () => {
         setValidationError("");
-        if (!venueInfo?.place || !venueInfo?.eventDate || !venueInfo?.eventTime) {
+        if (!venueInfo?.location || !venueInfo?.eventDate || !venueInfo?.eventTime) {
             setValidationError("Enter all the Event Details!");
             return;
         }
@@ -105,11 +105,11 @@ const EventInformations = () => {
                 </div>
                 <ul className="event-info">
                     <li>
-                        <label className="event-details-label">Event Details</label>
+                        <label className="event-details-label">Fill Event Details</label>
                     </li>
                     <li>
-                        <label htmlFor="place">Location*</label>
-                        <input type="text" placeholder="Location" className="event-control" name="place" value={venueInfo?.place} onChange={addFieldValue} />
+                        <label htmlFor="location">Location*</label>
+                        <input type="text" placeholder="Location" className="event-control" name="location" value={venueInfo?.location} onChange={addFieldValue} />
                     </li>
                     <li>
                         <label htmlFor="eventDate">Date*</label>

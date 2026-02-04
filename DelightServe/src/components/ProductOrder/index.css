@@ -29,7 +29,8 @@
 
             .event-details-label {
                 color: #ffa500;
-                font-size: 16px;
+                font-size: 18px;
+                width: auto;
             }
 
             .event-control {

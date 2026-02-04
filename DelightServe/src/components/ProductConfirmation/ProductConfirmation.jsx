@@ -81,7 +81,8 @@ const ProductConfirmation = () => {
                         categoryListId: cartItem?.categoryListId,
                         cateringListItemId: cartItem?.cateringListItemId,
                         quantity: cartItem?.quantity,
-                        amount: cartItem?.price
+                        amount: cartItem?.price,
+                        venueInfo: cartItem?.venuInfo
                     }
                     await api.post(apiURL + "/api/user/catering-booking-detail", cateringDetail);
                 } else {
@@ -91,7 +92,8 @@ const ProductConfirmation = () => {
                         categoryListId: cartItem?.categoryListId,
                         categoryListItemId: cartItem?.categoryListItemId,
                         quantity: cartItem?.quantity,
-                        amount: cartItem?.price
+                        amount: cartItem?.price,
+                        venueInfo: cartItem?.venuInfo
                     }
                     await api.post(apiURL + "/api/user/purchase-detail", detail);
                 }
@@ -168,6 +170,7 @@ const ProductConfirmation = () => {
 
     return (
         <div className="product-confirmation-view">
+            =={JSON.stringify(cartItems)}=
             <ul className="product-panel">
                 {cartItems?.length > 0 && cartItems.map((item) => {
                     return (
@@ -219,7 +222,7 @@ const ProductConfirmation = () => {
                                         <h5 className="venu-info-title">Venue Info:</h5>
                                     </div>
                                     <div>
-                                        Location: <label>{item?.venuInfo?.place}</label>
+                                        Location: <label>{item?.venuInfo?.location}</label>
                                     </div>
                                     <div>
                                         Date: <label>{item?.venuInfo?.eventDate}</label>
