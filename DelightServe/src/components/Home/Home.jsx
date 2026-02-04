@@ -1,26 +1,11 @@
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 import { Link } from 'react-router-dom';
 import AppCarousel from './../Carousel/Carousel';
 import { CartContext } from "../../contexts/Cart";
-import api from "../../contexts/APIContext";
 import './index.css';
 
 const Home = () => {
-
     const { addSelectedCategoryToCart } = useContext(CartContext);
-
-    const apiURL = import.meta.env.VITE_API_URL;
-      useEffect(() => {
-        const fetchData = async () => {
-          try {
-            await api.get(apiURL + "/api/admin/health-check");
-          } catch (error) {
-            console.error("Error fetching data:", error);
-          }
-        };
-    
-        fetchData();
-      }, []);
 
     return (
         <div className="home-view">

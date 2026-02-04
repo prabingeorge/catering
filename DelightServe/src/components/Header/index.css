@@ -53,7 +53,8 @@
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
-         @media only screen and (max-width: 600px) {
+
+        @media only screen and (max-width: 600px) {
             margin-top: 15px;
         }
 
@@ -71,6 +72,10 @@
             label {
                 margin: 5px;
                 cursor: pointer;
+
+                a {
+                    text-decoration: none;
+                }
             }
         }
     }
@@ -85,6 +90,10 @@
             label {
                 margin: 5px;
                 cursor: pointer;
+
+                a {
+                    text-decoration: none;
+                }
             }
         }
     }

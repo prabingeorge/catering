@@ -44,15 +44,15 @@ export const CartProvider = ({ children }) => {
 
   const udateCartVenuInfo = (item, venuInfo) => {
     const isCartItem = cartItems.find((cartItem) => cartItem.categoryId === item.categoryId);
+    const copyVenuInfo = { ...venuInfo, status: 'Pending' };
     if (!isCartItem) {
       return;
     }
-
     if (item?.cateringListItemTypeId) {
       setCartItems(
         cartItems.map((cartItem) =>
           cartItem.foodId === item.foodId
-            ? { ...item, venuInfo: venuInfo }
+            ? { ...item, venuInfo: copyVenuInfo }
             : cartItem
         )
       );
@@ -60,7 +60,7 @@ export const CartProvider = ({ children }) => {
       setCartItems(
         cartItems.map((cartItem) =>
           cartItem.categoryListItemId === item.categoryListItemId
-            ? { ...item, venuInfo: venuInfo }
+            ? { ...item, venuInfo: copyVenuInfo }
             : cartItem
         )
       );

@@ -74,6 +74,9 @@ const ProductConfirmation = () => {
 
         try {
             const promises = cartItems.map(async (cartItem) => {
+                if (!cartItem?.venuInfo) {
+                    return;
+                }
                 if (cartItem?.cateringListItemId) {
                     const cateringDetail = {
                         userId: user?.userId,
@@ -170,9 +173,11 @@ const ProductConfirmation = () => {
 
     return (
         <div className="product-confirmation-view">
-            =={JSON.stringify(cartItems)}=
             <ul className="product-panel">
                 {cartItems?.length > 0 && cartItems.map((item) => {
+                    if (!item?.venuInfo) {
+                        return;
+                    }
                     return (
                         <>
                             <li key={item?.categoryListItemId} className="product-wrapper">

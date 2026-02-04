@@ -13,13 +13,13 @@ const EventInformations = () => {
     const navigate = useNavigate();
     const { user } = useAuth();
     let product = [];
-    
+
     if (params?.eventType === 'decoration') {
         product = cartItems.find((cartItem) => cartItem.categoryListItemId === parseInt(params?.categoryCateringId));
     } else {
-        product = cartItems.find((cartItem) => cartItem.cateringListItemId === parseInt(params?.categoryCateringId) 
-                && cartItem.cateringListItemTypeId === cateringCurrentItem?.cateringListItemTypeId
-                && cartItem.foodId === cateringCurrentItem?.foodId);
+        product = cartItems.find((cartItem) => cartItem.cateringListItemId === parseInt(params?.categoryCateringId)
+            && cartItem.cateringListItemTypeId === cateringCurrentItem?.cateringListItemTypeId
+            && cartItem.foodId === cateringCurrentItem?.foodId);
     }
 
 
@@ -29,7 +29,8 @@ const EventInformations = () => {
         eventDate: "",
         eventTime: "",
         gender: "",
-        guests: ""
+        guests: "",
+        status: ""
     };
 
     const [venueInfo, setVenueInfo] = useState(initialVenueInfo);
