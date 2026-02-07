@@ -1,5 +1,4 @@
 import express from "express";
-// import DonationUser from "../models/DonationUser.js";
 import auth from "../middleware/auth.js";
 import { Op } from 'sequelize';
 import model from '../models/index.cjs';
