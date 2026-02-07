@@ -25,7 +25,7 @@
   "production": {
     "username": "postgres",
     "password": "123456",
-    "database": "dsmanagementdb",
+    "database": "postgres",
     "host": "dscatering-486710:us-central1:dsmanagementdb",
     "port": "5432",
     "dialect": "postgres"
