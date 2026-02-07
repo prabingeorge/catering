@@ -1,5 +1,4 @@
 import express from "express";
-import * as Sequelize from 'sequelize';
 import model from '../models/index.cjs';
 
 const { Categories, CategoriesLists, CategoriesListItems, CateringListItems, CateringListItemsTypes, FoodMenusTables, DecorationBookingDetails, CateringBookingDetails, User } = model;
