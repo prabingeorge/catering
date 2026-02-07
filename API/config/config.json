@@ -26,7 +26,7 @@
     "username": "postgres",
     "password": "123456",
     "database": "postgres",
-    "host": "dscatering-486710:us-central1:dsmanagementdb",
+    "host": "dscatering-486710:us-central1:dsmanagementdb1",
     "port": "5432",
     "dialect": "postgres"
   }
