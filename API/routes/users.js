@@ -1,22 +1,32 @@
 import express from "express";
 import model from '../models/index.cjs';
 
-const { Categories, CategoriesLists, CategoriesListItems, CateringListItems, CateringListItemsTypes, FoodMenusTables, DecorationBookingDetails, CateringBookingDetails, User } = model;
+const { Categories, CategoriesLists, CategoriesListItems, CateringListItems, CateringListItemsTypes, FoodMenusTables, DecorationBookingDetails, CateringBookingDetails, User, VenueDetails } = model;
 
 User.hasMany(DecorationBookingDetails, { foreignKey: 'user_id' });
 DecorationBookingDetails.belongsTo(User, { foreignKey: 'user_id' });
 Categories.hasMany(DecorationBookingDetails, { foreignKey: 'category_id' });
 DecorationBookingDetails.belongsTo(Categories, { foreignKey: 'category_id' });
-Categories.hasMany(CategoriesLists, { foreignKey: 'category_list_id' });
-CategoriesLists.belongsTo(Categories, { foreignKey: 'category_list_id' });
+CategoriesLists.hasMany(DecorationBookingDetails, { foreignKey: 'category_list_id' });
+DecorationBookingDetails.belongsTo(CategoriesLists, { foreignKey: 'category_list_id' });
+
+VenueDetails.hasMany(DecorationBookingDetails, { foreignKey: 'venue_id' });
+DecorationBookingDetails.belongsTo(VenueDetails, { foreignKey: 'venue_id' });
+CategoriesListItems.hasMany(DecorationBookingDetails, { foreignKey: 'category_list_item_id' });
+DecorationBookingDetails.belongsTo(CategoriesListItems, { foreignKey: 'category_list_item_id' });
 
 
 User.hasMany(CateringBookingDetails, { foreignKey: 'user_id' });
 CateringBookingDetails.belongsTo(User, { foreignKey: 'user_id' });
 Categories.hasMany(CateringBookingDetails, { foreignKey: 'category_id' });
 CateringBookingDetails.belongsTo(Categories, { foreignKey: 'category_id' });
-Categories.hasMany(CategoriesLists, { foreignKey: 'category_list_id' });
-CategoriesLists.belongsTo(Categories, { foreignKey: 'category_list_id' });
+CategoriesLists.hasMany(CateringBookingDetails, { foreignKey: 'category_list_id' });
+CateringBookingDetails.belongsTo(CategoriesLists, { foreignKey: 'category_list_id' });
+
+VenueDetails.hasMany(CateringBookingDetails, { foreignKey: 'venue_id' });
+CateringBookingDetails.belongsTo(VenueDetails, { foreignKey: 'venue_id' });
+CateringListItems.hasMany(CateringBookingDetails, { foreignKey: 'catering_list_item_id' });
+CateringBookingDetails.belongsTo(CateringListItems, { foreignKey: 'catering_list_item_id' });
 
 const router = express.Router();
 
@@ -140,12 +150,19 @@ router.get("/users-purchase-details", async (req, res) => {
         {
           model: Categories,
           required: true,
-          include: [
-            {
-              model: CategoriesLists,
-            }
-          ]
-        }
+        },
+        {
+          model: CategoriesLists,
+          required: true,
+        },
+        {
+          model: VenueDetails,
+          required: true,
+        },
+        {
+          model: CategoriesListItems,
+          required: true,
+        },
       ]
     });
     const data1 = await CateringBookingDetails.findAll({
@@ -157,15 +174,22 @@ router.get("/users-purchase-details", async (req, res) => {
         {
           model: Categories,
           required: true,
-          include: [
-            {
-              model: CategoriesLists,
-            }
-          ]
-        }
+        },
+        {
+          model: CategoriesLists,
+          required: true,
+        },
+        {
+          model: VenueDetails,
+          required: true,
+        },
+        {
+          model: CateringListItems,
+          required: true,
+        },
       ]
     })
-    res.json([...data, ...data1]);
+    res.json({ decoration: data, catering: data1 });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
