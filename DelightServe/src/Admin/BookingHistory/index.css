@@ -1,4 +1,5 @@
 .ABookinghistory-view {
+    margin: 0 10px;
     .table {
         list-style: none;
     }

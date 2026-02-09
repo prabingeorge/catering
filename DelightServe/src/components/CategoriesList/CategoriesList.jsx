@@ -11,10 +11,27 @@ import './index.css';
 const CategoriesList = () => {
 
     let navigate = useNavigate();
-    const { addToCart, selectedCategoryId } = useContext(CartContext);
+    const { addToCart, cartItems, selectedCategoryId } = useContext(CartContext);
     const [categoriesListItems, setCategoriesListItems] = useState([]);
 
     const addToCartClick = (item) => {
+        if (item?.isAddedToCart) {
+            return;
+        }
+        let isAlreadyAddedtoCart = cartItems.find((item)=>item?.categoryId == 1 && item?.venuInfo);
+       
+        if (!isAlreadyAddedtoCart) {
+            addItemAndNavigate(item);
+            return;
+        }
+
+        let text = "You have already selected a Decoration item! Click 'Ok' to change or Cancel";
+        if (confirm(text) == true) {
+            addItemAndNavigate(item);
+        }
+    }
+
+    const addItemAndNavigate = (item) => {
         item.categoryId = selectedCategoryId;
         addToCart(item);
         navigate('/productorder/' + item.categoryListItemId);
@@ -27,6 +44,14 @@ const CategoriesList = () => {
             try {
                 const response = await api.post(apiURL + "/api/user/categories-list-items-by-id", { categoryListId: params?.categoryListId });
                 const { data } = response;
+                if (data?.length > 0 && cartItems?.length > 0) {
+                    cartItems?.forEach((item) => {
+                        const addedCartData = data?.find((datum) => datum?.categoryListItemId == item?.categoryListItemId && item?.venuInfo);
+                        if (addedCartData) {
+                            addedCartData.isAddedToCart = true;
+                        }
+                    });
+                }
                 setCategoriesListItems([...data]);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -63,7 +88,7 @@ const CategoriesList = () => {
                                         <FontAwesomeIcon icon={faIndianRupee} size="1x" />{image.price}
                                     </li>
                                     <li className="button-container">
-                                        <input type="button" className="add-to-cart" value={'Add'} onClick={() => addToCartClick(image)} />
+                                        <input type="button" className={image?.isAddedToCart ? 'added-to-cart' : 'add-to-cart'} value={image?.isAddedToCart ? 'Added' : 'Add'} onClick={() => addToCartClick(image)} />
                                     </li>
                                     <li>
                                         <hr />

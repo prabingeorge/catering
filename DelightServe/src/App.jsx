@@ -31,6 +31,7 @@ import { EventInformations } from "./components/EventInformations/EventInformati
 import { CateringList } from "./components/CateringList/CateringList";
 import { ACateringListItemsTypes } from "./Admin/CateringListItemsTypes/CateringListItemsTypes";
 import { AFoodMenu } from "./Admin/FoodMenu/FoodMenu";
+import { AdminHeader } from "./Admin/Header/Header";
 
 function App() {
   return (
@@ -200,6 +201,7 @@ function App() {
           path="/admin/bookinghistory"
           element={
             <>
+              <AdminHeader />
               <ABookingHistory />
             </>
           }
@@ -208,6 +210,7 @@ function App() {
           path="/admin/categories"
           element={
             <>
+              <AdminHeader />
               <ACategories />
             </>
           }
@@ -216,6 +219,7 @@ function App() {
           path="/admin/categorieslist"
           element={
             <>
+              <AdminHeader />
               <ACategoriesList />
             </>
           }
@@ -224,6 +228,7 @@ function App() {
           path="/admin/categorieslistitems"
           element={
             <>
+              <AdminHeader />
               <ACategoriesListItems />
             </>
           }
@@ -232,6 +237,7 @@ function App() {
           path="/admin/cateringlistitemstypes"
           element={
             <>
+              <AdminHeader />
               <ACateringListItemsTypes />
             </>
           }
@@ -240,6 +246,7 @@ function App() {
           path="/admin/foodmenu"
           element={
             <>
+              <AdminHeader />
               <AFoodMenu />
             </>
           }
