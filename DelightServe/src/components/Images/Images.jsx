@@ -25,7 +25,7 @@ const Images = ({ fileName, navigatePath = '', path, cssClass, isNavigate = true
                     alt={fileName}
                     onError={
                         (e) => {
-                            e.target.src = `images/default.jpg`;
+                            e.target.src = baseUrl + `default.jpg`;
                         }
                     }
                 />

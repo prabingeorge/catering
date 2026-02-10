@@ -72,7 +72,9 @@ const ABookingHistory = () => {
                                                             Time: {eventTimeInfo?.[purchase?.VenueDetail?.event_time - 1]}
                                                         </td>
                                                         <td>
-                                                            Gender: {genderBirthdayInfo?.[purchase?.VenueDetail?.gender - 1]}
+                                                            Gender:
+                                                            {(purchase?.CategoriesList?.type === 'Wedding') && genderWeddingInfo?.[purchase?.VenueDetail?.gender - 1]}
+                                                            {(purchase?.CategoriesList?.type === 'Birthday') && genderBirthdayInfo?.[purchase?.VenueDetail?.gender - 1]}
                                                         </td>
                                                         <td>
                                                             Amount: {purchase?.amount}

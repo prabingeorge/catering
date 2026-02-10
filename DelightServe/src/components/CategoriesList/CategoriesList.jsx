@@ -11,15 +11,20 @@ import './index.css';
 const CategoriesList = () => {
 
     let navigate = useNavigate();
+    let params = useParams();
+    const apiURL = import.meta.env.VITE_API_URL;
     const { addToCart, cartItems, selectedCategoryId } = useContext(CartContext);
     const [categoriesListItems, setCategoriesListItems] = useState([]);
+
+    const categoryListMap = [{ categoryListId: 1, type: 'wedding' }, { categoryListId: 2, type: 'birthday' }];
+    const selectedCategoryListMap = categoryListMap.find((list) => list?.categoryListId == params?.categoryListId);
 
     const addToCartClick = (item) => {
         if (item?.isAddedToCart) {
             return;
         }
-        let isAlreadyAddedtoCart = cartItems.find((item)=>item?.categoryId == 1 && item?.venuInfo);
-       
+        let isAlreadyAddedtoCart = cartItems.find((item) => item?.categoryId == 1 && item?.venuInfo);
+
         if (!isAlreadyAddedtoCart) {
             addItemAndNavigate(item);
             return;
@@ -37,8 +42,6 @@ const CategoriesList = () => {
         navigate('/productorder/' + item.categoryListItemId);
     }
 
-    let params = useParams();
-    const apiURL = import.meta.env.VITE_API_URL;
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -70,7 +73,7 @@ const CategoriesList = () => {
                             <>
                                 <ul key={image?.categoryListItemId} className="images-wrapper">
                                     <li>
-                                        <Images fileName={image.imageName} path={`categorieslist/`} cssClass={'rectangle-image'} />
+                                        <Images fileName={image.imageName} path={`categorieslist/` + selectedCategoryListMap?.type} cssClass={'rectangle-image'} />
                                     </li>
                                     <li>
                                         <label className="product-name">{image.itemName}</label>
