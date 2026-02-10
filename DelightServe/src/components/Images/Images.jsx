@@ -11,7 +11,13 @@ const Images = ({ fileName, navigatePath = '', path, cssClass, isNavigate = true
     if (!isNavigate) {
         return (
             <div className="images-view">
-                <img className={cssClass} src={url} alt={fileName} srcSet={`${url} 200w,`} />
+                <img className={cssClass} src={url} alt={fileName}
+                    // srcSet={`${url} 200w,`}
+                    onError={
+                        (e) => {
+                            e.target.src = baseUrl + `default.jpg`;
+                        }
+                    } />
             </div>
         )
     }
