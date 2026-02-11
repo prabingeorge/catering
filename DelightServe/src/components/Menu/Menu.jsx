@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { CartContext } from "../../contexts/Cart";
 import api from "../../contexts/APIContext";
 import "./index.css";
+import { BreadcrumbExample } from "../Breadcrumb/Breadcrumb";
 
 const Menu = () => {
     const { selectedCategoryId, addSelectedCategoryToCart } = useContext(CartContext);
@@ -43,6 +44,9 @@ const Menu = () => {
                         })}
                     </ul>
                 </div>
+            </div>
+            <div className="breadcrumb-header">
+                <BreadcrumbExample />
             </div>
         </div>
     )

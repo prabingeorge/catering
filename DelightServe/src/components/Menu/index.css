@@ -31,4 +31,11 @@
             }
         }
     }
+
+    .breadcrumb-header {
+        margin-left: 32px;
+        .breadcrumb-item {
+            text-transform: capitalize;
+        }
+    }
 }
