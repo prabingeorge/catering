@@ -15,7 +15,10 @@ const ProductOrder = () => {
     const product = cartItems.find((cartItem) => cartItem.categoryListItemId === parseInt(params?.categoryListItemId));
 
     const [productQuantity, setProductQuantity] = useState(product?.quantity);
-    
+
+    const categoryListMap = [{ categoryListId: 1, type: 'wedding' }, { categoryListId: 2, type: 'birthday' }];
+    const selectedCategoryListMap = categoryListMap.find((list) => list?.categoryListId == product?.categoryListId);
+
     const buyNowProduct = () => {
         navigate(`/eventinformations/decoration/${params?.categoryListItemId}`);
     };
@@ -24,7 +27,7 @@ const ProductOrder = () => {
         <>
             <div className="productorder-view">
                 <div>
-                    <Images fileName={product?.imageName} path={`categorieslist/`} cssClass={'order-rectangle-image'} />
+                    <Images fileName={product?.imageName} path={`categorieslist/` + selectedCategoryListMap?.type} cssClass={'order-rectangle-image'} />
                 </div>
                 <div className="order-right-panel">
                     <ul className="order-summary">

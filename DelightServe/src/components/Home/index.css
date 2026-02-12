@@ -53,6 +53,11 @@
 
                     .card-image {
                         width: 150px;
+                        transition: width 2s;
+
+                        &:hover {
+                            width: 200px;
+                        }
                     }
                 }
             }
