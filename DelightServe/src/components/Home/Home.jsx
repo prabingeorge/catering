@@ -2,10 +2,28 @@ import { useContext } from "react";
 import { Link } from 'react-router-dom';
 import AppCarousel from './../Carousel/Carousel';
 import { CartContext } from "../../contexts/Cart";
+import Card from 'react-bootstrap/Card';
+import CardGroup from 'react-bootstrap/CardGroup';
 import './index.css';
 
 const Home = () => {
     const { addSelectedCategoryToCart } = useContext(CartContext);
+    const ourEvents = [{
+        name: 'Wedding',
+        imageName: 'wedding.jpg'
+    },
+    {
+        name: 'Birthday',
+        imageName: 'birthday.jpg'
+    },
+    {
+        name: 'Communion',
+        imageName: 'communion.jpg'
+    },
+    {
+        name: 'Puberty',
+        imageName: 'puberty.jpg'
+    }];
 
     return (
         <div className="home-view">
@@ -13,7 +31,26 @@ const Home = () => {
                 <AppCarousel></AppCarousel>
             </div>
             <div className='location-order-container'>
-                <Link to={'/dashboard'} onClick={()=>addSelectedCategoryToCart(1)} className='order-button'>View & Place Order</Link>
+                <Link to={'/dashboard'} onClick={() => addSelectedCategoryToCart(1)} className='order-button'>View & Place Order</Link>
+            </div>
+            <div className="our-events">
+                <h2>Our Events</h2>
+                <p>We will support the events with our full support.</p>
+                <div className="card-container">
+                    <CardGroup>
+                        {ourEvents?.map((event) => {
+                            return (
+                                <Card>
+                                    <Card.Img className="d-block w-10 card-image" variant="top" src={`/images/dashboard/${event?.imageName}`} />
+                                    <Card.Body>
+                                        <Card.Title>{event?.name}</Card.Title>
+                                    </Card.Body>
+                                </Card>
+
+                            )
+                        })}
+                    </CardGroup>
+                </div>
             </div>
             <div className="footer-container">
                 <div>
