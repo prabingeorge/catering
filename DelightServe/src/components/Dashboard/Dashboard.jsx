@@ -8,7 +8,19 @@ import { faBowlingBall } from '@fortawesome/free-solid-svg-icons';
 import "./index.css";
 
 const Dashboard = () => {
-  const [categoriesList, setCategoriesList] = useState([]);
+  const dummyData = [{
+    "categoryId": 1,
+    "categoryListId": 1,
+    "type": "Wedding",
+    "imageName": "wedding.jpg"
+  },
+  {
+    "categoryId": 1,
+    "categoryListId": 2,
+    "type": "Birthday",
+    "imageName": "birthday.jpg"
+  }];
+  const [categoriesList, setCategoriesList] = useState((selectedCategoryId == 1) ? dummyData : []);
   const [isTimerRunning, setTimerRunning] = useState(false);
 
   const { selectedCategoryId } = useContext(CartContext);
