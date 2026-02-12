@@ -18,7 +18,8 @@ const Header = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                await api.get(apiURL + "/api/admin/health-check");
+                await api.get(apiURL + "/api/user/categories");
+                // await api.get(apiURL + "/api/admin/health-check");
             } catch (error) {
                 console.error("Error fetching data:", error);
             }

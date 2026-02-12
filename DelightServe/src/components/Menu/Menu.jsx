@@ -6,8 +6,16 @@ import "./index.css";
 import { BreadcrumbExample } from "../Breadcrumb/Breadcrumb";
 
 const Menu = () => {
+    const dummyData = [{
+        "categoryId": 1,
+        "name": "Decoration"
+    },
+    {
+        "categoryId": 2,
+        "name": "Catering"
+    }];
     const { selectedCategoryId, addSelectedCategoryToCart } = useContext(CartContext);
-    const [categoriesList, setCategoriesList] = useState([]);
+    const [categoriesList, setCategoriesList] = useState(dummyData);
 
     const apiURL = import.meta.env.VITE_API_URL;
     useEffect(() => {
