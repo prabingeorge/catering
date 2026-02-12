@@ -20,10 +20,10 @@ const Dashboard = () => {
     "type": "Birthday",
     "imageName": "birthday.jpg"
   }];
+  const { selectedCategoryId } = useContext(CartContext);
   const [categoriesList, setCategoriesList] = useState((selectedCategoryId == 1) ? dummyData : []);
   const [isTimerRunning, setTimerRunning] = useState(false);
 
-  const { selectedCategoryId } = useContext(CartContext);
   const nextPage = (selectedCategoryId == 1) ? '/categorieslist/' : '/cateringlist/';
 
   const apiURL = import.meta.env.VITE_API_URL;
