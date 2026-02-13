@@ -66,6 +66,25 @@ const Home = () => {
         "sendItemsCount": 10
     }];
 
+    const ourCaterings = [{
+        "cateringListItemTypeId": 1,
+        "typeName": "Tiffin",
+        "imageName": "tiffin.jpg",
+        "cateringListItemId": 1
+    },
+    {
+        "cateringListItemTypeId": 2,
+        "typeName": "Meal",
+        "imageName": "meal.jpg",
+        "cateringListItemId": 1
+    },
+    {
+        "cateringListItemTypeId": 5,
+        "typeName": "Biriyani",
+        "imageName": "biriyani.jpg",
+        "cateringListItemId": 2
+    }];
+
     return (
         <div className="home-view">
             <div className="carousel-container">
@@ -104,6 +123,25 @@ const Home = () => {
                                     <Card.Img className="d-block w-10 card-image" variant="top" src={`/images/categorieslist/wedding/${event?.imageName}`} />
                                     <Card.Body>
                                         <Card.Title>{event?.itemName}</Card.Title>
+                                    </Card.Body>
+                                </Card>
+
+                            )
+                        })}
+                    </CardGroup>
+                </div>
+            </div>
+            <div className="our-events">
+                <h2>Most Delicious Foods</h2>
+                <p>We serve tasty and quality foods.</p>
+                <div className="card-container">
+                    <CardGroup>
+                        {ourCaterings?.map((event) => {
+                            return (
+                                <Card>
+                                    <Card.Img className="d-block w-10 card-image" variant="top" src={`/images/cateringlisttypes/foodmenu/${event?.imageName}`} />
+                                    <Card.Body>
+                                        <Card.Title>{event?.typeName}</Card.Title>
                                     </Card.Body>
                                 </Card>
 
