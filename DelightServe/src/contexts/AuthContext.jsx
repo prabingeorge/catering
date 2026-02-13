@@ -33,19 +33,20 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  useEffect(() => {
-    if (token) {
-      const decoded = jwtDecode(token);
-      const expiresIn = decoded.exp * 1000 - Date.now();
+  /* Token expires code */
+  // useEffect(() => {
+  //   if (token) {
+  //     const decoded = jwtDecode(token);
+  //     const expiresIn = decoded.exp * 1000 - Date.now();
 
-      const timeout = setTimeout(()=>{
-        logout();
-        alert("Session expired. Please login again.");
-      }, expiresIn);
+  //     const timeout = setTimeout(()=>{
+  //       logout();
+  //       alert("Session expired. Please login again.");
+  //     }, expiresIn);
       
-      return () => clearTimeout(timeout);
-    }
-  }, [token]);
+  //     return () => clearTimeout(timeout);
+  //   }
+  // }, [token]);
 
   const login = (token) => {
     localStorage.setItem("token", token);
