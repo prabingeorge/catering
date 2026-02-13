@@ -25,6 +25,47 @@ const Home = () => {
         imageName: 'puberty.jpg'
     }];
 
+    const ourDecorations = [{
+        "categoryListId": 1,
+        "categoryListItemId": 1,
+        "itemName": "Gerbera Theme",
+        "imageName": "1_1.jpg",
+        "price": "20999",
+        "discountPrice": "1000",
+        "ratings": 5,
+        "sendItemsCount": 1
+    },
+    {
+        "categoryListId": 1,
+        "categoryListItemId": 2,
+        "itemName": "Royal Look",
+        "imageName": "1_2.jpg",
+        "price": "25999",
+        "discountPrice": "1000",
+        "ratings": 5,
+        "sendItemsCount": 1
+    },
+    {
+        "categoryListId": 1,
+        "categoryListItemId": 3,
+        "itemName": "Test",
+        "imageName": "1_3.jpg",
+        "price": "1000",
+        "discountPrice": "100",
+        "ratings": 5,
+        "sendItemsCount": 3
+    },
+    {
+        "categoryListId": 1,
+        "categoryListItemId": 4,
+        "itemName": "Test2",
+        "imageName": "1_4.jpg",
+        "price": "30000",
+        "discountPrice": "900",
+        "ratings": 4,
+        "sendItemsCount": 10
+    }];
+
     return (
         <div className="home-view">
             <div className="carousel-container">
@@ -44,6 +85,25 @@ const Home = () => {
                                     <Card.Img className="d-block w-10 card-image" variant="top" src={`/images/dashboard/${event?.imageName}`} />
                                     <Card.Body>
                                         <Card.Title>{event?.name}</Card.Title>
+                                    </Card.Body>
+                                </Card>
+
+                            )
+                        })}
+                    </CardGroup>
+                </div>
+            </div>
+            <div className="our-events">
+                <h2>Most Popular Decorations</h2>
+                <p>The customers best choice decorations.</p>
+                <div className="card-container">
+                    <CardGroup>
+                        {ourDecorations?.map((event) => {
+                            return (
+                                <Card>
+                                    <Card.Img className="d-block w-10 card-image" variant="top" src={`/images/categorieslist/wedding/${event?.imageName}`} />
+                                    <Card.Body>
+                                        <Card.Title>{event?.itemName}</Card.Title>
                                     </Card.Body>
                                 </Card>
 

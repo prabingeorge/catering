@@ -1,9 +1,10 @@
 .home-view {
+    --font-heading-scale: 1.0;
     .carousel-container {
-        margin: 40px;
+        /* margin: 40px; */
 
         @media only screen and (max-width: 600px) {
-            margin: 20px 40px;
+            /* margin: 20px 40px; */
         }
 
         .carousel-item {
@@ -28,6 +29,7 @@
             color: #fff;
             border: 2px solid #ffa500;
             border-radius: 5px;
+            margin-top: 15px;
 
             &:hover {
                 color: #fff;
@@ -58,6 +60,10 @@
                         &:hover {
                             width: 200px;
                         }
+                    }
+
+                    .card-title {
+                        font-size: calc(var(--font-heading-scale) * 14px);
                     }
                 }
             }
