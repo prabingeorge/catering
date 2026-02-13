@@ -1,5 +1,6 @@
 .home-view {
     --font-heading-scale: 1.0;
+
     .carousel-container {
         /* margin: 40px; */
 
@@ -9,6 +10,19 @@
 
         .carousel-item {
             height: 20%;
+
+            .carousel-caption {
+                h5 {
+                    --bs-heading-color: lightyellow;
+                    background-color: orange;
+                    display: inline-flex;
+                    padding: 5px;
+                }
+
+                p {
+                    background-color: orange;
+                }
+            }
 
             img {
                 height: 500px;
