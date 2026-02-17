@@ -98,6 +98,40 @@ router.post("/login", async (req, res) => {
     }
 });
 
+// @route   POST /api/auth/register
+// @desc    Register new user
+// @access  Public
+// router.post('/register', AuthController.signUp);
+router.post("/user-register", async (req, res) => {
+    console.log("user register API");
+   
+    const { name, email, phone, status } = req.body;
+    try {
+        // Create new user
+        const newUser = await User.create({
+            name,
+            email,
+            phone,
+            status,
+        });
+
+        // Generate JWT
+        const token = jwt.sign({ userId: newUser.user_id, name: newUser.name, email: newUser.email, phone: newUser?.phone, role: 'user' }, process.env.JWT_SECRET, {
+            expiresIn: "1h"
+        });
+
+        res.status(201).json({
+            token,
+            user: { userId: newUser.user_id, name: newUser.name, email: newUser.email, role: newUser.role }
+        });
+
+    } catch (e) {
+        console.log(e);
+        return res.status(500)
+            .send({ message: 'Could not perform operation at this time, kindly try again later.' });
+    }
+});
+
 // Add Categories
 router.post("/categories", async (req, res) => {
     console.log("register API");

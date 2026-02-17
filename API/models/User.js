@@ -31,10 +31,10 @@ export default (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     email: {
       type: DataTypes.STRING,
-      allowNull: {
-        args: false,
-        msg: 'Please enter your email address',
-      },
+      // allowNull: {
+      //   args: false,
+      //   msg: 'Please enter your email address',
+      // },
       unique: {
         args: true,
         msg: 'Email already exists',
