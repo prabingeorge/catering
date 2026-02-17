@@ -15,6 +15,10 @@ const BreadcrumbExample = () => {
             if (!pathValue) {
                 return;
             }
+            if (pathValue == 'delivery') {
+                setList([]);
+                return;
+            }
             const selectedIndex = list.findIndex(x => x.pathname === pathValue);
             if (selectedIndex !== -1) {
                 list.splice(selectedIndex + 1);

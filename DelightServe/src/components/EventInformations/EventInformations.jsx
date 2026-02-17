@@ -6,6 +6,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import "./index.css";
 import { SignIn } from "../SignIn/SignIn";
 import { Signup } from "../Signup/Signup";
+import { RegisterUserInfo } from "../RegisterUserInfo/RegisterUserInfo";
 
 const EventInformations = () => {
     const { cartItems, cateringCurrentItem, udateCartVenuInfo } = useContext(CartContext);
@@ -23,7 +24,7 @@ const EventInformations = () => {
     }
 
 
-    const [isNewUser, setIsNewUser] = useState(false);
+    const [isRegisteredUser, setIsRegisteredUser] = useState(false);
     const initialVenueInfo = {
         location: "",
         eventDate: "",
@@ -70,19 +71,18 @@ const EventInformations = () => {
     return (
         <div className="eventinformations-view">
             <div className="userinfo-panel">
-                {!user && !isNewUser && <div>
+                {!user && !isRegisteredUser && <div>
+                    <RegisterUserInfo />
                     <div className="login-header">
-                        New User Click here to Register <Link className="link" onClick={() => setIsNewUser(true)}> Click</Link>
+                        Registered user, click here to login <Link className="link" onClick={() => setIsRegisteredUser(true)}> Click</Link>
                     </div>
-                    <SignIn />
                 </div>}
-                {!user && isNewUser && <div>
+                {!user && isRegisteredUser && <div>
+                    <SignIn />
                     <div className="login-header">
-                        Already registered user <Link className="link" onClick={() => setIsNewUser(false)}> Click</Link>
+                        Not yet registered, click here <Link className="link" onClick={() => setIsRegisteredUser(false)}> Click</Link>
                     </div>
-                    <Signup />
-                </div>
-                }
+                </div>}
                 {user && <div>
                     <ul className="loggedin-panel">
                         <li>

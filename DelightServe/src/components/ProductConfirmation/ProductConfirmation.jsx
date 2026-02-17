@@ -253,7 +253,8 @@ const ProductConfirmation = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    {!item?.foodId && <Images fileName={item?.imageName} path={`categorieslist/`} cssClass={'square-image'} />}
+                                    {!item?.foodId && (item?.categoryListId == 1) && <Images fileName={item?.imageName} path={`categorieslist/wedding/`} cssClass={'square-image'} />}
+                                    {!item?.foodId && (item?.categoryListId == 2) && <Images fileName={item?.imageName} path={`categorieslist/birthday/`} cssClass={'square-image'} />}
                                     {item?.foodId && <Images fileName={item?.imageName1} path={`cateringlisttypes/fooditems`} cssClass={'square-image'} />}
                                 </div>
                             </li>
